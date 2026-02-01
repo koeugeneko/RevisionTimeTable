@@ -72,10 +72,10 @@ namespace TimeTable.Data
         public static string GetHashedPasswordFromDatabase(string username)
         {
             string sql = @"
-                SELECT u.user_id, u.username, up.hashed_password
-                FROM users u
-                INNER JOIN user_passwords up ON u.user_id = up.user_id
-                WHERE u.username = @username";
+        SELECT up.hashed_password
+        FROM users u
+        INNER JOIN userpasswords up ON u.user_id = up.user_id
+        WHERE u.username = @username";
             
             var parameters = new Dictionary<string, object>
             {
@@ -88,27 +88,64 @@ namespace TimeTable.Data
             {
                 return null;
             }
-
-            return Convert.ToString(result[0]);
-
-            
-
+            else
+            {
+                return Convert.ToString(result[0]);
+            }
         }
-
-        public static void InsertUserIntoDatabase()
+        public static string GetSaltFromDatabase(string username)
         {
             string sql = @"
-                INSERT INTO Users (username, email)
-                VALUES (@username, @email)
-                RETURNING user_id;
-                INSERT INTO UserPasswords (user_id, hashed_password)
-                VALUES (@user_id, @hashed_password);";
+                SELECT up.salt
+                FROM users u
+                INNER JOIN userpasswords up ON u.user_id = up.user_id
+                WHERE u.username = @username";
+            var parameters = new Dictionary<string, object>
+            {
+                { "@username", username }
+            };
+            var result = ExecuteQuery(sql, parameters);
+            if (result.Count == 0)
+            {
+                return null;
+            }
+            return Convert.ToString(result[0]);
+        }
+        public static void InsertUserIntoDatabase(Logic.User user)
+        { 
+            string sql = @"
+                INSERT INTO users (username, user_email, created_at, last_login)
+                VALUES (@username, @email, @created_at, @last_login )";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@username", user.Username },
+                { "@email", user.Email },
+                { "@hashed_password", user.Password },
+                { "@created_at", user.CreatedAt },
+                { "@last_login", user.lastLogin }
+            };
+            
+            ExecuteNonQuery(sql, parameters);
+        }
+        public static void InsertUserPasswordIntoDatabase()
+        {
+            string sql = @"
+                INSERT INTO userpasswords (user_id, hashed_password, salt)
+                VALUES (
+                    (SELECT user_id FROM users WHERE username = @username),
+                    @hashed_password,
+                    @salt
+                )";
         }
 
         // task related
         public static void GetTasksFromDatabase()
         {
-            string sql = $@"SELECT task_id, description, priority, estimated_min FROM tasks WHERE completed = false AND DueDate >= {TimeOnly.FromDateTime(DateTime.Now)}";
+            string sql = $@"
+                SELECT task_id, description, priority, estimated_min 
+                FROM tasks WHERE completed = false 
+                AND DueDate >= {TimeOnly.FromDateTime(DateTime.Now)}";
         }
         public static void InsertTaskIntoDatabase()
         {

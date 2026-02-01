@@ -5,9 +5,6 @@ namespace TimeTable
 {
     public partial class LoginPage : UserControl
     {
-        string username;
-        string password;
-
         public LoginPage()
         {
             InitializeComponent();
@@ -35,10 +32,7 @@ namespace TimeTable
         public Action loginSuccessful;
         private void btnLoginLogin_Click(object sender, EventArgs e)
         {
-            //sould add a loading screen here
-            username = txtUsername.Text;
-            password = txtPassword.Text;
-            bool loginSuccess = AuthService.Login(username, password);
+            bool loginSuccess = AuthService.Login(txtUsername.Text, txtPassword.Text);
             if (!loginSuccess)
             {
                 ErrorLabel.Show();

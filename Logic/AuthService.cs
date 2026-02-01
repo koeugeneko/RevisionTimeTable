@@ -10,32 +10,39 @@ namespace TimeTable.Logic
 {
     internal static class AuthService
     {   
-        public static bool SignUp(string username, string password, string email)
+
+        public static void SignUp(string username, string password, string password2, string email)
         {
             User user = new User();
-            if (!ValidateUsername(username)) return false;
-            if (!ValidatePassword(password)) return false;
-            if (!ValidateEmail(email)) return false;
-            return true;
+
+            user.Username = username;
+            user.Password = password;
+            user.Email = email;
+            user.CreatedAt = DateTime.Now;
+
+            DataLayer.InsertUserIntoDatabase(user);
+            DataLayer.InsertUserPasswordIntoDatabase();
         }
 
         public static bool Login(string username, string password)
         {
-            User user = new User();
-            user.Username = username;
-            user.Password = password;   
-
-            string hashedPassword = DataLayer.GetHashedPasswordFromDatabase(user.Username);
-            
-            if (user.Password != hashedPassword)
+            if (username == null || password == null)
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
-                
+
+            User user = new User();
+            user.Username = username;
+            user.Password = password;
+
+            
+            string hashedPasswordFromDatabase = DataLayer.GetHashedPasswordFromDatabase(user.Username);
+            string SaltFromDatabase = DataLayer.GetSaltFromDatabase(user.Username);
+
+            string hashedPassword = HashPassword(user.Username, user.Password, SaltFromDatabase);
+
+            if (hashedPassword != hashedPasswordFromDatabase) return false;
+            else return true;
         }
 
         public static bool ValidateUsername(string username)
@@ -98,12 +105,20 @@ namespace TimeTable.Logic
 
             return true;*/
         }
-        public static string HashPassword(string username, string password)
+        public static bool ValidatePasswordMatch(string password, string password2)
+        {
+            return password == password2;
+        }
+        public static string HashPassword(string username, string password, string? salt)
         {
             int iterations = 2;
             int saltLength = 16;
-            string salt = GenerateSalt(saltLength);
 
+            if (salt == null)
+            {
+                salt = GenerateSalt(saltLength);
+            }
+            
             string plaintext = username + password + salt;
 
             for (int i = 0; i < iterations; i++) // run ahash a few times

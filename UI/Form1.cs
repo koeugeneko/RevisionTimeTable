@@ -42,13 +42,6 @@ namespace TimeTable
         {
             LoadLoginPage();
             MinSideBar();
-
-            //subscribe to when login is successful
-            loginPage.loginSuccessful += LoadSideBarBottom;
-            loginPage.loginSuccessful += LoadSideBarTop;
-            loginPage.loginSuccessful += MinSideBar;
-            loginPage.loginSuccessful += LoadDailyTaskPage;
-
         }
         private void LoadLoginPage()  // requre the user to login before accessing the app
         {
@@ -56,6 +49,13 @@ namespace TimeTable
             loginPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(loginPage);
             Debug.WriteLine("Login Page Loaded");
+
+            //subscribe to when login is successful
+            loginPage.SignUpClicked += LoadSignUpPage;
+            loginPage.loginSuccessful += LoadSideBarBottom;
+            loginPage.loginSuccessful += LoadSideBarTop;
+            loginPage.loginSuccessful += MinSideBar;
+            loginPage.loginSuccessful += LoadDailyTaskPage;
         }
 
         private void LoadSignUpPage()
@@ -64,6 +64,9 @@ namespace TimeTable
             signUpPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(signUpPage);
             Debug.WriteLine("Sign Up Page Loaded");
+
+            signUpPage.LoginClicked += LoadLoginPage;
+
         }
 
         private void LoadSideBarBottom()
@@ -73,7 +76,6 @@ namespace TimeTable
             panelSideBottom.Controls.Add(sideBar);
 
             //subscribe to when setting button in sidebar got click
-            loginPage.SignUpClicked += LoadSignUpPage;
             sideBar.DailyTaskButtonClicked += LoadDailyTaskPage;
             sideBar.ReportStatButtonClicked += LoadReportStatsPage;
             sideBar.SettingButtonClicked += LoadSettingPage;

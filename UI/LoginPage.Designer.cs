@@ -53,7 +53,7 @@ namespace TimeTable
             // 
             txtUsername.BackColor = Color.White;
             txtUsername.BorderStyle = BorderStyle.FixedSingle;
-            txtUsername.ForeColor = Color.Silver;
+            txtUsername.ForeColor = Color.Black;
             txtUsername.Location = new Point(207, 242);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(401, 27);
@@ -65,7 +65,7 @@ namespace TimeTable
             // 
             txtPassword.BackColor = Color.White;
             txtPassword.BorderStyle = BorderStyle.FixedSingle;
-            txtPassword.ForeColor = Color.Silver;
+            txtPassword.ForeColor = Color.DimGray;
             txtPassword.Location = new Point(207, 326);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(401, 27);
@@ -119,9 +119,9 @@ namespace TimeTable
             labelSignUp.Click += labelSignUp_Click;
             labelSignUp.MouseEnter += labelSignUp_MouseEnter;
             labelSignUp.MouseLeave += labelSignUp_MouseLeave;
-            //
+            // 
             // ErrorLabel
-            //
+            // 
             ErrorLabel.AutoSize = true;
             ErrorLabel.ForeColor = Color.Red;
             ErrorLabel.Location = new Point(207, 170);
