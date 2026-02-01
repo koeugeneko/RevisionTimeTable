@@ -36,7 +36,7 @@
             label2 = new Label();
             label1 = new Label();
             txtEmail = new TextBox();
-            btnLoginLogin = new Button();
+            btnSignup = new Button();
             SuspendLayout();
             // 
             // txtPassword
@@ -127,23 +127,23 @@
             txtEmail.TabIndex = 15;
             txtEmail.Text = "Email";
             // 
-            // btnLoginLogin
+            // btnSignup
             // 
-            btnLoginLogin.BackColor = Color.White;
-            btnLoginLogin.FlatStyle = FlatStyle.Flat;
-            btnLoginLogin.Location = new Point(386, 523);
-            btnLoginLogin.Name = "btnLoginLogin";
-            btnLoginLogin.Size = new Size(204, 52);
-            btnLoginLogin.TabIndex = 16;
-            btnLoginLogin.Text = "Sign up";
-            btnLoginLogin.UseVisualStyleBackColor = false;
-            btnLoginLogin.Click += btnLoginLogin_Click;
+            btnSignup.BackColor = Color.White;
+            btnSignup.FlatStyle = FlatStyle.Flat;
+            btnSignup.Location = new Point(386, 523);
+            btnSignup.Name = "btnSignup";
+            btnSignup.Size = new Size(204, 52);
+            btnSignup.TabIndex = 16;
+            btnSignup.Text = "Signup";
+            btnSignup.UseVisualStyleBackColor = false;
+            btnSignup.Click += btnSignup_Click;
             // 
             // SignUpPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(btnLoginLogin);
+            Controls.Add(btnSignup);
             Controls.Add(txtEmail);
             Controls.Add(label1);
             Controls.Add(label2);
@@ -169,6 +169,6 @@
         private Label label2;
         private Label label1;
         private TextBox txtEmail;
-        private Button btnLoginLogin;
+        private Button btnSignup;
     }
 }

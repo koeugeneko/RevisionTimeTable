@@ -32,6 +32,7 @@ namespace TimeTable
             }
         }
 
+        public Action loginSuccessful;
         private void btnLoginLogin_Click(object sender, EventArgs e)
         {
             //sould add a loading screen here
@@ -41,6 +42,10 @@ namespace TimeTable
             if (!loginSuccess)
             {
                 ErrorLabel.Show();
+            }
+            else
+            {
+                loginSuccessful?.Invoke();
             }
 
         }
@@ -87,5 +92,7 @@ namespace TimeTable
                 labelSignUp.Cursor = Cursors.Default;
             }
         }
+
+
     }
 }

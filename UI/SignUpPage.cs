@@ -17,9 +17,9 @@ namespace TimeTable.UI
             InitializeComponent();
         }
 
-        private void btnLoginLogin_Click(object sender, EventArgs e)
+        private void btnSignup_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

@@ -24,7 +24,7 @@ namespace TimeTable.Data
 
             return cmd.ExecuteNonQuery();
         }
-        // INSERT / UPDATE / DELETE signel data
+        // SELECT signel data
         public static object ExecuteScalar(string sql, Dictionary<string, object> parameters = null)
         {
             using var conn = new NpgsqlConnection(ConnectionString);
@@ -39,8 +39,6 @@ namespace TimeTable.Data
 
             return cmd.ExecuteScalar();
         }
-
-
         // SELECT
         public static List<Dictionary<string, object>> ExecuteQuery(string sql, Dictionary<string, object> parameters = null)
         {
@@ -71,14 +69,29 @@ namespace TimeTable.Data
         }
 
         // user related
-        public static void GetHashedPasswordFromDatabase(Logic.User user)
+        public static string GetHashedPasswordFromDatabase(string username)
         {
             string sql = @"
                 SELECT u.user_id, u.username, up.hashed_password
                 FROM users u
                 INNER JOIN user_passwords up ON u.user_id = up.user_id
                 WHERE u.username = @username";
+            
+            var parameters = new Dictionary<string, object>
+            {
+                { "@username", username }
+            };
 
+            var result = ExecuteQuery(sql, parameters);
+
+            if(result.Count == 0)
+            {
+                return null;
+            }
+
+            return Convert.ToString(result[0]);
+
+            
 
         }
 

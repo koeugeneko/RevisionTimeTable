@@ -38,7 +38,7 @@ namespace TimeTable.UI
             minSideBarButton.Name = "minSideBarButton";
             minSideBarButton.Size = new Size(118, 70);
             minSideBarButton.TabIndex = 0;
-            minSideBarButton.Text = ". . .";
+            minSideBarButton.Text = ". . . ";
             minSideBarButton.UseVisualStyleBackColor = true;
             minSideBarButton.Click += MinSideBarButton_Click;
             // 

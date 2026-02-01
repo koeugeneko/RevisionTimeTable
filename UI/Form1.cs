@@ -19,8 +19,6 @@ namespace TimeTable
         AddNewTaskPage addNewTaskPage;
         TaskDetailPage taskDetailPage;
 
-
-
         public Form1()
         {
             InitializeComponent();
@@ -43,8 +41,14 @@ namespace TimeTable
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadLoginPage();
-            LoadSideBarBottom();
-            LoadSideBarTop();
+            MinSideBar();
+
+            //subscribe to when login is successful
+            loginPage.loginSuccessful += LoadSideBarBottom;
+            loginPage.loginSuccessful += LoadSideBarTop;
+            loginPage.loginSuccessful += MinSideBar;
+            loginPage.loginSuccessful += LoadDailyTaskPage;
+
         }
         private void LoadLoginPage()  // requre the user to login before accessing the app
         {

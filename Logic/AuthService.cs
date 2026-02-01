@@ -22,8 +22,20 @@ namespace TimeTable.Logic
         public static bool Login(string username, string password)
         {
             User user = new User();
-            TimeTable.Data.DataLayer.GetHashedPasswordFromDatabase(user);
-            return true;
+            user.Username = username;
+            user.Password = password;   
+
+            string hashedPassword = DataLayer.GetHashedPasswordFromDatabase(user.Username);
+            
+            if (user.Password != hashedPassword)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+                
         }
 
         public static bool ValidateUsername(string username)

@@ -43,6 +43,7 @@
             checkBox1 = new CheckBox();
             numericUpDown1 = new NumericUpDown();
             label6 = new Label();
+            comboBox1 = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)trackBar2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -173,14 +174,23 @@
             label6.Font = new Font("Segoe UI", 10F);
             label6.Location = new Point(54, 421);
             label6.Name = "label6";
-            label6.Size = new Size(188, 40);
+            label6.Size = new Size(153, 30);
             label6.TabIndex = 19;
             label6.Text = "Region:";
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(252, 423);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(151, 28);
+            comboBox1.TabIndex = 20;
             // 
             // SettingsPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(comboBox1);
             Controls.Add(label6);
             Controls.Add(numericUpDown1);
             Controls.Add(checkBox1);
@@ -222,5 +232,6 @@
         private CheckBox checkBox1;
         private NumericUpDown numericUpDown1;
         private Label label6;
+        private ComboBox comboBox1;
     }
 }
