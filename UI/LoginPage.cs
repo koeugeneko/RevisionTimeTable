@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic.Logging;
+using Microsoft.VisualBasic.Logging;
 using TimeTable.Logic; 
 
 namespace TimeTable
@@ -40,9 +40,9 @@ namespace TimeTable
             bool loginSuccess = AuthService.Login(username, password);
             if (!loginSuccess)
             {
-                ErrorLable.Show();
+                ErrorLabel.Show();
             }
-            
+
         }
 
         private void LoginPage_Load(object sender, EventArgs e)
@@ -52,7 +52,7 @@ namespace TimeTable
             {
                 lblUsername.Focus();
             }));*/
-            ErrorLable.Hide();
+            ErrorLabel.Hide();
         }
 
 

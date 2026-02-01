@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +19,7 @@ namespace TimeTable.UI
 
         public event Action MinSideBarButtonClicked;
 
-        private void minSideBarButton_Click_1(object sender, EventArgs e)
+        private void MinSideBarButton_Click(object sender, EventArgs e)
         {
             MinSideBarButtonClicked?.Invoke();
         }

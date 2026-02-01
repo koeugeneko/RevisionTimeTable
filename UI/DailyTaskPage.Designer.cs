@@ -28,10 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            progressBar1 = new ProgressBar();
+            label1 = new Label();
+            SuspendLayout();
+            // 
+            // progressBar1
+            // 
+            progressBar1.Location = new Point(52, 110);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(378, 29);
+            progressBar1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.Location = new Point(594, 101);
+            label1.Name = "label1";
+            label1.Size = new Size(113, 25);
+            label1.TabIndex = 1;
+            label1.Text = "label1";
+            // 
+            // DailyTaskPage
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label1);
+            Controls.Add(progressBar1);
+            Name = "DailyTaskPage";
+            Size = new Size(856, 721);
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private ProgressBar progressBar1;
+        private Label label1;
     }
 }

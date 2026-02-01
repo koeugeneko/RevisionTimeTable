@@ -36,13 +36,13 @@
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
-            button4 = new Button();
             label7 = new Label();
             label8 = new Label();
             trackBar2 = new TrackBar();
             trackBar3 = new TrackBar();
             checkBox1 = new CheckBox();
             numericUpDown1 = new NumericUpDown();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)trackBar2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -87,7 +87,7 @@
             // label5
             // 
             label5.Font = new Font("Segoe UI", 10F);
-            label5.Location = new Point(41, 433);
+            label5.Location = new Point(41, 533);
             label5.Name = "label5";
             label5.Size = new Size(188, 40);
             label5.TabIndex = 6;
@@ -95,7 +95,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(41, 476);
+            button1.Location = new Point(41, 576);
             button1.Name = "button1";
             button1.Size = new Size(166, 35);
             button1.TabIndex = 7;
@@ -104,7 +104,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(224, 476);
+            button2.Location = new Point(224, 576);
             button2.Name = "button2";
             button2.Size = new Size(166, 35);
             button2.TabIndex = 8;
@@ -113,21 +113,12 @@
             // 
             // button3
             // 
-            button3.Location = new Point(423, 476);
+            button3.Location = new Point(423, 576);
             button3.Name = "button3";
             button3.Size = new Size(166, 35);
             button3.TabIndex = 9;
             button3.Text = "Delete account";
             button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            button4.Location = new Point(41, 530);
-            button4.Name = "button4";
-            button4.Size = new Size(166, 35);
-            button4.TabIndex = 10;
-            button4.Text = "Export data as JSON";
-            button4.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -177,17 +168,26 @@
             numericUpDown1.Size = new Size(150, 27);
             numericUpDown1.TabIndex = 18;
             // 
+            // label6
+            // 
+            label6.Font = new Font("Segoe UI", 10F);
+            label6.Location = new Point(54, 421);
+            label6.Name = "label6";
+            label6.Size = new Size(188, 40);
+            label6.TabIndex = 19;
+            label6.Text = "Region:";
+            // 
             // SettingsPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label6);
             Controls.Add(numericUpDown1);
             Controls.Add(checkBox1);
             Controls.Add(trackBar3);
             Controls.Add(trackBar2);
             Controls.Add(label8);
             Controls.Add(label7);
-            Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -215,12 +215,12 @@
         private Button button1;
         private Button button2;
         private Button button3;
-        private Button button4;
         private Label label7;
         private Label label8;
         private TrackBar trackBar2;
         private TrackBar trackBar3;
         private CheckBox checkBox1;
         private NumericUpDown numericUpDown1;
+        private Label label6;
     }
 }

@@ -32,10 +32,10 @@
             lblLoginPassword = new Label();
             txtUsername = new TextBox();
             lblUsername = new Label();
-            textBox1 = new TextBox();
+            txtPassword2 = new TextBox();
             label2 = new Label();
             label1 = new Label();
-            textBox2 = new TextBox();
+            txtEmail = new TextBox();
             btnLoginLogin = new Button();
             SuspendLayout();
             // 
@@ -83,16 +83,16 @@
             lblUsername.TabIndex = 7;
             lblUsername.Text = "Enter username";
             // 
-            // textBox1
+            // txtPassword2
             // 
-            textBox1.BackColor = Color.White;
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.ForeColor = Color.Silver;
-            textBox1.Location = new Point(189, 360);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(401, 27);
-            textBox1.TabIndex = 11;
-            textBox1.Text = "Password";
+            txtPassword2.BackColor = Color.White;
+            txtPassword2.BorderStyle = BorderStyle.FixedSingle;
+            txtPassword2.ForeColor = Color.Silver;
+            txtPassword2.Location = new Point(189, 360);
+            txtPassword2.Name = "txtPassword2";
+            txtPassword2.Size = new Size(401, 27);
+            txtPassword2.TabIndex = 11;
+            txtPassword2.Text = "Password";
             // 
             // label2
             // 
@@ -116,16 +116,16 @@
             label1.TabIndex = 14;
             label1.Text = "Enter Password again";
             // 
-            // textBox2
+            // txtEmail
             // 
-            textBox2.BackColor = Color.White;
-            textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.ForeColor = Color.Silver;
-            textBox2.Location = new Point(191, 459);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(401, 27);
-            textBox2.TabIndex = 15;
-            textBox2.Text = "Email";
+            txtEmail.BackColor = Color.White;
+            txtEmail.BorderStyle = BorderStyle.FixedSingle;
+            txtEmail.ForeColor = Color.Silver;
+            txtEmail.Location = new Point(191, 459);
+            txtEmail.Name = "txtEmail";
+            txtEmail.Size = new Size(401, 27);
+            txtEmail.TabIndex = 15;
+            txtEmail.Text = "Email";
             // 
             // btnLoginLogin
             // 
@@ -144,10 +144,10 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(btnLoginLogin);
-            Controls.Add(textBox2);
+            Controls.Add(txtEmail);
             Controls.Add(label1);
             Controls.Add(label2);
-            Controls.Add(textBox1);
+            Controls.Add(txtPassword2);
             Controls.Add(txtPassword);
             Controls.Add(lblLoginPassword);
             Controls.Add(txtUsername);
@@ -165,10 +165,10 @@
         private Label lblLoginPassword;
         private TextBox txtUsername;
         private Label lblUsername;
-        private TextBox textBox1;
+        private TextBox txtPassword2;
         private Label label2;
         private Label label1;
-        private TextBox textBox2;
+        private TextBox txtEmail;
         private Button btnLoginLogin;
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,16 +23,16 @@ namespace TimeTable.UI
             DailyTaskButtonClicked?.Invoke();
         }
 
-        public event Action TaskLibaryButtonClicked;
-        private void TaskLibaryButton_Click(object sender, EventArgs e)
+        public event Action TaskLibraryButtonClicked;
+        private void TaskLibraryButton_Click(object sender, EventArgs e)
         {
-            TaskLibaryButtonClicked?.Invoke();
+            TaskLibraryButtonClicked?.Invoke();
         }
 
-        public event Action SubjectLibaryButtonClicked;
-        private void SubjectLibaryButton_Click(object sender, EventArgs e)
+        public event Action SubjectLibraryButtonClicked;
+        private void SubjectLibraryButton_Click(object sender, EventArgs e)
         {
-            SubjectLibaryButtonClicked?.Invoke();
+            SubjectLibraryButtonClicked?.Invoke();
         }
 
         public event Action ReportStatButtonClicked;

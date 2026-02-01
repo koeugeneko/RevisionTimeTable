@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,16 +10,20 @@ using System.Windows.Forms;
 
 namespace TimeTable.UI
 {
-    public partial class TaskLibaryPage : UserControl
+    public partial class SubjectLibraryPage : UserControl
     {
-        public TaskLibaryPage()
+        public SubjectLibraryPage()
         {
             InitializeComponent();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public event Action AddSubjectButtonClicked;
+        private void AddNewSubject_Click(object sender, EventArgs e)
         {
 
+            AddSubjectButtonClicked?.Invoke();
         }
+
+
     }
 }

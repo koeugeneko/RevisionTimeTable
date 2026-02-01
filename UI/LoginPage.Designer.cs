@@ -1,4 +1,4 @@
-﻿namespace TimeTable
+namespace TimeTable
 {
     partial class LoginPage
     {
@@ -35,7 +35,7 @@
             btnLoginLogin = new Button();
             chkRememberMe = new CheckBox();
             labelSignUp = new Label();
-            ErrorLable = new Label();
+            ErrorLabel = new Label();
             SuspendLayout();
             // 
             // lblUsername
@@ -119,23 +119,23 @@
             labelSignUp.Click += labelSignUp_Click;
             labelSignUp.MouseEnter += labelSignUp_MouseEnter;
             labelSignUp.MouseLeave += labelSignUp_MouseLeave;
-            // 
-            // ErrorLable
-            // 
-            ErrorLable.AutoSize = true;
-            ErrorLable.ForeColor = Color.Red;
-            ErrorLable.Location = new Point(207, 170);
-            ErrorLable.Name = "ErrorLable";
-            ErrorLable.Size = new Size(222, 20);
-            ErrorLable.TabIndex = 7;
-            ErrorLable.Text = "Username or password incorrect";
+            //
+            // ErrorLabel
+            //
+            ErrorLabel.AutoSize = true;
+            ErrorLabel.ForeColor = Color.Red;
+            ErrorLabel.Location = new Point(207, 170);
+            ErrorLabel.Name = "ErrorLabel";
+            ErrorLabel.Size = new Size(222, 20);
+            ErrorLabel.TabIndex = 7;
+            ErrorLabel.Text = "Username or password incorrect";
             // 
             // LoginPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
-            Controls.Add(ErrorLable);
+            Controls.Add(ErrorLabel);
             Controls.Add(labelSignUp);
             Controls.Add(chkRememberMe);
             Controls.Add(btnLoginLogin);
@@ -160,6 +160,6 @@
         private Button btnLoginLogin;
         private CheckBox chkRememberMe;
         private Label labelSignUp;
-        private Label ErrorLable;
+        private Label ErrorLabel;
     }
 }

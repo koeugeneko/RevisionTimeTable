@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TimeTable.Logic
 {
-    internal class Subject
+    public class Subject
     {
-        string name { get; set; }
-        int prioirty { get; set; }
-
+        public int SubjectId { get; set; }
+        public int UserId { get; set; }
+        public string Name { get; set; }
     }
 }

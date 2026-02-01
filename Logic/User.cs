@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,18 +8,11 @@ namespace TimeTable.Logic
 {
     public class User
     {
-        public string username { get; set; }
-        public string password { get; set; }
-        public string email { get; set; }
-        int userId { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public int UserId { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        public User(string username, string password)
-        {
-            this.username = username;
-            this.password = password;
-        }
-
-        //userId = 
-        
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace TimeTable.UI
+namespace TimeTable.UI
 {
     partial class SideBarTop
     {
@@ -40,7 +40,7 @@
             minSideBarButton.TabIndex = 0;
             minSideBarButton.Text = ". . .";
             minSideBarButton.UseVisualStyleBackColor = true;
-            minSideBarButton.Click += minSideBarButton_Click_1;
+            minSideBarButton.Click += MinSideBarButton_Click;
             // 
             // SideBarTop
             // 

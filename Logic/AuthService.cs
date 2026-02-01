@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,17 +12,17 @@ namespace TimeTable.Logic
     {   
         public static bool SignUp(string username, string password, string email)
         {
-            User user = new User(username, password);
+            User user = new User();
             if (!ValidateUsername(username)) return false;
-            if (!ValidatePassowrd(password)) return false;
+            if (!ValidatePassword(password)) return false;
             if (!ValidateEmail(email)) return false;
             return true;
         }
 
         public static bool Login(string username, string password)
-        {   
-            User user = new User(username, password);
-            TimeTable.Data.DataLayer.GetHashedPasswordFromDatabse(user);
+        {
+            User user = new User();
+            TimeTable.Data.DataLayer.GetHashedPasswordFromDatabase(user);
             return true;
         }
 
@@ -44,7 +44,7 @@ namespace TimeTable.Logic
             string pattern = @"^[\w\.-]+@[\w\.-]+\.\w+$";
             return Regex.IsMatch(email, pattern);
         }
-        public static bool ValidatePassowrd(string password)
+        public static bool ValidatePassword(string password)
         {
             if (string.IsNullOrEmpty(password)) return false; // check if password is empty
 

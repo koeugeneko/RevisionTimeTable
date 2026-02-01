@@ -8,14 +8,24 @@ namespace TimeTable.Logic
 {
     public class Task
     {
-        string name { get; set; }
-        string subject { get; set; }
-        int prioirty { get; set; }
-        DateOnly dueDate { get; set; }
+        public int TaskId { get; set; }
+        public int UserId { get; set; }
+        public int? SubjectId { get; set; }
+        public string Description { get; set; }
+        public int EstimatedMinutes { get; set; }
+        public int Priority { get; set; }  // 1=Low, 2=Medium, 3=High
+        public DateTime? DueDate { get; set; }
+        public bool Completed { get; set; }
+        public DateTime? CompletedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        public Task()
-        { 
+        // 可加方法（行為封裝）
+        public double CalculatePriorityScore()
+        {
+            double score = Priority * 10;
+            if (DueDate.HasValue)
+                score += (DueDate.Value - DateTime.Today).TotalDays * -5;  // 越近到期分越高
+            return score;
         }
-
     }
 }

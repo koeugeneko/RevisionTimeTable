@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
+using Microsoft.VisualBasic.ApplicationServices;
 using Npgsql;
 using TimeTable.Logic;
 
@@ -71,7 +71,7 @@ namespace TimeTable.Data
         }
 
         // user related
-        public static void GetHashedPasswordFromDatabse(Logic.User user)
+        public static void GetHashedPasswordFromDatabase(Logic.User user)
         {
             string sql = @"
                 SELECT u.user_id, u.username, up.hashed_password

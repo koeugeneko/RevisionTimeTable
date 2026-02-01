@@ -5,62 +5,85 @@ namespace TimeTable
 {
     public partial class Form1 : Form
     {
-        LoginPage loginpage;
-        SignUpPage SignUpPage;
+        LoginPage loginPage;
+        SignUpPage signUpPage;
         SideBar sideBar;
         SideBarTop sideBarTop;
         DailyTaskPage dailyTaskPage;
+        TaskLibraryPage taskLibraryPage;
+        SubjectLibraryPage subjectLibraryPage;
         ReportStatsPage reportStatsPage;
         SettingsPage settingsPage;
-        SubjectLibaryPage subjectLibaryPage;
-        TaskLibaryPage taskLibaryPage;
         TimerPage timerPage;
+        AddNewSubjectPage addNewSubjectPage;
+        AddNewTaskPage addNewTaskPage;
+        TaskDetailPage taskDetailPage;
+
+
 
         public Form1()
         {
             InitializeComponent();
 
-            loginpage = new LoginPage(); // Initialise user controls
-            SignUpPage = new SignUpPage();
-            reportStatsPage = new ReportStatsPage();
-            dailyTaskPage = new DailyTaskPage();
-            settingsPage = new SettingsPage();
+            loginPage = new LoginPage(); // Initialise user controls
+            signUpPage = new SignUpPage();
             sideBar = new SideBar();
             sideBarTop = new SideBarTop();
-            subjectLibaryPage = new SubjectLibaryPage();
-            taskLibaryPage = new TaskLibaryPage();
+            dailyTaskPage = new DailyTaskPage();
+            taskLibraryPage = new TaskLibraryPage();
+            subjectLibraryPage = new SubjectLibraryPage();
+            reportStatsPage = new ReportStatsPage();
+            settingsPage = new SettingsPage();
             timerPage = new TimerPage();
+            addNewSubjectPage = new AddNewSubjectPage();
+            addNewTaskPage = new AddNewTaskPage();
+            taskDetailPage = new TaskDetailPage();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadLoginPage();
-            LoadSideBarButtom();
+            LoadSideBarBottom();
             LoadSideBarTop();
         }
+        private void LoadLoginPage()  // requre the user to login before accessing the app
+        {
+            panelMain.Controls.Clear();
+            loginPage.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(loginPage);
+            Debug.WriteLine("Login Page Loaded");
+        }
 
-        private void LoadSideBarButtom()
+        private void LoadSignUpPage()
+        {
+            panelMain.Controls.Clear();
+            signUpPage.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(signUpPage);
+            Debug.WriteLine("Sign Up Page Loaded");
+        }
+
+        private void LoadSideBarBottom()
         {
             panelSideBottom.Controls.Clear();
             sideBar.Dock = DockStyle.Fill;
             panelSideBottom.Controls.Add(sideBar);
 
-            sideBarTop.MinSideBarButtonClicked += MinSideBar; //subscribe to when setting button in sidebar got click
-            loginpage.SignUpClicked += LoadSignUpPage;
+            //subscribe to when setting button in sidebar got click
+            loginPage.SignUpClicked += LoadSignUpPage;
             sideBar.DailyTaskButtonClicked += LoadDailyTaskPage;
             sideBar.ReportStatButtonClicked += LoadReportStatsPage;
             sideBar.SettingButtonClicked += LoadSettingPage;
-            sideBar.SubjectLibaryButtonClicked += LoadSubjectLibaryPage;
-            sideBar.TaskLibaryButtonClicked += LoadTaskLibaryPage;
+            sideBar.SubjectLibraryButtonClicked += LoadSubjectLibraryPage;
+            sideBar.TaskLibraryButtonClicked += LoadTaskLibraryPage;
         }
-        
         private void LoadSideBarTop()
         {
             panelSideTop.Controls.Clear();
             sideBarTop.Dock = DockStyle.Fill;
             panelSideTop.Controls.Add(sideBarTop);
-        }
 
+            sideBarTop.MinSideBarButtonClicked += MinSideBar;
+        }
         private void MinSideBar()
         {
             if (panelSideBottom.Width >= 150) //sidebar
@@ -91,21 +114,6 @@ namespace TimeTable
             }
         }
 
-        private void LoadLoginPage()  // requre the user to login before accessing the app
-        {
-            panelMain.Controls.Clear();
-            loginpage.Dock = DockStyle.Fill;
-            panelMain.Controls.Add(loginpage);
-            Debug.WriteLine("Login Page Loaded");
-        }
-
-        private void LoadSignUpPage()
-        {
-            panelMain.Controls.Clear();
-            SignUpPage.Dock = DockStyle.Fill;
-            panelMain.Controls.Add(SignUpPage);
-            Debug.WriteLine("Sign Up Page Loaded");
-        }
         private void LoadDailyTaskPage()
         {
             panelMain.Controls.Clear();
@@ -113,7 +121,20 @@ namespace TimeTable
             panelMain.Controls.Add(dailyTaskPage);
             Debug.WriteLine("Daily Task Page Loaded");
         }
+        private void LoadTaskLibraryPage()
+        {
+            panelMain.Controls.Clear();
+            taskLibraryPage.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(taskLibraryPage);
+        }
+        private void LoadSubjectLibraryPage()
+        {
+            panelMain.Controls.Clear();
+            subjectLibraryPage.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(subjectLibraryPage);
 
+            subjectLibraryPage.AddSubjectButtonClicked += LoadAddNewSubjectPage;
+        }
         private void LoadReportStatsPage()
         {
             panelMain.Controls.Clear();
@@ -121,35 +142,36 @@ namespace TimeTable
             panelMain.Controls.Add(reportStatsPage);
             Debug.WriteLine("Report / Stats Page Loaded");
         }
-
         private void LoadSettingPage()
         {
             panelMain.Controls.Clear();
             settingsPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(settingsPage);
         }
-
-        private void LoadSubjectLibaryPage()
-        {
-            panelMain.Controls.Clear();
-            subjectLibaryPage.Dock = DockStyle.Fill;
-            panelMain.Controls.Add(subjectLibaryPage);
-        }
-
-        private void LoadTaskLibaryPage()
-        {
-            panelMain.Controls.Clear();
-            taskLibaryPage.Dock = DockStyle.Fill;
-            panelMain.Controls.Add(taskLibaryPage);
-        }
-
-        private void loadTimerPage()
+        private void LoadTimerPage()
         {
             panelMain.Controls.Clear();
             timerPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(timerPage);
         }
+        private void LoadAddNewSubjectPage()
+        {
+            panelMain.Controls.Clear();
+            addNewSubjectPage.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(addNewSubjectPage);
+        }
+        private void LoadAddNewTaskPage()
+        {
+            panelMain.Controls.Clear();
+            addNewTaskPage.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(addNewTaskPage);
 
-
+        }
+        private void LoadTaskDetailPage()
+        {
+            panelMain.Controls.Clear();
+            taskDetailPage.Dock = DockStyle.Fill;
+            panelMain.Controls.Add(taskDetailPage);
+        }
     }
 }
