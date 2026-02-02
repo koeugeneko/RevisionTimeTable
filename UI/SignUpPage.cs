@@ -56,8 +56,8 @@ namespace TimeTable.UI
             }
             else EmailErrorLabel.Hide();
 
-            AuthService.SignUp(txtUsername.Text, txtPassword.Text, txtEmail.Text);
-            SignupSuccessLabel.Show();
+            bool signupSuccess = AuthService.SignUp(txtUsername.Text, txtPassword.Text, txtEmail.Text);
+            if (signupSuccess) SignupSuccessLabel.Show();
         }
 
         private void txtUsername_Click(object sender, EventArgs e)
