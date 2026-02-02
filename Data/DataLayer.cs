@@ -1,5 +1,6 @@
 using Microsoft.VisualBasic.ApplicationServices;
 using Npgsql;
+using System.Diagnostics;
 using TimeTable.Logic;
 
 namespace TimeTable.Data
@@ -71,11 +72,12 @@ namespace TimeTable.Data
         // user related
         public static string GetHashedPasswordFromDatabase(string username)
         {
+            Debug.WriteLine("GetHashedPasswordFromDatabase");
             string sql = @"
-        SELECT up.hashed_password
-        FROM users u
-        INNER JOIN userpasswords up ON u.user_id = up.user_id
-        WHERE u.username = @username";
+                SELECT up.hashed_password
+                FROM users u
+                INNER JOIN userpasswords up ON u.user_id = up.user_id
+                WHERE u.username = @username";
             
             var parameters = new Dictionary<string, object>
             {
@@ -95,6 +97,7 @@ namespace TimeTable.Data
         }
         public static string GetSaltFromDatabase(string username)
         {
+            Debug.WriteLine("GetSaltFromDatabase");
             string sql = @"
                 SELECT up.salt
                 FROM users u
@@ -128,7 +131,7 @@ namespace TimeTable.Data
             
             ExecuteNonQuery(sql, parameters);
         }
-        public static void InsertUserPasswordIntoDatabase()
+        public static void InsertUserPasswordIntoDatabase(SignupUser signupUser)
         {
             string sql = @"
                 INSERT INTO userpasswords (user_id, hashed_password, salt)
@@ -137,6 +140,15 @@ namespace TimeTable.Data
                     @hashed_password,
                     @salt
                 )";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@username", signupUser.Username},
+                { "@hashed_password", signupUser.HashedPassword},
+                { "@salt", signupUser.Salt}
+            };
+
+            ExecuteNonQuery(sql, parameters);
         }
 
         // task related

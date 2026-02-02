@@ -33,7 +33,7 @@ namespace TimeTable
         private void btnLoginLogin_Click(object sender, EventArgs e)
         {
             bool loginSuccess = AuthService.Login(txtUsername.Text, txtPassword.Text);
-            if (!loginSuccess)
+            if (!loginSuccess)//?
             {
                 ErrorLabel.Show();
             }
