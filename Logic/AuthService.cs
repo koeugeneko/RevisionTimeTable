@@ -6,42 +6,47 @@ using TimeTable.Data;
 namespace TimeTable.Logic
 {
     internal static class AuthService
-    {   
+    {
 
-        public static void SignUp(string username, string password,string email)
+        public static bool SignUp(string username, string password, string email)
         {
-            SignupUser signupUser = new SignupUser();
+            string salt = GenerateSalt(16);
+            string hash = HashPassword(username, password, salt);
 
-            signupUser.Username = username;
-            signupUser.Password = password;
-            signupUser.Email = email;
-            signupUser.CreatedAt = DateTime.Now;
+            SignupUser user = new SignupUser
+            {
+                Username = username,
+                Email = email,
+                CreatedAt = DateTime.Now,
+                Salt = salt,
+                HashedPassword = hash
+            };
 
-            signupUser.Salt = GenerateSalt(16);
-            signupUser.HashedPassword = HashPassword(signupUser.Username, signupUser.Password, signupUser.Salt);
+            if (!DataLayer.InsertUserIntoDatabase(user))
+                return false;
 
-            DataLayer.InsertUserIntoDatabase(signupUser);
-            DataLayer.InsertUserPasswordIntoDatabase(signupUser);
+            if (!DataLayer.InsertUserPasswordIntoDatabase(user))
+                return false;
 
+            return true;
         }
 
         public static bool Login(string username, string password)
         {
-            if (username == null || password == null) return false;
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                return false;
 
-            User user = new User();
-            user.Username = username;
-            user.Password = password;
-            user.lastLogin = DateTime.Now;
+            string storedHash = DataLayer.GetHashedPasswordFromDatabase(username);
+            string storedSalt = DataLayer.GetSaltFromDatabase(username);
 
-            string hashedPasswordFromDatabase = DataLayer.GetHashedPasswordFromDatabase(user.Username);
-            string SaltFromDatabase = DataLayer.GetSaltFromDatabase(user.Username);
+            if (storedHash == null || storedSalt == null)
+                return false;
 
-            string hashedPassword = HashPassword(user.Username, user.Password, SaltFromDatabase);
+            string inputHash = HashPassword(username, password, storedSalt);
 
-            if (hashedPassword != hashedPasswordFromDatabase) return false;
-            else return true;
+            return inputHash == storedHash;
         }
+
 
         public static bool ValidateUsername(string username)
         {

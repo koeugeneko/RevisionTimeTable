@@ -114,7 +114,7 @@ namespace TimeTable.Data
             }
             return Convert.ToString(result[0]);
         }
-        public static void InsertUserIntoDatabase(Logic.User user)
+        public static bool InsertUserIntoDatabase(Logic.SignupUser user)
         { 
             string sql = @"
                 INSERT INTO users (username, user_email, created_at, last_login)
@@ -124,14 +124,17 @@ namespace TimeTable.Data
             {
                 { "@username", user.Username },
                 { "@email", user.Email },
-                { "@hashed_password", user.Password },
+                { "@hashed_password", user.HashedPassword },
                 { "@created_at", user.CreatedAt },
                 { "@last_login", user.lastLogin }
             };
-            
+            Debug.WriteLine($"HashedPassword: {user.HashedPassword}");
+            Debug.WriteLine($"Salt: {user.Salt}");
+
             ExecuteNonQuery(sql, parameters);
+            return true;
         }
-        public static void InsertUserPasswordIntoDatabase(SignupUser signupUser)
+        public static bool InsertUserPasswordIntoDatabase(SignupUser signupUser)
         {
             string sql = @"
                 INSERT INTO userpasswords (user_id, hashed_password, salt)
@@ -149,6 +152,8 @@ namespace TimeTable.Data
             };
 
             ExecuteNonQuery(sql, parameters);
+            return true;
+
         }
 
         // task related
