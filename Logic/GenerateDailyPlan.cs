@@ -15,5 +15,7 @@ namespace TimeTable.Logic
 
         LinkedList<Task> todaysTasks = new LinkedList<Task>();
 
+        // call public hoilday api
+        // if the region of the hoilday is on important hoilday, set less task or no task
     }
 }

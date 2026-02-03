@@ -40,7 +40,7 @@ namespace TimeTable.Data
 
             return cmd.ExecuteScalar();
         }
-        // SELECT
+        // SELECT muli data with a reader
         public static List<Dictionary<string, object>> ExecuteQuery(string sql, Dictionary<string, object> parameters = null)
         {
             var result = new List<Dictionary<string, object>>();
@@ -114,7 +114,7 @@ namespace TimeTable.Data
             }
             return Convert.ToString(result[0]);
         }
-        public static bool InsertUserIntoDatabase(Logic.SignupUser user)
+        public static bool InsertUserIntoDatabase(SignupUser user)
         { 
             string sql = @"
                 INSERT INTO users (username, user_email, created_at, last_login)
@@ -134,7 +134,7 @@ namespace TimeTable.Data
             ExecuteNonQuery(sql, parameters);
             return true;
         }
-        public static bool InsertUserPasswordIntoDatabase(SignupUser signupUser)
+        public static bool InsertUserPasswordIntoDatabase(SignupUser user)
         {
             string sql = @"
                 INSERT INTO userpasswords (user_id, hashed_password, salt)
@@ -146,14 +146,36 @@ namespace TimeTable.Data
 
             var parameters = new Dictionary<string, object>
             {
-                { "@username", signupUser.Username},
-                { "@hashed_password", signupUser.HashedPassword},
-                { "@salt", signupUser.Salt}
+                { "@username", user.Username},
+                { "@hashed_password", user.HashedPassword},
+                { "@salt", user.Salt}
             };
 
             ExecuteNonQuery(sql, parameters);
             return true;
 
+        }
+        public static Logic.User GetLastLogin(Logic.User user)
+        {
+            string sql = @"
+            SELECT last_login
+            FROM users
+            Where user_id = @userID
+            AND username = @username";
+
+            user.lastLogin = Convert.ToDateTime(ExecuteScalar(sql));
+            return user;
+
+        }
+
+        // user prefence related
+        public static void UpdateMaxDailyTasks()
+        {
+            string sql = @"
+            UPDATE usersettins
+            set max_daily_task = 
+            where us
+            ";
         }
 
         // task related
@@ -209,5 +231,7 @@ namespace TimeTable.Data
         {
             string sql = @"INSERT INTO plans (plan_name, start_time, end_time, recurrence) VALUES (@plan_name, @start_time, @end_time, @recurrence);";
         }
+
+        
     }
 }
