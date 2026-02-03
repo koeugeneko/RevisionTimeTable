@@ -8,8 +8,8 @@ namespace TimeTable.Logic
 {
     public class Subject
     {
-        public int SubjectId { get; set; }
-        public int UserId { get; set; }
+        public int SubjectId { get; }
+        public int UserId { get; }
         public string Name { get; set; }
     }
 }
