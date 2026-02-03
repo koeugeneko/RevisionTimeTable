@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimeTable.Logic
 {
-    internal class GenerateReminder
+    internal class ReminderService
     {
         Queue<string> reminder = new Queue<string>();
 
