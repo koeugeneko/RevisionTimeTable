@@ -176,6 +176,8 @@ namespace TimeTable.Data
             set max_daily_task = 
             where us
             ";
+
+            ExecuteNonQuery(sql);
         }
 
         // task related
