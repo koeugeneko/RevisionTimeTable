@@ -35,7 +35,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(157, 283);
+            label1.Location = new Point(94, 143);
             label1.Name = "label1";
             label1.Size = new Size(99, 20);
             label1.TabIndex = 0;
@@ -43,7 +43,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(289, 283);
+            textBox1.Location = new Point(217, 143);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(125, 27);
             textBox1.TabIndex = 1;
@@ -55,7 +55,7 @@
             Controls.Add(textBox1);
             Controls.Add(label1);
             Name = "AddNewSubjectPage";
-            Size = new Size(856, 721);
+            Size = new Size(530, 280);
             ResumeLayout(false);
             PerformLayout();
         }

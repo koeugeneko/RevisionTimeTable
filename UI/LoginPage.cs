@@ -32,7 +32,7 @@ namespace TimeTable
         public Action loginSuccessful;
         private void btnLoginLogin_Click(object sender, EventArgs e)
         {
-            /*bool loginSuccess = AuthService.Login(txtUsername.Text, txtPassword.Text);
+            bool loginSuccess = AuthService.Login(txtUsername.Text, txtPassword.Text);
             if (!loginSuccess)
             {
                 ErrorLabel.Show();
@@ -40,8 +40,8 @@ namespace TimeTable
             else
             {
                 loginSuccessful?.Invoke();
-            }*/ 
-            loginSuccessful?.Invoke(); // For testing purposes only, remove this line in production
+            }
+            //loginSuccessful?.Invoke(); // For testing purposes only, remove this line in production
 
         }
 

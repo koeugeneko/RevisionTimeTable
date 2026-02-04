@@ -92,7 +92,7 @@ namespace TimeTable.Data
             }
             else
             {
-                return Convert.ToString(result[0]);
+                return Convert.ToString(result[0]["hashed_password"]);
             }
         }
         public static string GetSaltFromDatabase(string username)
@@ -107,12 +107,18 @@ namespace TimeTable.Data
             {
                 { "@username", username }
             };
+
             var result = ExecuteQuery(sql, parameters);
             if (result.Count == 0)
             {
                 return null;
             }
-            return Convert.ToString(result[0]);
+
+            Debug.WriteLine($"Salt retrieved: {Convert.ToString(result[0]["salt"])}");
+            return Convert.ToString(result[0]["salt"]);
+
+
+
         }
         public static bool InsertUserIntoDatabase(SignupUser user)
         { 

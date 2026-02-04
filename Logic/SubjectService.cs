@@ -9,7 +9,8 @@ namespace TimeTable.Logic
     internal class SubjectService
     {
         public void AddNewTask(string name)
-        {
+        {   
+            
             Subject subject = new Subject();
             subject.Name = name;
 
