@@ -169,15 +169,19 @@ namespace TimeTable.Data
         }
 
         // user prefence related
-        public static void UpdateMaxDailyTasks()
+        public static void UpdateMaxDailyTasks(Logic.User user)
         {
             string sql = @"
             UPDATE usersettins
             set max_daily_task = 
-            where us
-            ";
+            where user_id = @userID";
 
-            ExecuteNonQuery(sql);
+            var parameters = new Dictionary<string, object>
+            {
+                { "@userID", user.UserId}
+            };
+
+            ExecuteNonQuery(sql, parameters);
         }
 
         // task related
@@ -208,7 +212,10 @@ namespace TimeTable.Data
         // subject related
         public static void GetSubjectsFromDatabase()
         {
-            string sql = @"SELECT subject_id, subject_name, color FROM subjects";
+            string sql = @"SELECT subject_name
+                FROM subjects, users
+                JOIN
+                WHERE subject.user_id = users.user_id";
         }
 
         public static void InsertSubjectIntoDatabase()

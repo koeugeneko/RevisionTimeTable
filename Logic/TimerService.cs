@@ -8,5 +8,9 @@ namespace TimeTable.Logic
 {
     internal class TimerService
     {
+        public void asdf()
+        {
+            
+        }
     }
 }

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace TimeTable.Logic
 {
-    internal class DailyPlan
+    public class DailyPlan
     {
-        
+        public DateTime Date { get; set; }
+
     }
 }

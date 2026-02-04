@@ -34,38 +34,41 @@ namespace TimeTable.UI
             ReportStatButton = new Button();
             SettingButton = new Button();
             SuspendLayout();
-            //
+            // 
             // DailyTaskButton
-            //
+            // 
             DailyTaskButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             DailyTaskButton.BackgroundImageLayout = ImageLayout.Zoom;
-            DailyTaskButton.Location = new Point(14, 35);
+            DailyTaskButton.Location = new Point(18, 44);
+            DailyTaskButton.Margin = new Padding(4, 4, 4, 4);
             DailyTaskButton.Name = "DailyTaskButton";
-            DailyTaskButton.Size = new Size(118, 90);
+            DailyTaskButton.Size = new Size(148, 112);
             DailyTaskButton.TabIndex = 0;
             DailyTaskButton.Text = "Daily task";
             DailyTaskButton.UseVisualStyleBackColor = true;
             DailyTaskButton.Click += DailyTaskButton_Click;
-            //
+            // 
             // TaskLibraryButton
-            //
+            // 
             TaskLibraryButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             TaskLibraryButton.BackgroundImageLayout = ImageLayout.Zoom;
-            TaskLibraryButton.Location = new Point(14, 151);
+            TaskLibraryButton.Location = new Point(18, 189);
+            TaskLibraryButton.Margin = new Padding(4, 4, 4, 4);
             TaskLibraryButton.Name = "TaskLibraryButton";
             TaskLibraryButton.RightToLeft = RightToLeft.No;
-            TaskLibraryButton.Size = new Size(118, 90);
+            TaskLibraryButton.Size = new Size(148, 112);
             TaskLibraryButton.TabIndex = 1;
             TaskLibraryButton.Text = "Task library";
             TaskLibraryButton.UseVisualStyleBackColor = true;
             TaskLibraryButton.Click += TaskLibraryButton_Click;
-            //
+            // 
             // SubjectLibraryButton
-            //
+            // 
             SubjectLibraryButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            SubjectLibraryButton.Location = new Point(14, 264);
+            SubjectLibraryButton.Location = new Point(18, 330);
+            SubjectLibraryButton.Margin = new Padding(4, 4, 4, 4);
             SubjectLibraryButton.Name = "SubjectLibraryButton";
-            SubjectLibraryButton.Size = new Size(118, 90);
+            SubjectLibraryButton.Size = new Size(148, 112);
             SubjectLibraryButton.TabIndex = 2;
             SubjectLibraryButton.Text = "Subject library";
             SubjectLibraryButton.UseVisualStyleBackColor = true;
@@ -75,12 +78,13 @@ namespace TimeTable.UI
             // 
             ReportStatButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             ReportStatButton.BackgroundImageLayout = ImageLayout.Zoom;
-            ReportStatButton.Location = new Point(14, 379);
+            ReportStatButton.Location = new Point(18, 474);
+            ReportStatButton.Margin = new Padding(4, 4, 4, 4);
             ReportStatButton.Name = "ReportStatButton";
             ReportStatButton.RightToLeft = RightToLeft.No;
-            ReportStatButton.Size = new Size(118, 90);
+            ReportStatButton.Size = new Size(148, 112);
             ReportStatButton.TabIndex = 3;
-            ReportStatButton.Text = "Stats";
+            ReportStatButton.Text = "Report";
             ReportStatButton.UseVisualStyleBackColor = true;
             ReportStatButton.Click += ReportStatButton_Click;
             // 
@@ -88,9 +92,10 @@ namespace TimeTable.UI
             // 
             SettingButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             SettingButton.BackgroundImageLayout = ImageLayout.Zoom;
-            SettingButton.Location = new Point(14, 503);
+            SettingButton.Location = new Point(18, 629);
+            SettingButton.Margin = new Padding(4, 4, 4, 4);
             SettingButton.Name = "SettingButton";
-            SettingButton.Size = new Size(118, 90);
+            SettingButton.Size = new Size(148, 112);
             SettingButton.TabIndex = 4;
             SettingButton.Text = "Settings";
             SettingButton.UseVisualStyleBackColor = true;
@@ -98,7 +103,7 @@ namespace TimeTable.UI
             // 
             // SideBar
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(SettingButton);
             Controls.Add(ReportStatButton);
@@ -107,7 +112,7 @@ namespace TimeTable.UI
             Controls.Add(DailyTaskButton);
             Margin = new Padding(2);
             Name = "SideBar";
-            Size = new Size(150, 621);
+            Size = new Size(188, 776);
             ResumeLayout(false);
         }
 

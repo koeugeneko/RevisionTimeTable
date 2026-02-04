@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TimeTable.Data;
 
+
 namespace TimeTable.Logic
 {
     internal class GenerateDailyPlan
@@ -15,7 +16,8 @@ namespace TimeTable.Logic
 
         LinkedList<Task> todaysTasks = new LinkedList<Task>();
 
-        // call public hoilday api
+        // call public hoilday
+        // 
         // if the region of the hoilday is on important hoilday, set less task or no task
     }
 }
