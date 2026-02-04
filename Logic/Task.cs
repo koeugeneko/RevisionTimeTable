@@ -8,9 +8,9 @@ namespace TimeTable.Logic
 {
     public class Task
     {
-        public int TaskId { get; set; }
-        public int UserId { get; set; }
-        public int? SubjectId { get; set; }
+        public int TaskId { get; }
+        public int UserId { get; }
+        public int? SubjectId { get; }
         public string Description { get; set; }
         public int EstimatedMinutes { get; set; }
         public int Priority { get; set; }  // 1=Low, 2=Medium, 3=High
@@ -19,7 +19,11 @@ namespace TimeTable.Logic
         public DateTime? CompletedAt { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        // 可加方法（行為封裝）
+        public Task()
+        {
+            CreatedAt = DateTime.Now;
+        }
+
         public double CalculatePriorityScore()
         {
             double score = Priority * 10;

@@ -8,10 +8,14 @@ namespace TimeTable.Logic
 {
     internal class SubjectService
     {
-        public void asdf(string name)
+        public void AddNewTask(string name)
         {
             Subject subject = new Subject();
             subject.Name = name;
+
+
         }
+
+        public void DeleteTask(string name) { }
     }
 }

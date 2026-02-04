@@ -8,5 +8,6 @@ namespace TimeTable.Logic
 {
     internal class DailyPlanService
     {
+
     }
 }
