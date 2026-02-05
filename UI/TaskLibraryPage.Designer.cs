@@ -44,15 +44,15 @@ namespace TimeTable.UI
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { SubjectColumn, DescriptionColumn, EstimatedTimeColumn, DueDateColumn, PriorityColumn, StatsColumn });
-            dataGridView1.Location = new Point(55, 54);
-            dataGridView1.Margin = new Padding(4, 4, 4, 4);
+            dataGridView1.Location = new Point(44, 43);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(966, 435);
+            dataGridView1.Size = new Size(773, 348);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
@@ -62,6 +62,7 @@ namespace TimeTable.UI
             SubjectColumn.HeaderText = "Subject";
             SubjectColumn.MinimumWidth = 6;
             SubjectColumn.Name = "SubjectColumn";
+            SubjectColumn.ReadOnly = true;
             // 
             // DescriptionColumn
             // 
@@ -100,53 +101,50 @@ namespace TimeTable.UI
             // 
             // AddNewTask
             // 
-            AddNewTask.Location = new Point(55, 532);
-            AddNewTask.Margin = new Padding(4);
+            AddNewTask.Location = new Point(44, 426);
             AddNewTask.Name = "AddNewTask";
-            AddNewTask.Size = new Size(240, 81);
+            AddNewTask.Size = new Size(192, 65);
             AddNewTask.TabIndex = 2;
             AddNewTask.Text = "Add new task";
             AddNewTask.UseVisualStyleBackColor = true;
             // 
             // DeleteTaskButton
             // 
-            DeleteTaskButton.Location = new Point(55, 763);
-            DeleteTaskButton.Margin = new Padding(4);
+            DeleteTaskButton.Location = new Point(44, 610);
             DeleteTaskButton.Name = "DeleteTaskButton";
-            DeleteTaskButton.Size = new Size(240, 81);
+            DeleteTaskButton.Size = new Size(192, 65);
             DeleteTaskButton.TabIndex = 3;
             DeleteTaskButton.Text = "DeleteTask";
             DeleteTaskButton.UseVisualStyleBackColor = true;
             // 
             // EditTaskButton
             // 
-            EditTaskButton.Location = new Point(55, 648);
-            EditTaskButton.Margin = new Padding(4);
+            EditTaskButton.Location = new Point(44, 518);
             EditTaskButton.Name = "EditTaskButton";
-            EditTaskButton.Size = new Size(240, 81);
+            EditTaskButton.Size = new Size(192, 65);
             EditTaskButton.TabIndex = 4;
             EditTaskButton.Text = "Edit task";
             EditTaskButton.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
-            panel1.Location = new Point(346, 512);
+            panel1.Location = new Point(277, 410);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(675, 332);
+            panel1.Size = new Size(540, 266);
             panel1.TabIndex = 5;
             // 
             // TaskLibraryPage
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(panel1);
             Controls.Add(EditTaskButton);
             Controls.Add(DeleteTaskButton);
             Controls.Add(AddNewTask);
             Controls.Add(dataGridView1);
-            Margin = new Padding(4, 4, 4, 4);
             Name = "TaskLibraryPage";
-            Size = new Size(1070, 901);
+            Size = new Size(856, 721);
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
@@ -154,15 +152,15 @@ namespace TimeTable.UI
         #endregion
 
         private DataGridView dataGridView1;
+        private Button AddNewTask;
+        private Button DeleteTaskButton;
+        private Button EditTaskButton;
+        private Panel panel1;
         private DataGridViewTextBoxColumn SubjectColumn;
         private DataGridViewTextBoxColumn DescriptionColumn;
         private DataGridViewTextBoxColumn EstimatedTimeColumn;
         private DataGridViewTextBoxColumn DueDateColumn;
         private DataGridViewTextBoxColumn PriorityColumn;
         private DataGridViewCheckBoxColumn StatsColumn;
-        private Button AddNewTask;
-        private Button DeleteTaskButton;
-        private Button EditTaskButton;
-        private Panel panel1;
     }
 }

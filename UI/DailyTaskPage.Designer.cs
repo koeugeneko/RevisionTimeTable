@@ -32,6 +32,7 @@
             lblDate = new Label();
             dataGridView1 = new DataGridView();
             button1 = new Button();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -73,10 +74,21 @@
             button1.Text = "Add emergcy task";
             button1.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            button2.Location = new Point(388, 598);
+            button2.Margin = new Padding(2);
+            button2.Name = "button2";
+            button2.Size = new Size(174, 67);
+            button2.TabIndex = 4;
+            button2.Text = "Regenrate daily plan";
+            button2.UseVisualStyleBackColor = true;
+            // 
             // DailyTaskPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(lblDate);
@@ -94,5 +106,6 @@
         private Label lblDate;
         private DataGridView dataGridView1;
         private Button button1;
+        private Button button2;
     }
 }

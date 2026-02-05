@@ -77,7 +77,7 @@ namespace TimeTable.Data
                 SELECT up.hashed_password
                 FROM users u
                 INNER JOIN userpasswords up ON u.user_id = up.user_id
-                WHERE u.username = @username";
+                WHERE u.username = @username;";
             
             var parameters = new Dictionary<string, object>
             {
@@ -213,19 +213,43 @@ namespace TimeTable.Data
         }
         public static void InsertTaskIntoDatabase()
         {
-            string sql = @"INSERT INTO tasks (description, priority, estimated_min, due_date, subject_id) VALUES (@description, @priority, @estimated_min, @due_date, @subject_id);";
+            string sql = @"INSERT INTO tasks (description, priority, estimated_min, due_date, subject_id) 
+                VALUES (@description, @priority, @estimated_min, @due_date, @subject_id);";
         }
         public static void UpdateTaskInDatabase()
         {
-            string sql = @"UPDATE tasks SET description = @description, priority = @priority, estimated_min = @estimated_min, due_date = @due_date, subject_id = @subject_id WHERE task_id = @task_id;";
+            string sql = @"UPDATE tasks 
+                SET description = @description, priority = @priority, estimated_min = @estimated_min, due_date = @due_date, subject_id = @subject_id 
+                WHERE task_id = @task_id
+                AND user_id = @userId;";
         }
-        public static void DeleteTaskFromDatabase()
+        public static void DeleteTaskFromDatabase(int taskId, int userId)
         {
-            string sql = @"DELETE FROM tasks WHERE task_id = @task_id;";
+            string sql = @"DELETE FROM tasks 
+                WHERE task_id = @taskId;
+                AND user_id = @userId";
+
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@taskId", taskId},
+                { "@userId", userId}
+            };  
         }
-        public static void MarkTaskAsCompletedInDatabase()
+        public static void MarkTaskAsCompletedInDatabase(int taskId, int userId)
         {
-            string sql = @"UPDATE tasks SET completed = true WHERE task_id = @task_id;";
+            string sql = @"UPDATE tasks 
+                SET completed = true 
+                WHERE task_id = @taskId 
+                AND user_id = @userID;";
+
+            var parameters = new Dictionary<string, object>
+            {
+                {"@taskID", taskId},
+                { "userId", userId},
+            };
+
+            ExecuteNonQuery(sql, parameters );
         }
 
         // subject related
@@ -261,7 +285,7 @@ namespace TimeTable.Data
         public static void DeleteSubjectFromDatabase(string subjectName, int userId)
         {
             string sql = @"DELETE FROM subjects
-                WHERE subject_id = @subject_id";
+                WHERE subject_id = @subject_id;";
 
             var parameters = new Dictionary<string, object>
             {
@@ -275,13 +299,11 @@ namespace TimeTable.Data
         // plan related
         public static void GetPlansFromDatabase()
         {
-            string sql = @"SELECT plan_id, plan_name, start_time, end_time, recurrence FROM plans";
+            string sql = @"SELECT plan_id, plan_name, start_time, end_time, recurrence FROM plans;";
         }
         public static void InsertPlanIntoDatabase()
         {
             string sql = @"INSERT INTO plans (plan_name, start_time, end_time, recurrence) VALUES (@plan_name, @start_time, @end_time, @recurrence);";
         }
-
-        
     }
 }
