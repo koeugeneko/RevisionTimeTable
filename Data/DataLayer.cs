@@ -140,7 +140,7 @@ namespace TimeTable.Data
             ExecuteNonQuery(sql, parameters);
             return true;
         }
-        public static bool InsertUserPasswordIntoDatabase(SignupUser user)
+        public static bool InsertUserPasswordSaltIntoDatabase(SignupUser user)
         {
             string sql = @"
                 INSERT INTO userpasswords (user_id, hashed_password, salt)
@@ -161,13 +161,29 @@ namespace TimeTable.Data
             return true;
 
         }
+        public static int GetUserIdFromDatabase(string username)
+        {
+            string sql = @"
+            SELECT user_id
+            FROM users
+            Where username = @username";
+            var parameters = new Dictionary<string, object>
+            {
+                { "@username", username }
+            };
+            return Convert.ToInt32(ExecuteScalar(sql, parameters));
+        }
         public static Logic.User GetLastLogin(Logic.User user)
         {
             string sql = @"
             SELECT last_login
             FROM users
-            Where user_id = @userID
-            AND username = @username";
+            Where user_id = @userID";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@userID", user.UserId}
+            };
 
             user.lastLogin = Convert.ToDateTime(ExecuteScalar(sql));
             return user;
@@ -216,25 +232,39 @@ namespace TimeTable.Data
         }
 
         // subject related
-        public static void GetSubjectsFromDatabase()
+        public static void GetSubjectsFromDatabase(int UserId)
         {
-            string sql = @"SELECT subject_name
-                FROM subjects, users
-                JOIN
-                WHERE subject.user_id = users.user_id";
-        }
+            string sql = @"
+                SELECT subject_name
+                FROM subjects
+                WHERE user_id = @userID";
+            
+            var parameters = new Dictionary<string, object>
+            {
+                { "@userID", UserId} 
+            };
 
-        public static void InsertSubjectIntoDatabase()
-        {
-            string sql = @"INSERT INTO subjects (subject_name, color) VALUES (@subject_name, @color);";
+            ExecuteQuery(sql, parameters);
         }
-        public static void UpdateSubjectInDatabase()
+        public static void InsertSubjectIntoDatabase(string subjectName, Logic.User user)
         {
-            string sql = @"UPDATE subjects SET subject_name = @subject_name, color = @color WHERE subject_id = @subject_id;";
+            string sql = @"
+                INSERT INTO subjects (subject_name, user_id)
+                VALUES @subjectName, @userID
+                ";
+            
+            var parameters = new Dictionary<string, object>
+            {
+                { "@subjectName", subjectName },
+                { "@userID", user.UserId}
+            };
+
+            ExecuteNonQuery(sql, parameters);
         }
         public static void DeleteSubjectFromDatabase()
         {
             string sql = @"DELETE FROM subjects WHERE subject_id = @subject_id;";
+
         }
 
         // plan related

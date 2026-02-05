@@ -25,7 +25,7 @@ namespace TimeTable.Logic
             if (!DataLayer.InsertUserIntoDatabase(user))
                 return false;
 
-            if (!DataLayer.InsertUserPasswordIntoDatabase(user))
+            if (!DataLayer.InsertUserPasswordSaltIntoDatabase(user))
                 return false;
 
             return true;

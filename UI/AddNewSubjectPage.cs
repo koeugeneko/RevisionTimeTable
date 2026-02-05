@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TimeTable.Logic;
 
 namespace TimeTable.UI
 {
@@ -15,6 +16,12 @@ namespace TimeTable.UI
         public AddNewSubjectPage()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string subjectName = textBox1.Text;
+            Logic.SubjectService.AddNewTask(subjectName);
         }
     }
 }

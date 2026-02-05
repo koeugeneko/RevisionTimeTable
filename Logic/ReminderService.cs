@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Toolkit.Uwp.Notifications;
-
+using TimeTable.Data;
 
 namespace TimeTable.Logic
 {
@@ -25,7 +25,11 @@ namespace TimeTable.Logic
             .(); // Displays the notification
         }*/
 
+        public void adf()
+        {
+            //Data.DataLayer.GetLastLogin();
 
+        }
 
 
 

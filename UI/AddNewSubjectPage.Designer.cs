@@ -30,32 +30,44 @@
         {
             label1 = new Label();
             textBox1 = new TextBox();
+            button1 = new Button();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(94, 143);
+            label1.Location = new Point(238, 303);
             label1.Name = "label1";
-            label1.Size = new Size(99, 20);
+            label1.Size = new Size(106, 20);
             label1.TabIndex = 0;
-            label1.Text = "Subject name";
+            label1.Text = "Subject name: ";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(217, 143);
+            textBox1.Location = new Point(361, 303);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(125, 27);
             textBox1.TabIndex = 1;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(502, 377);
+            button1.Name = "button1";
+            button1.Size = new Size(126, 46);
+            button1.TabIndex = 2;
+            button1.Text = "Confirm";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // AddNewSubjectPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(button1);
             Controls.Add(textBox1);
             Controls.Add(label1);
             Name = "AddNewSubjectPage";
-            Size = new Size(530, 280);
+            Size = new Size(856, 721);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -64,5 +76,6 @@
 
         private Label label1;
         private TextBox textBox1;
+        private Button button1;
     }
 }

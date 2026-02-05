@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TimeTable.Data;
 
 namespace TimeTable.Logic
 {
-    internal class SubjectService
+    public class SubjectService
     {
-        public void AddNewTask(string name)
+        public static void AddNewTask(string subjectName)
         {   
-            
             Subject subject = new Subject();
-            subject.Name = name;
+            subject.Name = subjectName;
 
-
+            DataLayer.InsertSubjectIntoDatabase(subject, user);
         }
 
-        public void DeleteTask(string name) { }
+        public void DeleteTask(string name)
+        {
+        }
     }
 }
