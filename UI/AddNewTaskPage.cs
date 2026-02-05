@@ -16,5 +16,6 @@ namespace TimeTable.UI
         {
             InitializeComponent();
         }
+
     }
 }

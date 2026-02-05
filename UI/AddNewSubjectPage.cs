@@ -13,7 +13,6 @@ namespace TimeTable.UI
 {
     public partial class AddNewSubjectPage : UserControl
     {
-        public Logic.User user;
         public AddNewSubjectPage()
         {
             InitializeComponent();
@@ -21,8 +20,7 @@ namespace TimeTable.UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string subjectName = textBox1.Text;
-            SubjectService.AddNewSubject(subjectName);
+            SubjectService.AddNewSubject(textBox1.Text);
         }
     }
 }

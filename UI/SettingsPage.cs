@@ -37,5 +37,10 @@ namespace TimeTable.UI
                 // Delect account
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

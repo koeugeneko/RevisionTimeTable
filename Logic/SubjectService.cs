@@ -17,14 +17,13 @@ namespace TimeTable.Logic
 
         public static void AddNewSubject(string subjectName)
         {   
-            Subject subject = new Subject();
-            subject.Name = subjectName;
+            DataLayer.InsertSubjectIntoDatabase(subjectName, CurrentUser.UserId);
 
-            DataLayer.InsertSubjectIntoDatabase(subject.Name, userId);
         }
 
-        public void DeleteTask(string name)
+        public void DeleteTask(string subjectName)
         {
+            DataLayer.DeleteSubjectFromDatabase(subjectName, CurrentUser.UserId);   
         }
     }
 }

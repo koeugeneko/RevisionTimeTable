@@ -21,5 +21,13 @@ namespace TimeTable.UI
         {
             progressBar1.PerformStep();
         }
+
+        private void lblDate_Click(object sender, EventArgs e)
+        {
+        }
+        private void DailyTaskPage_Load(object sender, EventArgs e)
+        {
+            lblDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+        }
     }
 }

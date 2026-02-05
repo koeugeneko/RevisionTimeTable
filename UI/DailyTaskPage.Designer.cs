@@ -37,52 +37,53 @@
             // 
             // progressBar1
             // 
-            progressBar1.Location = new Point(65, 138);
-            progressBar1.Margin = new Padding(4, 4, 4, 4);
+            progressBar1.Location = new Point(52, 110);
             progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(472, 36);
+            progressBar1.Size = new Size(378, 29);
             progressBar1.TabIndex = 0;
             progressBar1.Click += progressBar1_Click;
             // 
             // lblDate
             // 
             lblDate.Font = new Font("Segoe UI", 12F);
-            lblDate.Location = new Point(689, 138);
-            lblDate.Margin = new Padding(4, 0, 4, 0);
+            lblDate.Location = new Point(551, 110);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(235, 31);
+            lblDate.Size = new Size(188, 25);
             lblDate.TabIndex = 1;
             lblDate.Text = "00/00/0000, wed";
+            lblDate.Click += lblDate_Click;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(65, 209);
+            dataGridView1.Location = new Point(52, 167);
+            dataGridView1.Margin = new Padding(2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(859, 488);
+            dataGridView1.Size = new Size(687, 390);
             dataGridView1.TabIndex = 2;
             // 
             // button1
             // 
-            button1.Location = new Point(79, 747);
+            button1.Location = new Point(63, 598);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
-            button1.Size = new Size(218, 84);
+            button1.Size = new Size(174, 67);
             button1.TabIndex = 3;
             button1.Text = "Add emergcy task";
             button1.UseVisualStyleBackColor = true;
             // 
             // DailyTaskPage
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(lblDate);
             Controls.Add(progressBar1);
-            Margin = new Padding(4, 4, 4, 4);
             Name = "DailyTaskPage";
-            Size = new Size(1070, 901);
+            Size = new Size(856, 721);
+            Load += DailyTaskPage_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }

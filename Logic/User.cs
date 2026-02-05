@@ -17,11 +17,6 @@ namespace TimeTable.Logic
         public DateTime CreatedAt { get; set; }
         public DateTime lastLogin { get; set; }
 
-        public User()
-        {
-            DataLayer.GetUserIdFromDatabase(Username);
-            Debug.WriteLine($"User created with ID: {UserId}");
-        }
 
     }
 }

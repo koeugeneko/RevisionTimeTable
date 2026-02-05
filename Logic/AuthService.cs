@@ -39,12 +39,20 @@ namespace TimeTable.Logic
             string storedHash = DataLayer.GetHashedPasswordFromDatabase(username);
             string storedSalt = DataLayer.GetSaltFromDatabase(username);
 
-            if (storedHash == null || storedSalt == null)
+            if (storedHash == null || storedSalt == null) // user not stored in database
                 return false;
 
             string inputHash = HashPassword(username, password, storedSalt);
 
-            return inputHash == storedHash;
+            if (inputHash == storedHash) // check if password mathchs
+            {   
+                CurrentUser.UserId = Data.DataLayer.GetUserIdFromDatabase(username);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
 

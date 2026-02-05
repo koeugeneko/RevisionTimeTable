@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimeTable.Logic
 {
-    public class Subject
+    public class Subject //not in use
     {
         public int SubjectId { get; }
         public int UserId { get; }

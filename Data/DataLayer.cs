@@ -7,7 +7,7 @@ namespace TimeTable.Data
 {
     public class DataLayer
     {
-        private static readonly string ConnectionString = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek002";
+        private static readonly string ConnectionString = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek001";
 
 
         // INSERT / UPDATE / DELETE mutiple data
@@ -116,9 +116,6 @@ namespace TimeTable.Data
 
             Debug.WriteLine($"Salt retrieved: {Convert.ToString(result[0]["salt"])}");
             return Convert.ToString(result[0]["salt"]);
-
-
-
         } 
         public static bool InsertUserIntoDatabase(SignupUser user)
         { 
@@ -191,7 +188,7 @@ namespace TimeTable.Data
         }
 
         // user prefence related
-        public static void UpdateMaxDailyTasks(Logic.User user) //TODO
+        public static void UpdateMaxDailyTasks(int UserId) //TODO
         {
             string sql = @"
             UPDATE usersettins
@@ -200,7 +197,7 @@ namespace TimeTable.Data
 
             var parameters = new Dictionary<string, object>
             {
-                { "@userID", user.UserId}
+                { "@userID", UserId}
             };
 
             ExecuteNonQuery(sql, parameters);
@@ -250,21 +247,29 @@ namespace TimeTable.Data
         {
             string sql = @"
                 INSERT INTO subjects (subject_name, user_id)
-                VALUES @subjectName, @userID
-                ";
+                VALUES (@subjectName, @userID)";
             
             var parameters = new Dictionary<string, object>
             {
                 { "@subjectName", subjectName },
                 { "@userID", userId}
             };
-
+            Debug.WriteLine("InsertSubjectIntoDatabase");
             ExecuteNonQuery(sql, parameters);
+            
         }
-        public static void DeleteSubjectFromDatabase()
+        public static void DeleteSubjectFromDatabase(string subjectName, int userId)
         {
-            string sql = @"DELETE FROM subjects WHERE subject_id = @subject_id;";
+            string sql = @"DELETE FROM subjects
+                WHERE subject_id = @subject_id";
 
+            var parameters = new Dictionary<string, object>
+            {
+                { "@subjectName", subjectName },
+                { "@userID", userId}
+            };
+            Debug.WriteLine("InsertSubjectIntoDatabase");
+            ExecuteNonQuery(sql, parameters);
         }
 
         // plan related
