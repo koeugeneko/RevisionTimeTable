@@ -23,8 +23,13 @@ namespace TimeTable
         {
             InitializeComponent();
 
-            loginPage = new LoginPage(); // Initialise user controls
+            loginPage = new LoginPage(); 
             signUpPage = new SignUpPage();
+            
+        }
+
+        public void InitialiseUserControls()
+        {
             sideBar = new SideBar();
             sideBarTop = new SideBarTop();
             dailyTaskPage = new DailyTaskPage();
@@ -49,14 +54,26 @@ namespace TimeTable
             loginPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(loginPage);
             Debug.WriteLine("Login Page Loaded");
-
             //subscribe to when login is successful
             loginPage.SignUpClicked += LoadSignUpPage;
-            loginPage.loginSuccessful += LoadSideBarBottom;
-            loginPage.loginSuccessful += LoadSideBarTop;
-            loginPage.loginSuccessful += MinSideBar;
-            loginPage.loginSuccessful += LoadDailyTaskPage;
+            InitialiseUserControls();
+            loginPage.LoginSuccessful += OnLoginSuccess;
+            
         }
+        private int _currentUserId;
+
+        private void OnLoginSuccess(object? sender, LoginSuccessEvent e)
+        {
+            _currentUserId = e.userId;
+
+            LoadSideBarBottom();
+            LoadSideBarTop();
+            MinSideBar();
+            LoadDailyTaskPage();
+
+            InitialiseUserControls();
+        }
+
 
         private void LoadSignUpPage()
         {
@@ -161,7 +178,7 @@ namespace TimeTable
             panelMain.Controls.Add(timerPage);
         }
         private void LoadAddNewSubjectPage()
-        {
+        {   
             panelMain.Controls.Clear();
             addNewSubjectPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(addNewSubjectPage);

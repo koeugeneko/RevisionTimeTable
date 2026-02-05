@@ -95,7 +95,7 @@ namespace TimeTable.Data
                 return Convert.ToString(result[0]["hashed_password"]);
             }
         }
-        public static string GetSaltFromDatabase(string username)
+        public static string GetSaltFromDatabase(string username) // Didn't pass userid as parameter because we can get it from username in the same query, and this way we can avoid an extra query to get userid first
         {
             Debug.WriteLine("GetSaltFromDatabase");
             string sql = @"
@@ -119,7 +119,7 @@ namespace TimeTable.Data
 
 
 
-        }
+        } 
         public static bool InsertUserIntoDatabase(SignupUser user)
         { 
             string sql = @"
@@ -173,7 +173,7 @@ namespace TimeTable.Data
             };
             return Convert.ToInt32(ExecuteScalar(sql, parameters));
         }
-        public static Logic.User GetLastLogin(Logic.User user)
+        public static DateTime GetLastLogin(int UserId)
         {
             string sql = @"
             SELECT last_login
@@ -182,16 +182,16 @@ namespace TimeTable.Data
 
             var parameters = new Dictionary<string, object>
             {
-                { "@userID", user.UserId}
+                { "@userID",UserId}
             };
 
-            user.lastLogin = Convert.ToDateTime(ExecuteScalar(sql));
-            return user;
+            DateTime lastLogin = Convert.ToDateTime(ExecuteScalar(sql));
+            return lastLogin;
 
         }
 
         // user prefence related
-        public static void UpdateMaxDailyTasks(Logic.User user)
+        public static void UpdateMaxDailyTasks(Logic.User user) //TODO
         {
             string sql = @"
             UPDATE usersettins
@@ -246,7 +246,7 @@ namespace TimeTable.Data
 
             ExecuteQuery(sql, parameters);
         }
-        public static void InsertSubjectIntoDatabase(string subjectName, Logic.User user)
+        public static void InsertSubjectIntoDatabase(string subjectName, int userId)
         {
             string sql = @"
                 INSERT INTO subjects (subject_name, user_id)
@@ -256,7 +256,7 @@ namespace TimeTable.Data
             var parameters = new Dictionary<string, object>
             {
                 { "@subjectName", subjectName },
-                { "@userID", user.UserId}
+                { "@userID", userId}
             };
 
             ExecuteNonQuery(sql, parameters);

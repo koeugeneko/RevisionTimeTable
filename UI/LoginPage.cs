@@ -1,5 +1,8 @@
 using Microsoft.VisualBasic.Logging;
-using TimeTable.Logic; 
+using TimeTable.Data;
+using TimeTable.Logic;
+using TimeTable.UI;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace TimeTable
 {
@@ -29,7 +32,7 @@ namespace TimeTable
             }
         }
 
-        public Action loginSuccessful;
+        public event EventHandler<LoginSuccessEvent>? LoginSuccessful;
         private void btnLoginLogin_Click(object sender, EventArgs e)
         {
             bool loginSuccess = AuthService.Login(txtUsername.Text, txtPassword.Text);
@@ -39,7 +42,12 @@ namespace TimeTable
             }
             else
             {
-                loginSuccessful?.Invoke();
+                int userId = DataLayer.GetUserIdFromDatabase(txtUsername.Text);
+                LoginSuccessful?.Invoke(
+                    this,
+                    new LoginSuccessEvent(userId)
+                    );
+
             }
             //loginSuccessful?.Invoke(); // For testing purposes only, remove this line in production
 

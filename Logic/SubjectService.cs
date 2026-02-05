@@ -8,13 +8,19 @@ using TimeTable.Data;
 namespace TimeTable.Logic
 {
     public class SubjectService
-    {
-        public static void AddNewTask(string subjectName)
+    {   
+        private int userId; 
+        public SubjectService(int userId)
+        {
+            this.userId = userId;
+        }
+
+        public static void AddNewSubject(string subjectName)
         {   
             Subject subject = new Subject();
             subject.Name = subjectName;
 
-            DataLayer.InsertSubjectIntoDatabase(subject, user);
+            DataLayer.InsertSubjectIntoDatabase(subject.Name, userId);
         }
 
         public void DeleteTask(string name)

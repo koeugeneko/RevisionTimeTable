@@ -85,7 +85,7 @@
             MinimumSize = new Size(1024, 768);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "WinForms";
+            Text = "Revision Tracker";
             Load += Form1_Load;
             panelSide.ResumeLayout(false);
             ResumeLayout(false);
