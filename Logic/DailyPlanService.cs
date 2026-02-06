@@ -32,5 +32,7 @@ namespace TimeTable.Logic
             memo[key] = best;
             return best;
         }
+
+
     }
 }
