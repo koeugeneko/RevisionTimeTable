@@ -107,6 +107,7 @@ namespace TimeTable.UI
             AddNewTask.TabIndex = 2;
             AddNewTask.Text = "Add new task";
             AddNewTask.UseVisualStyleBackColor = true;
+            AddNewTask.Click += AddNewTask_Click;
             // 
             // DeleteTaskButton
             // 

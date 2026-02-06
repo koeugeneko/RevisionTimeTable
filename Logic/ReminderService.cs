@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Toolkit.Uwp.Notifications;
 using TimeTable.Data;
 
+
 namespace TimeTable.Logic
 {
     internal class ReminderService
@@ -27,8 +28,11 @@ namespace TimeTable.Logic
 
         public void adf()
         {
-            //Data.DataLayer.GetLastLogin();
+            DateTime lastlogin = Data.DataLayer.GetLastLogin(CurrentUser.UserId);
+            //if( DateTime.Now.Date - lastlogin.Date >= 3)
+            {
 
+            }
         }
 
 

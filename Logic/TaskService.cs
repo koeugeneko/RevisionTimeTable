@@ -8,5 +8,21 @@ namespace TimeTable.Logic
 {
     internal class TaskService
     {
+
+        public void AddNewTask()
+        {
+            Task task = new Task();
+
+        }
+
+        public static void UpdateTask()
+        {
+
+        }
+
+        public void DeleteTask() 
+        {
+
+        }
     }
 }

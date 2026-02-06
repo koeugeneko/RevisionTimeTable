@@ -8,5 +8,11 @@ namespace TimeTable.Logic
 {
     internal class UserSettingsService
     {
+
+        public void signout()
+        {
+            CurrentUser.UserId = 0;
+            CurrentUser.Username = null;
+        }
     }
 }

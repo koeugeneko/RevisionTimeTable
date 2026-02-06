@@ -38,9 +38,10 @@ namespace TimeTable.UI
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        public Action signoutButtonClicked;
+        private void button2_Click(object sender, EventArgs e) //sign out
         {
-
+            signoutButtonClicked?.Invoke();
         }
     }
 }

@@ -22,14 +22,7 @@ namespace TimeTable.Logic
         public Task()
         {
             CreatedAt = DateTime.Now;
-        }
-
-        public double CalculatePriorityScore()
-        {
-            double score = Priority * 10;
-            if (DueDate.HasValue)
-                score += (DueDate.Value - DateTime.Today).TotalDays * -5;  // 越近到期分越高
-            return score;
+            Completed = false;
         }
     }
 }

@@ -227,7 +227,7 @@ namespace TimeTable.Logic
             Debug.WriteLine("GenerateSalt");
 
             // Extended character set for more entropy per character
-            char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*".ToCharArray();
+            char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*".ToCharArray(); //salt base
             char[] salt = new char[saltLength];
 
             // Multiple entropy sources for better randomness (academic approach)

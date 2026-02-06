@@ -149,6 +149,8 @@ namespace TimeTable
             panelMain.Controls.Clear();
             taskLibraryPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(taskLibraryPage);
+
+            taskLibraryPage.addNewTaskButtonClicked += LoadAddNewTaskPage;
         }
         private void LoadSubjectLibraryPage()
         {
@@ -170,6 +172,10 @@ namespace TimeTable
             panelMain.Controls.Clear();
             settingsPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(settingsPage);
+
+            settingsPage.signoutButtonClicked += LoadLoginPage;
+
+            Debug.WriteLine($"sign out succes");
         }
         private void LoadTimerPage()
         {
@@ -188,13 +194,13 @@ namespace TimeTable
             panelMain.Controls.Clear();
             addNewTaskPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(addNewTaskPage);
-
         }
         private void LoadTaskDetailPage()
         {
             panelMain.Controls.Clear();
             taskDetailPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(taskDetailPage);
+
         }
     }
 }

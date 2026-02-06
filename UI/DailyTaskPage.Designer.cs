@@ -49,9 +49,9 @@
             lblDate.Font = new Font("Segoe UI", 12F);
             lblDate.Location = new Point(551, 110);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(188, 25);
+            lblDate.Size = new Size(188, 45);
             lblDate.TabIndex = 1;
-            lblDate.Text = "00/00/0000, wed";
+            lblDate.Text = "00/00/0000, Friday";
             lblDate.Click += lblDate_Click;
             // 
             // dataGridView1
@@ -83,6 +83,7 @@
             button2.TabIndex = 4;
             button2.Text = "Regenrate daily plan";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // DailyTaskPage
             // 

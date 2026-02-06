@@ -20,6 +20,8 @@ namespace TimeTable.Logic
             DataLayer.InsertSubjectIntoDatabase(subjectName, CurrentUser.UserId);
 
         }
+        
+       
 
         public void DeleteTask(string subjectName)
         {

@@ -27,7 +27,12 @@ namespace TimeTable.UI
         }
         private void DailyTaskPage_Load(object sender, EventArgs e)
         {
-            lblDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            lblDate.Text = $"{DateTime.Now.ToString("dd/MM/yyyy")} " + $"{DateTime.Now.DayOfWeek}";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

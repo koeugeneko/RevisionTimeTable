@@ -7,7 +7,7 @@ namespace TimeTable.Data
 {
     public class DataLayer
     {
-        private static readonly string ConnectionString = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek002";
+        private static readonly string ConnectionString = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek001";
 
 
         // INSERT / UPDATE / DELETE mutiple data
@@ -161,9 +161,9 @@ namespace TimeTable.Data
         public static int GetUserIdFromDatabase(string username)
         {
             string sql = @"
-            SELECT user_id
-            FROM users
-            Where username = @username";
+                SELECT user_id
+                FROM users
+                Where username = @username";
             var parameters = new Dictionary<string, object>
             {
                 { "@username", username }
@@ -191,8 +191,8 @@ namespace TimeTable.Data
         public static void UpdateMaxDailyTasks(int UserId) //TODO
         {
             string sql = @"
-            UPDATE usersettins
-            set max_daily_task = 
+                UPDATE usersettins
+                set max_daily_task = 
             where user_id = @userID";
 
             var parameters = new Dictionary<string, object>
@@ -211,10 +211,19 @@ namespace TimeTable.Data
                 FROM tasks WHERE completed = false 
                 AND DueDate >= {TimeOnly.FromDateTime(DateTime.Now)}";
         }
-        public static void InsertTaskIntoDatabase()
+        public static void InsertTaskIntoDatabase(Logic.Task task)
         {
             string sql = @"INSERT INTO tasks (description, priority, estimated_min, due_date, subject_id) 
                 VALUES (@description, @priority, @estimated_min, @due_date, @subject_id);";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@description", task.Description},
+                { "@priority", task.Priority },
+                { "@estimated_min", task.EstimatedMinutes },
+                { "@due_date", task.DueDate },
+                { "@subject_id", task.SubjectId }
+            };
         }
         public static void UpdateTaskInDatabase()
         {
@@ -249,7 +258,7 @@ namespace TimeTable.Data
                 { "userId", userId},
             };
 
-            ExecuteNonQuery(sql, parameters );
+            ExecuteNonQuery(sql, parameters);
         }
 
         // subject related

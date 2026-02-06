@@ -21,5 +21,11 @@ namespace TimeTable.UI
         {
 
         }
+
+        public Action addNewTaskButtonClicked;
+        private void AddNewTask_Click(object sender, EventArgs e)
+        {
+            addNewTaskButtonClicked?.Invoke();
+        }
     }
 }
