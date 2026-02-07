@@ -173,9 +173,13 @@ namespace TimeTable
             settingsPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(settingsPage);
 
-            settingsPage.signoutButtonClicked += LoadLoginPage;
+            settingsPage.signoutButtonClicked += SignOut;
 
             Debug.WriteLine($"sign out succes");
+        }
+        private void SignOut()
+        {
+            Environment.Exit(0);
         }
         private void LoadTimerPage()
         {

@@ -7,7 +7,7 @@ namespace TimeTable.Data
 {
     public class DataLayer
     {
-        private static readonly string ConnectionString = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek001";
+        private static readonly string ConnectionString = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek002";
 
 
         // INSERT / UPDATE / DELETE mutiple data
