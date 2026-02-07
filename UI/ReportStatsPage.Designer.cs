@@ -38,56 +38,62 @@
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(29, 113);
+            dateTimePicker1.Location = new Point(23, 90);
+            dateTimePicker1.Margin = new Padding(2, 2, 2, 2);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(300, 31);
+            dateTimePicker1.Size = new Size(241, 27);
             dateTimePicker1.TabIndex = 0;
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(485, 113);
+            dateTimePicker2.Location = new Point(342, 90);
+            dateTimePicker2.Margin = new Padding(2, 2, 2, 2);
             dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(300, 31);
+            dateTimePicker2.Size = new Size(241, 27);
             dateTimePicker2.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(29, 74);
+            label1.Location = new Point(23, 59);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(54, 25);
+            label1.Size = new Size(43, 20);
             label1.TabIndex = 2;
             label1.Text = "From";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(482, 79);
+            label2.Location = new Point(340, 63);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(30, 25);
+            label2.Size = new Size(25, 20);
             label2.TabIndex = 3;
             label2.Text = "To";
             // 
             // panel1
             // 
-            panel1.Location = new Point(55, 300);
+            panel1.Location = new Point(44, 240);
+            panel1.Margin = new Padding(2, 2, 2, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(300, 150);
+            panel1.Size = new Size(291, 257);
             panel1.TabIndex = 4;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(55, 232);
+            label3.Location = new Point(44, 186);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(126, 25);
+            label3.Size = new Size(133, 20);
             label3.TabIndex = 5;
-            label3.Text = "comletion rate";
+            label3.Text = "Completetion rate:";
             label3.Click += label3_Click;
             // 
             // ReportStatsPage
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(label3);
             Controls.Add(panel1);
@@ -95,9 +101,8 @@
             Controls.Add(label1);
             Controls.Add(dateTimePicker2);
             Controls.Add(dateTimePicker1);
-            Margin = new Padding(4);
             Name = "ReportStatsPage";
-            Size = new Size(814, 712);
+            Size = new Size(651, 570);
             ResumeLayout(false);
             PerformLayout();
         }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TimeTable.Logic;
 
 namespace TimeTable.UI
 {
@@ -30,6 +31,13 @@ namespace TimeTable.UI
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        public event Action confirmButtonClicked;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            TaskService.AddNewTask();
+            confirmButtonClicked?.Invoke();
         }
     }
 }

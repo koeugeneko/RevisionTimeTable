@@ -61,7 +61,6 @@ namespace TimeTable
             
         }
         private int _currentUserId;
-
         private void OnLoginSuccess(object? sender, LoginSuccessEvent e)
         {
             _currentUserId = e.userId;
@@ -192,12 +191,16 @@ namespace TimeTable
             panelMain.Controls.Clear();
             addNewSubjectPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(addNewSubjectPage);
+
+            addNewSubjectPage.confirmButtonClicked += LoadSubjectLibraryPage;
         }
         private void LoadAddNewTaskPage()
         {
             panelMain.Controls.Clear();
             addNewTaskPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(addNewTaskPage);
+
+            addNewTaskPage.confirmButtonClicked += LoadTaskLibraryPage;
         }
         private void LoadTaskDetailPage()
         {

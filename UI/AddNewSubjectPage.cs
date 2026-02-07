@@ -17,10 +17,13 @@ namespace TimeTable.UI
         {
             InitializeComponent();
         }
+        public event Action confirmButtonClicked;
 
         private void button1_Click(object sender, EventArgs e)
         {
             SubjectService.AddNewSubject(textBox1.Text);
+            confirmButtonClicked?.Invoke();
+
         }
     }
 }

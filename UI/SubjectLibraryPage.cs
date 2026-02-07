@@ -23,7 +23,8 @@ namespace TimeTable.UI
 
             AddSubjectButtonClicked?.Invoke();
         }
-
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

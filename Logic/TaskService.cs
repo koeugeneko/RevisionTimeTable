@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TimeTable.Logic
 {
-    internal class TaskService
+    internal static class TaskService
     {
 
-        public void AddNewTask()
+        public static void AddNewTask()
         {
             Task task = new Task();
 
@@ -20,7 +20,7 @@ namespace TimeTable.Logic
 
         }
 
-        public void DeleteTask() 
+        public static void DeleteTask() 
         {
 
         }
