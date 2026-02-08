@@ -225,12 +225,33 @@ namespace TimeTable.Data
                 { "@subject_id", task.SubjectId }
             };
         }
-        public static void UpdateTaskInDatabase()
+        public static void UpdateTaskInDatabase(Logic.Task task)
         {
             string sql = @"UPDATE tasks 
-                SET description = @description, priority = @priority, estimated_min = @estimated_min, due_date = @due_date, subject_id = @subject_id 
+                SET description = @description,
+                    priority = @priority,
+                    estimated_min = @estimated_min, 
+                    due_date = @due_date, 
+                    subject_id = @subject_id
+                    completed = @completed,
+                    completed_at = @completed_at
                 WHERE task_id = @task_id
                 AND user_id = @userId;";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@description", task.Description},
+                { "@priority", task.Priority },
+                { "@estimated_min", task.EstimatedMinutes },
+                { "@due_date", task.DueDate },
+                { "@subject_id", task.SubjectId },
+                { "@task_id", task.TaskId },
+                { "@userId", task.UserId },
+                { "@completed", task.Completed },
+                { "@completed_at", task.CompletedAt }
+            };
+            
+
         }
         public static void DeleteTaskFromDatabase(int taskId, int userId)
         {
@@ -245,36 +266,35 @@ namespace TimeTable.Data
                 { "@userId", userId}
             };  
         }
-        public static void MarkTaskAsCompletedInDatabase(int taskId, int userId)
-        {
-            string sql = @"UPDATE tasks 
-                SET completed = true 
-                WHERE task_id = @taskId 
-                AND user_id = @userID;";
-
-            var parameters = new Dictionary<string, object>
-            {
-                {"@taskID", taskId},
-                { "userId", userId},
-            };
-
-            ExecuteNonQuery(sql, parameters);
-        }
-
+       
         // subject related
-        public static void GetSubjectsFromDatabase(int UserId)
+        public static List<Logic.Subject> GetSubjectsFromDatabase(int UserId)
         {
             string sql = @"
-                SELECT subject_name
+                SELECT subject_id, subject_name, user_id
                 FROM subjects
                 WHERE user_id = @userID";
-            
+
             var parameters = new Dictionary<string, object>
             {
-                { "@userID", UserId} 
+                { "@userID", UserId}
             };
 
-            ExecuteQuery(sql, parameters);
+            var results = ExecuteQuery(sql, parameters);
+            var subjects = new List<Logic.Subject>();
+
+            foreach (var row in results)
+            {
+                subjects.Add(new Logic.Subject
+                {
+                    SubjectId = Convert.ToInt32(row["subject_id"]),
+                    Name = Convert.ToString(row["subject_name"]),
+                    UserId = Convert.ToInt32(row["user_id"])
+                });
+            }
+
+            Debug.WriteLine($"Retrieved {subjects.Count} subjects for user {UserId}");
+            return subjects;
         }
         public static void InsertSubjectIntoDatabase(string subjectName, int userId)
         {

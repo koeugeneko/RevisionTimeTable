@@ -32,22 +32,24 @@
             dateTimePicker2 = new DateTimePicker();
             label1 = new Label();
             label2 = new Label();
-            panel1 = new Panel();
             label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
             SuspendLayout();
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(23, 90);
-            dateTimePicker1.Margin = new Padding(2, 2, 2, 2);
+            dateTimePicker1.Location = new Point(23, 67);
+            dateTimePicker1.Margin = new Padding(2);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(241, 27);
             dateTimePicker1.TabIndex = 0;
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(342, 90);
-            dateTimePicker2.Margin = new Padding(2, 2, 2, 2);
+            dateTimePicker2.Location = new Point(342, 67);
+            dateTimePicker2.Margin = new Padding(2);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(241, 27);
             dateTimePicker2.TabIndex = 1;
@@ -55,7 +57,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(23, 59);
+            label1.Location = new Point(23, 36);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(43, 20);
@@ -65,25 +67,17 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(340, 63);
+            label2.Location = new Point(340, 40);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new Size(25, 20);
             label2.TabIndex = 3;
             label2.Text = "To";
             // 
-            // panel1
-            // 
-            panel1.Location = new Point(44, 240);
-            panel1.Margin = new Padding(2, 2, 2, 2);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(291, 257);
-            panel1.TabIndex = 4;
-            // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(44, 186);
+            label3.Location = new Point(23, 193);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(133, 20);
@@ -91,12 +85,44 @@
             label3.Text = "Completetion rate:";
             label3.Click += label3_Click;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(309, 144);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(136, 20);
+            label4.TabIndex = 6;
+            label4.Text = "Totoal Time: 0h 0m";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(27, 144);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(129, 20);
+            label5.TabIndex = 7;
+            label5.Text = "Task Completed: 0";
+            // 
+            // label6
+            // 
+            label6.Font = new Font("Segoe UI", 12F);
+            label6.Location = new Point(27, 264);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(190, 37);
+            label6.TabIndex = 8;
+            label6.Text = "Subject Breakdown";
+            // 
             // ReportStatsPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(panel1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(dateTimePicker2);
@@ -113,7 +139,9 @@
         private DateTimePicker dateTimePicker2;
         private Label label1;
         private Label label2;
-        private Panel panel1;
         private Label label3;
+        private Label label4;
+        private Label label5;
+        private Label label6;
     }
 }

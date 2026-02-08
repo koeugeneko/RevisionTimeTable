@@ -50,6 +50,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(151, 28);
             comboBox1.TabIndex = 0;
+            comboBox1.Click += comboBox1_Click;
             // 
             // label1
             // 
