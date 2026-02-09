@@ -13,7 +13,8 @@ namespace TimeTable.Logic
         public static void AddNewTask()
         {
             Task task = new Task();
-
+            {
+            }
         }
 
         public static List<Subject> GetSubjectsForCurrentUser()

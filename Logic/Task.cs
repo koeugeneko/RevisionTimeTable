@@ -11,6 +11,8 @@ namespace TimeTable.Logic
         public int TaskId { get; }
         public int UserId { get; }
         public int? SubjectId { get; }
+
+        //public string Name { get; set; } not going to use it
         public string Description { get; set; }
         public int EstimatedMinutes { get; set; }
         public int Priority { get; set; }  // 1=Low, 2=Medium, 3=High
@@ -20,7 +22,8 @@ namespace TimeTable.Logic
         public DateTime CreatedAt { get; set; }
 
         public Task()
-        {
+        {   
+            UserId = CurrentUser.UserId;
             CreatedAt = DateTime.Now;
             Completed = false;
         }

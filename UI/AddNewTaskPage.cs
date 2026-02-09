@@ -37,7 +37,7 @@ namespace TimeTable.UI
         }
 
         public event Action confirmButtonClicked;
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) //confirm
         {
             TaskService.AddNewTask();
             confirmButtonClicked?.Invoke();
