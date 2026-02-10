@@ -21,12 +21,11 @@ namespace TimeTable.UI
             InitializeComponent();
         }
 
-
-
         public event Action confirmButtonClicked;
         private void buttonConfirm_Click(object sender, EventArgs e) // confirm
         {
-            TaskService.AddNewTask();
+            TaskService.AddNewTask(comboBoxSubject.Text, dateTimePickerEstamiatedTime.Value, numericUpDownPriority.Value, textBoxDescription.Text, monthCalendarDueDate.SelectionStart);
+
             confirmButtonClicked?.Invoke();
         }
 
@@ -46,7 +45,6 @@ namespace TimeTable.UI
             comboBoxSubject.DisplayMember = "Name";
             comboBoxSubject.ValueMember = "SubjectId";
         }
-
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             Debug.WriteLine(monthCalendarDueDate.SelectionStart.ToString());
@@ -55,7 +53,7 @@ namespace TimeTable.UI
         private void buttonClear_Click(object sender, EventArgs e) // clear
         {
             comboBoxSubject.Text = string.Empty;
-            textBoxEstamiatedTime.Text = string.Empty;
+            dateTimePickerEstamiatedTime.Value = dateTimePickerEstamiatedTime.MinDate;
             numericUpDownPriority.Value = 0;
             textBoxDescription.Text = string.Empty;
             monthCalendarDueDate.Text = string.Empty;

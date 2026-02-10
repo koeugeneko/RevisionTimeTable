@@ -10,7 +10,7 @@ namespace TimeTable.Logic
     {
         public int TaskId { get; }
         public int UserId { get; }
-        public int? SubjectId { get; }
+        public int? SubjectId { get; set; }
 
         //public string Name { get; set; } not going to use it
         public string Description { get; set; }

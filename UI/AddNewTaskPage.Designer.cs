@@ -33,13 +33,13 @@
             labelDescription = new Label();
             textBoxDescription = new TextBox();
             labelEstamiatedTime = new Label();
-            textBoxEstamiatedTime = new TextBox();
             labelPriority = new Label();
             monthCalendarDueDate = new MonthCalendar();
             numericUpDownPriority = new NumericUpDown();
             labelDueDate = new Label();
             buttonClear = new Button();
             buttonConfirm = new Button();
+            dateTimePickerEstamiatedTime = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPriority).BeginInit();
             SuspendLayout();
             // 
@@ -86,13 +86,6 @@
             labelEstamiatedTime.Size = new Size(117, 20);
             labelEstamiatedTime.TabIndex = 4;
             labelEstamiatedTime.Text = "Estamiated time";
-            // 
-            // textBoxEstamiatedTime
-            // 
-            textBoxEstamiatedTime.Location = new Point(212, 92);
-            textBoxEstamiatedTime.Name = "textBoxEstamiatedTime";
-            textBoxEstamiatedTime.Size = new Size(151, 27);
-            textBoxEstamiatedTime.TabIndex = 5;
             // 
             // labelPriority
             // 
@@ -145,17 +138,28 @@
             buttonConfirm.UseVisualStyleBackColor = true;
             buttonConfirm.Click += buttonConfirm_Click;
             // 
+            // dateTimePickerEstamiatedTime
+            // 
+            dateTimePickerEstamiatedTime.CustomFormat = "HH:mm";
+            dateTimePickerEstamiatedTime.Format = DateTimePickerFormat.Custom;
+            dateTimePickerEstamiatedTime.Location = new Point(212, 87);
+            dateTimePickerEstamiatedTime.Name = "dateTimePickerEstamiatedTime";
+            dateTimePickerEstamiatedTime.ShowUpDown = true;
+            dateTimePickerEstamiatedTime.Size = new Size(151, 27);
+            dateTimePickerEstamiatedTime.TabIndex = 12;
+            dateTimePickerEstamiatedTime.Value = new DateTime(2026, 2, 10, 0, 0, 0, 0);
+            // 
             // AddNewTaskPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(dateTimePickerEstamiatedTime);
             Controls.Add(buttonConfirm);
             Controls.Add(buttonClear);
             Controls.Add(labelDueDate);
             Controls.Add(numericUpDownPriority);
             Controls.Add(monthCalendarDueDate);
             Controls.Add(labelPriority);
-            Controls.Add(textBoxEstamiatedTime);
             Controls.Add(labelEstamiatedTime);
             Controls.Add(textBoxDescription);
             Controls.Add(labelDescription);
@@ -175,12 +179,12 @@
         private Label labelDescription;
         private TextBox textBoxDescription;
         private Label labelEstamiatedTime;
-        private TextBox textBoxEstamiatedTime;
         private Label labelPriority;
         private MonthCalendar monthCalendarDueDate;
         private NumericUpDown numericUpDownPriority;
         private Label labelDueDate;
         private Button buttonClear;
         private Button buttonConfirm;
+        private DateTimePicker dateTimePickerEstamiatedTime;
     }
 }

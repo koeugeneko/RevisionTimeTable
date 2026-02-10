@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +11,13 @@ namespace TimeTable.Logic
     internal static class TaskService
     {
 
-        public static void AddNewTask()
+        public static void AddNewTask(string subjectName, DateTime estamiatedTime, decimal priority, string description, DateTime dueDate)
         {
             Task task = new Task();
             {
+                task.SubjectId = DataLayer.GetSubjectIdFromDatabse(CurrentUser.UserId, subjectName);
+                task.EstimatedMinutes = estamiatedTime.Minute;
+                task.Priority = priority
             }
         }
 

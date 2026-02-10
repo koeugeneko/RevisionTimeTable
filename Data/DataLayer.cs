@@ -295,6 +295,24 @@ namespace TimeTable.Data
             Debug.WriteLine($"Retrieved {subjects.Count} subjects for user {UserId}");
             return subjects;
         }
+        public static int GetSubjectIdFromDatabse(int userID, string subjectName)
+        {
+            string sql = @"
+                SELECT subject_id
+                FROM subjects, users
+                WHERE subjects.user_id = @userId
+                AND subject_name = @subjectName";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@userId", userID },
+                { "@subjectName", subjectName }
+            };
+
+            var result = ExecuteScalar(sql, parameters);
+            Debug.WriteLine($"{result.ToString()}");
+            return Convert.ToInt32(result);
+        }
         public static void InsertSubjectIntoDatabase(string subjectName, int userId)
         {
             string sql = @"
