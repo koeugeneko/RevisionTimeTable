@@ -21,29 +21,16 @@ namespace TimeTable.UI
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void AddNewTaskPage_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         public event Action confirmButtonClicked;
-        private void button2_Click(object sender, EventArgs e) //confirm
+        private void buttonConfirm_Click(object sender, EventArgs e) // confirm
         {
             TaskService.AddNewTask();
             confirmButtonClicked?.Invoke();
         }
 
-        private void comboBox1_Click(object sender, EventArgs e) //subject
+        private void comboBoxSubject_Click(object sender, EventArgs e) // subject
         {
             var dt = new DataTable();
             dt.Columns.Add("SubjectId", typeof(int));
@@ -55,9 +42,23 @@ namespace TimeTable.UI
                 dt.Rows.Add(s.SubjectId, s.Name);
             }
 
-            comboBox1.DataSource = dt;
-            comboBox1.DisplayMember = "Name";
-            comboBox1.ValueMember = "SubjectId";
+            comboBoxSubject.DataSource = dt;
+            comboBoxSubject.DisplayMember = "Name";
+            comboBoxSubject.ValueMember = "SubjectId";
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            Debug.WriteLine(monthCalendarDueDate.SelectionStart.ToString());
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e) // clear
+        {
+            comboBoxSubject.Text = string.Empty;
+            textBoxEstamiatedTime.Text = string.Empty;
+            numericUpDownPriority.Value = 0;
+            textBoxDescription.Text = string.Empty;
+            monthCalendarDueDate.Text = string.Empty;
         }
     }
 }
