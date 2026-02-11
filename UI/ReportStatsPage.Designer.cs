@@ -36,6 +36,7 @@
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
+            dateTimeTotalTime = new DateTimePicker();
             SuspendLayout();
             // 
             // dateTimePicker1
@@ -77,7 +78,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(23, 193);
+            label3.Location = new Point(23, 191);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(133, 20);
@@ -88,17 +89,17 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(309, 144);
+            label4.Location = new Point(340, 144);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(136, 20);
+            label4.Size = new Size(88, 20);
             label4.TabIndex = 6;
-            label4.Text = "Totoal Time: 0h 0m";
+            label4.Text = "Totoal Time";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(27, 144);
+            label5.Location = new Point(23, 144);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
             label5.Size = new Size(129, 20);
@@ -108,17 +109,29 @@
             // label6
             // 
             label6.Font = new Font("Segoe UI", 12F);
-            label6.Location = new Point(27, 264);
+            label6.Location = new Point(23, 264);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
             label6.Size = new Size(190, 37);
             label6.TabIndex = 8;
             label6.Text = "Subject Breakdown";
             // 
+            // dateTimeTotalTime
+            // 
+            dateTimeTotalTime.Checked = false;
+            dateTimeTotalTime.CustomFormat = "hh:mm";
+            dateTimeTotalTime.Format = DateTimePickerFormat.Custom;
+            dateTimeTotalTime.Location = new Point(443, 144);
+            dateTimeTotalTime.Name = "dateTimeTotalTime";
+            dateTimeTotalTime.Size = new Size(113, 27);
+            dateTimeTotalTime.TabIndex = 9;
+            dateTimeTotalTime.Visible = false;
+            // 
             // ReportStatsPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(dateTimeTotalTime);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -143,5 +156,6 @@
         private Label label4;
         private Label label5;
         private Label label6;
+        private DateTimePicker dateTimeTotalTime;
     }
 }

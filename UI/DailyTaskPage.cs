@@ -26,8 +26,11 @@ namespace TimeTable.UI
         {
         }
         private void DailyTaskPage_Load(object sender, EventArgs e)
-        {
+        {   
+            // set date time
             lblDate.Text = $"{DateTime.Now.ToString("dd/MM/yyyy")} " + $"{DateTime.Now.DayOfWeek}";
+
+            Logic.DailyPlanService.CallApi();
         }
 
         private void button2_Click(object sender, EventArgs e)

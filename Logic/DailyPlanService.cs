@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Net;
+
+
 
 namespace TimeTable.Logic
 {
-    internal class DailyPlanService
+    public static class DailyPlanService
     {
         // Recursive Backtracking + Memoization (DP)
-        private List<Task> FindOptimalTasks(List<Task> tasks, int maxMinutes, int index, Dictionary<string, List<Task>> memo)
+        public static List<Task> FindOptimalTasks(List<Task> tasks, int maxMinutes, int index, Dictionary<string, List<Task>> memo)
         {
             if (index == tasks.Count || maxMinutes <= 0) return new List<Task>();
 
@@ -27,12 +27,38 @@ namespace TimeTable.Logic
                 take.Add(tasks[index]);
             }
 
-            // 選分數高嘅
             var best = take.Count > skip.Count ? take : skip;
             memo[key] = best;
             return best;
         }
 
+        public async static void CallApi()
+        {
+            /*string url = "https://date.nager.at";
 
+            HttpClient client = new HttpClient();
+
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                string json = await response.Content.ReadAsStringAsync();
+                return json;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return $"error: {e.Message}";
+            }*/
+
+            using var client = new HttpClient();
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://date.nager.at/api/v3/PublicHolidays/{DateTime.Now.Year}/us");
+
+            using var response = await client.SendAsync(request);
+
+            Debug.WriteLine(response); 
+        }
     }
 }

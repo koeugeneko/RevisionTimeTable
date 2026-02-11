@@ -17,7 +17,7 @@ namespace TimeTable.Logic
             {
                 task.SubjectId = DataLayer.GetSubjectIdFromDatabse(CurrentUser.UserId, subjectName);
                 task.EstimatedMinutes = estamiatedTime.Minute;
-                task.Priority = priority
+                task.Priority = Convert.ToInt32(priority);
             }
         }
 
