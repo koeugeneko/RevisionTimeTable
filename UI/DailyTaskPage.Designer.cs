@@ -52,7 +52,6 @@
             lblDate.Size = new Size(188, 45);
             lblDate.TabIndex = 1;
             lblDate.Text = "00/00/0000, Friday";
-            lblDate.Click += lblDate_Click;
             // 
             // dataGridView1
             // 

@@ -21,16 +21,13 @@ namespace TimeTable.UI
         {
             progressBar1.PerformStep();
         }
-
-        private void lblDate_Click(object sender, EventArgs e)
-        {
-        }
         private void DailyTaskPage_Load(object sender, EventArgs e)
-        {   
+        {
             // set date time
-            lblDate.Text = $"{DateTime.Now.ToString("dd/MM/yyyy")} " + $"{DateTime.Now.DayOfWeek}";
+            var now = DateTime.Now;
+            lblDate.Text = $"{now:dd/MM/yyyy} {now:dddd}";
 
-            Logic.DailyPlanService.CallApi();
+            Logic.DailyPlanService.CallPublicHolidayApi();
         }
 
         private void button2_Click(object sender, EventArgs e)
