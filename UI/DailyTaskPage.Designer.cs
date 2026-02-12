@@ -47,9 +47,9 @@
             // lblDate
             // 
             lblDate.Font = new Font("Segoe UI", 12F);
-            lblDate.Location = new Point(551, 110);
+            lblDate.Location = new Point(508, 110);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(188, 45);
+            lblDate.Size = new Size(302, 29);
             lblDate.TabIndex = 1;
             lblDate.Text = "00/00/0000, Friday";
             // 

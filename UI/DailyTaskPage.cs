@@ -25,7 +25,7 @@ namespace TimeTable.UI
         {
             // set date time
             var now = DateTime.Now;
-            lblDate.Text = $"{now:dd/MM/yyyy} {now:dddd}";
+            lblDate.Text = $"{now:dd/MM/yyyy} {now.DayOfWeek}";
 
             Logic.DailyPlanService.CallPublicHolidayApi();
         }
