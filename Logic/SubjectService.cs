@@ -20,8 +20,11 @@ namespace TimeTable.Logic
             DataLayer.InsertSubjectIntoDatabase(subjectName, CurrentUser.UserId);
 
         }
-        
-       
+
+        public static List<Subject> GetSubjectsForCurrentUser()
+        {
+            return DataLayer.GetSubjectsFromDatabase(CurrentUser.UserId);
+        }
 
         public void DeleteTask(string subjectName)
         {

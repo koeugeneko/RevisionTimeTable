@@ -267,7 +267,7 @@ namespace TimeTable.Data
         }
        
         // subject related
-        public static List<Logic.Subject> GetSubjectsFromDatabase(int UserId)
+        public static List<Subject> GetSubjectsFromDatabase(int UserId)
         {
             string sql = @"
                 SELECT subject_id, subject_name, user_id
@@ -343,6 +343,7 @@ namespace TimeTable.Data
         }
 
         // plan related
+        
         public static void GetPlansFromDatabase()
         {
             string sql = @"SELECT plan_id, plan_name, start_time, end_time, recurrence FROM plans;";

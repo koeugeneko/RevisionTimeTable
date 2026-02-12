@@ -21,10 +21,7 @@ namespace TimeTable.Logic
             }
         }
 
-        public static List<Subject> GetSubjectsForCurrentUser()
-        {
-            return DataLayer.GetSubjectsFromDatabase(CurrentUser.UserId);
-        }
+        
         public static void UpdateTask()
         {
 

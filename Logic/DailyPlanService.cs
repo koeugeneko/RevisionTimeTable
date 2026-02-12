@@ -31,27 +31,9 @@ namespace TimeTable.Logic
             memo[key] = best;
             return best;
         }
-
+        static bool? isHoliday;
         public async static void CallPublicHolidayApi()
         {
-            /*string url = "https://date.nager.at";
-
-            HttpClient client = new HttpClient();
-
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-
-                string json = await response.Content.ReadAsStringAsync();
-                return json;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-                return $"error: {e.Message}";
-            }*/
-
             using var client = new HttpClient();
 
             var request = new HttpRequestMessage(HttpMethod.Get, $"https://date.nager.at/api/v3/IsTodayPublicHoliday/us");
@@ -59,7 +41,6 @@ namespace TimeTable.Logic
             using var response = await client.SendAsync(request);
 
             Debug.WriteLine(response);
-            bool? isHoliday;
             switch (response.StatusCode)
             {
                 case HttpStatusCode.OK:
@@ -72,6 +53,7 @@ namespace TimeTable.Logic
                     isHoliday = null;
                     break;
             }
+
         }
     }
 }

@@ -34,7 +34,7 @@ namespace TimeTable.UI
             var dt = new DataTable();
             dt.Columns.Add("SubjectId", typeof(int));
             dt.Columns.Add("Name", typeof(string));
-            var subjects = TaskService.GetSubjectsForCurrentUser();
+            var subjects = SubjectService.GetSubjectsForCurrentUser();
             Debug.WriteLine($"Found {subjects.Count} subjects");
             foreach (var s in subjects)
             {
