@@ -21,7 +21,12 @@ namespace TimeTable.Logic
             }
         }
 
-        
+        public static List<Logic.Task> GetTasksForCurrentUser()
+        {
+            return DataLayer.GetTasksFromDatabase(CurrentUser.UserId);
+
+        }
+
         public static void UpdateTask()
         {
 

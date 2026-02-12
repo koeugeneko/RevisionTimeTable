@@ -7,7 +7,6 @@ namespace TimeTable.Logic
 {
     internal static class AuthService
     {
-
         public static bool SignUp(string username, string password, string email)
         {
             string salt = GenerateSalt(16);
@@ -30,7 +29,6 @@ namespace TimeTable.Logic
 
             return true;
         }
-
         public static bool Login(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))

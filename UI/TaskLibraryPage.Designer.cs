@@ -29,12 +29,6 @@ namespace TimeTable.UI
         private void InitializeComponent()
         {
             dataGridView1 = new DataGridView();
-            SubjectColumn = new DataGridViewTextBoxColumn();
-            DescriptionColumn = new DataGridViewTextBoxColumn();
-            EstimatedTimeColumn = new DataGridViewTextBoxColumn();
-            DueDateColumn = new DataGridViewTextBoxColumn();
-            PriorityColumn = new DataGridViewTextBoxColumn();
-            StatsColumn = new DataGridViewCheckBoxColumn();
             AddNewTask = new Button();
             DeleteTaskButton = new Button();
             EditTaskButton = new Button();
@@ -45,59 +39,16 @@ namespace TimeTable.UI
             // dataGridView1
             // 
             dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { SubjectColumn, DescriptionColumn, EstimatedTimeColumn, DueDateColumn, PriorityColumn, StatsColumn });
             dataGridView1.Location = new Point(44, 43);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(773, 348);
             dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // SubjectColumn
-            // 
-            SubjectColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            SubjectColumn.HeaderText = "Subject";
-            SubjectColumn.MinimumWidth = 6;
-            SubjectColumn.Name = "SubjectColumn";
-            SubjectColumn.ReadOnly = true;
-            // 
-            // DescriptionColumn
-            // 
-            DescriptionColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            DescriptionColumn.HeaderText = "Description";
-            DescriptionColumn.MinimumWidth = 6;
-            DescriptionColumn.Name = "DescriptionColumn";
-            // 
-            // EstimatedTimeColumn
-            // 
-            EstimatedTimeColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            EstimatedTimeColumn.HeaderText = "Time";
-            EstimatedTimeColumn.MinimumWidth = 6;
-            EstimatedTimeColumn.Name = "EstimatedTimeColumn";
-            // 
-            // DueDateColumn
-            // 
-            DueDateColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            DueDateColumn.HeaderText = "Due Date";
-            DueDateColumn.MinimumWidth = 6;
-            DueDateColumn.Name = "DueDateColumn";
-            // 
-            // PriorityColumn
-            // 
-            PriorityColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            PriorityColumn.HeaderText = "Priority";
-            PriorityColumn.MinimumWidth = 6;
-            PriorityColumn.Name = "PriorityColumn";
-            // 
-            // StatsColumn
-            // 
-            StatsColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            StatsColumn.HeaderText = "Stats";
-            StatsColumn.MinimumWidth = 6;
-            StatsColumn.Name = "StatsColumn";
             // 
             // AddNewTask
             // 
@@ -146,6 +97,7 @@ namespace TimeTable.UI
             Controls.Add(dataGridView1);
             Name = "TaskLibraryPage";
             Size = new Size(856, 721);
+            Load += TaskLibraryPage_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
@@ -157,11 +109,5 @@ namespace TimeTable.UI
         private Button DeleteTaskButton;
         private Button EditTaskButton;
         private Panel panel1;
-        private DataGridViewTextBoxColumn SubjectColumn;
-        private DataGridViewTextBoxColumn DescriptionColumn;
-        private DataGridViewTextBoxColumn EstimatedTimeColumn;
-        private DataGridViewTextBoxColumn DueDateColumn;
-        private DataGridViewTextBoxColumn PriorityColumn;
-        private DataGridViewCheckBoxColumn StatsColumn;
     }
 }

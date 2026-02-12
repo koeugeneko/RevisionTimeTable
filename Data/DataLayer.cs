@@ -203,12 +203,36 @@ namespace TimeTable.Data
         }
 
         // task related
-        public static void GetTasksFromDatabase()
+        public static List<Logic.Task> GetTasksFromDatabase(int userId)
         {
             string sql = $@"
                 SELECT task_id, description, priority, estimated_min 
                 FROM tasks WHERE completed = false 
                 AND DueDate >= {TimeOnly.FromDateTime(DateTime.Now)}";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@userID", userId}
+            };
+
+            var results = ExecuteQuery(sql, parameters);
+            var tasks = new List<Logic.Task>();
+
+            foreach (var row in results)
+            {
+                tasks.Add(new Logic.Task
+                {
+                    UserId = userId,
+                    TaskId = Convert.ToInt32(row["task_id"]),
+                    Description = Convert.ToString(row["description"]),
+                    Priority = Convert.ToInt32(row["priority"]),
+                    EstimatedMinutes = Convert.ToInt32(row["estimated_min"])
+                });
+            }
+
+            Debug.WriteLine($"Retrieved {tasks.Count} subjects for user {userId}");
+            return tasks;
+
         }
         public static void InsertTaskIntoDatabase(Logic.Task task)
         {

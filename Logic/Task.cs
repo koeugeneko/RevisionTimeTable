@@ -8,8 +8,8 @@ namespace TimeTable.Logic
 {
     public class Task // not in use
     {
-        public int TaskId { get; }
-        public int UserId { get; }
+        public int TaskId { get; set; }
+        public int UserId { get; set; }
         public int? SubjectId { get; set; }
 
         //public string Name { get; set; } not going to use it
