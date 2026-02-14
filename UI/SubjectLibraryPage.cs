@@ -22,12 +22,11 @@ namespace TimeTable.UI
         public event Action AddSubjectButtonClicked;
         private void AddNewSubject_Click(object sender, EventArgs e)
         {
-
             AddSubjectButtonClicked?.Invoke();
         }
         private void button1_Click(object sender, EventArgs e)// delete subject
         {
-
+            SubjectService.DeleteTask(dataGridView1.SelectedCells.ToString());
         }
 
         private void DisplaySubjects()
@@ -38,14 +37,13 @@ namespace TimeTable.UI
 
             var displayList = subjects.Select(s => new
             {
-                subjectName = s.Name
+                Name = s.Name
             }).ToList();
 
             Debug.WriteLine($"found {subjects.Count} subjects");
 
             dataGridView1.DataSource = displayList;
-                     
-            
+
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
         }
@@ -54,5 +52,6 @@ namespace TimeTable.UI
         {
             DisplaySubjects();
         }
+
     }
 }

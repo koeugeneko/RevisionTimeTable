@@ -1,10 +1,9 @@
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,25 +25,33 @@ namespace TimeTable.UI
             addNewTaskButtonClicked?.Invoke();
         }
 
-        private void loadTaskDisplay()
+        private void DisplayTasks()
         {
             dataGridView1.Columns.Clear();
 
             var tasks = TaskService.GetTasksForCurrentUser();
 
-           
+            var displayList = tasks.Select(t => new
+            {
+                Description = t.Description,
+                Time = t.EstimatedMinutes,
+                Priority = t.Priority,
+                DueDate = t.DueDate,
+                Completed = t.Completed,
+                //Completed_At = t.CompletedAt,
+                //Created_At = t.CreatedAt,
+            }).ToList();
 
             Debug.WriteLine($"found {tasks.Count} subjects");
 
-            dataGridView1.DataSource = tasks;
-
+            dataGridView1.DataSource = displayList;
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void TaskLibraryPage_Load(object sender, EventArgs e)
         {
-            loadTaskDisplay();
+            DisplayTasks();
         }
     }
 }

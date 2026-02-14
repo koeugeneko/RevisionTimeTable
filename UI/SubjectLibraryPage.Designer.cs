@@ -31,6 +31,7 @@ namespace TimeTable.UI
             dataGridView1 = new DataGridView();
             AddNewSubject = new Button();
             button1 = new Button();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -66,10 +67,21 @@ namespace TimeTable.UI
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // button2
+            // 
+            button2.Location = new Point(612, 466);
+            button2.Name = "button2";
+            button2.Size = new Size(192, 65);
+            button2.TabIndex = 4;
+            button2.Text = "Refersh";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += SubjectLibraryPage_Load;
+            // 
             // SubjectLibraryPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(AddNewSubject);
             Controls.Add(dataGridView1);
@@ -85,5 +97,6 @@ namespace TimeTable.UI
         private DataGridView dataGridView1;
         private Button AddNewSubject;
         private Button button1;
+        private Button button2;
     }
 }

@@ -207,8 +207,9 @@ namespace TimeTable.Data
         {
             string sql = $@"
                 SELECT task_id, description, priority, estimated_min 
-                FROM tasks WHERE completed = false 
-                AND DueDate >= {TimeOnly.FromDateTime(DateTime.Now)}";
+                FROM tasks 
+                WHERE completed = false 
+                AND user_id = @userID";
 
             var parameters = new Dictionary<string, object>
             {
@@ -216,8 +217,8 @@ namespace TimeTable.Data
             };
 
             var results = ExecuteQuery(sql, parameters);
-            var tasks = new List<Logic.Task>();
 
+            var tasks = new List<Logic.Task>(); // load the data into task objects
             foreach (var row in results)
             {
                 tasks.Add(new Logic.Task
@@ -282,7 +283,6 @@ namespace TimeTable.Data
                 WHERE task_id = @taskId;
                 AND user_id = @userId";
 
-
             var parameters = new Dictionary<string, object>
             {
                 { "@taskId", taskId},
@@ -323,7 +323,7 @@ namespace TimeTable.Data
         {
             string sql = @"
                 SELECT subject_id
-                FROM subjects, users
+                FROM subjects
                 WHERE subjects.user_id = @userId
                 AND subject_name = @subjectName";
 
@@ -354,15 +354,15 @@ namespace TimeTable.Data
         }
         public static void DeleteSubjectFromDatabase(string subjectName, int userId)
         {
-            string sql = @"DELETE FROM subjects
-                WHERE subject_id = @subject_id;";
+            string sql = $@"DELETE FROM subjects
+                WHERE subject_id = {GetSubjectIdFromDatabse(userId, subjectName)},
+                AND user_id = @userID;";
 
             var parameters = new Dictionary<string, object>
             {
-                { "@subjectName", subjectName },
                 { "@userID", userId}
             };
-            Debug.WriteLine("InsertSubjectIntoDatabase");
+            Debug.WriteLine("DeleteSubjectFromDatabase");
             ExecuteNonQuery(sql, parameters);
         }
 

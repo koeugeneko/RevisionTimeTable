@@ -37,6 +37,8 @@
             label5 = new Label();
             label6 = new Label();
             dateTimeTotalTime = new DateTimePicker();
+            dataGridView1 = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // dateTimePicker1
@@ -127,10 +129,20 @@
             dateTimeTotalTime.TabIndex = 9;
             dateTimeTotalTime.Visible = false;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(31, 314);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(552, 225);
+            dataGridView1.TabIndex = 10;
+            // 
             // ReportStatsPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(dataGridView1);
             Controls.Add(dateTimeTotalTime);
             Controls.Add(label6);
             Controls.Add(label5);
@@ -142,6 +154,7 @@
             Controls.Add(dateTimePicker1);
             Name = "ReportStatsPage";
             Size = new Size(651, 570);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -157,5 +170,6 @@
         private Label label5;
         private Label label6;
         private DateTimePicker dateTimeTotalTime;
+        private DataGridView dataGridView1;
     }
 }

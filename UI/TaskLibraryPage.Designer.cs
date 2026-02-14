@@ -32,7 +32,7 @@ namespace TimeTable.UI
             AddNewTask = new Button();
             DeleteTaskButton = new Button();
             EditTaskButton = new Button();
-            panel1 = new Panel();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -78,19 +78,21 @@ namespace TimeTable.UI
             EditTaskButton.Text = "Edit task";
             EditTaskButton.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // button2
             // 
-            panel1.Location = new Point(277, 410);
-            panel1.Margin = new Padding(2);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(540, 266);
-            panel1.TabIndex = 5;
+            button2.Location = new Point(625, 426);
+            button2.Name = "button2";
+            button2.Size = new Size(192, 65);
+            button2.TabIndex = 5;
+            button2.Text = "Refersh";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += TaskLibraryPage_Load;
             // 
             // TaskLibraryPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(panel1);
+            Controls.Add(button2);
             Controls.Add(EditTaskButton);
             Controls.Add(DeleteTaskButton);
             Controls.Add(AddNewTask);
@@ -108,6 +110,6 @@ namespace TimeTable.UI
         private Button AddNewTask;
         private Button DeleteTaskButton;
         private Button EditTaskButton;
-        private Panel panel1;
+        private Button button2;
     }
 }
