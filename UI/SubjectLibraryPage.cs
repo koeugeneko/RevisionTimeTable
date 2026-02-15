@@ -23,10 +23,11 @@ namespace TimeTable.UI
         private void AddNewSubject_Click(object sender, EventArgs e)
         {
             AddSubjectButtonClicked?.Invoke();
+
         }
         private void button1_Click(object sender, EventArgs e)// delete subject
         {
-            SubjectService.DeleteTask(dataGridView1.SelectedCells.ToString());
+            SubjectService.DeleteTask(dataGridView1.CurrentRow.Cells["Name"].Value.ToString());
         }
 
         private void DisplaySubjects()
@@ -53,5 +54,9 @@ namespace TimeTable.UI
             DisplaySubjects();
         }
 
+        private void SubjectLibraryPage_VisibleChanged(object sender, EventArgs e)
+        {
+            DisplaySubjects();
+        }
     }
 }

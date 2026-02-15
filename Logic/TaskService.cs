@@ -18,7 +18,11 @@ namespace TimeTable.Logic
                 task.SubjectId = DataLayer.GetSubjectIdFromDatabse(CurrentUser.UserId, subjectName);
                 task.EstimatedMinutes = estamiatedTime.Minute;
                 task.Priority = Convert.ToInt32(priority);
+                task.Description = description;
+                task.DueDate = dueDate;
             }
+
+            DataLayer.InsertTaskIntoDatabase(task);
         }
 
         public static List<Logic.Task> GetTasksForCurrentUser()

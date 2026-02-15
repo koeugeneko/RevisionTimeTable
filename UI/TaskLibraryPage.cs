@@ -53,5 +53,10 @@ namespace TimeTable.UI
         {
             DisplayTasks();
         }
+
+        private void TaskLibraryPage_VisibleChanged(object sender, EventArgs e)
+        {
+            DisplayTasks();
+        }
     }
 }

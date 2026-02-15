@@ -68,6 +68,7 @@
             Controls.Add(label1);
             Name = "AddNewSubjectPage";
             Size = new Size(856, 721);
+            VisibleChanged += AddNewSubjectPage_VisibleChanged;
             ResumeLayout(false);
             PerformLayout();
         }

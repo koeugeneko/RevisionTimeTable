@@ -100,6 +100,7 @@ namespace TimeTable.UI
             Name = "TaskLibraryPage";
             Size = new Size(856, 721);
             Load += TaskLibraryPage_Load;
+            VisibleChanged += TaskLibraryPage_VisibleChanged;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }

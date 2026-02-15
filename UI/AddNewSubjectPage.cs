@@ -23,7 +23,12 @@ namespace TimeTable.UI
         {
             SubjectService.AddNewSubject(textBox1.Text);
             confirmButtonClicked?.Invoke();
+        }
 
+        private void AddNewSubjectPage_VisibleChanged(object sender, EventArgs e)
+        {
+            textBox1.Text = string.Empty;
+            textBox1.Focus();
         }
     }
 }

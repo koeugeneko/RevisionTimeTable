@@ -7,7 +7,7 @@ namespace TimeTable.Data
 {
     public class DataLayer
     {
-        private static readonly string ConnectionString = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek001";
+        private static readonly string ConnectionString = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek002";
 
         // INSERT / UPDATE / DELETE mutiple data
         public static int ExecuteNonQuery(string sql, Dictionary<string, object> parameters = null)
@@ -237,17 +237,22 @@ namespace TimeTable.Data
         }
         public static void InsertTaskIntoDatabase(Logic.Task task)
         {
-            string sql = @"INSERT INTO tasks (description, priority, estimated_min, due_date, subject_id) 
-                VALUES (@description, @priority, @estimated_min, @due_date, @subject_id);";
+            string sql = @"INSERT INTO tasks (user_id, description, priority, estimated_min, due_date, created_at, subject_id) 
+                VALUES (@userId, @description, @priority, @estimated_min, @due_date, @created_at @subject_id);";
 
             var parameters = new Dictionary<string, object>
             {
+                { "@userId", task.UserId},
                 { "@description", task.Description},
                 { "@priority", task.Priority },
                 { "@estimated_min", task.EstimatedMinutes },
                 { "@due_date", task.DueDate },
+                { "@created_at", task.CreatedAt },
                 { "@subject_id", task.SubjectId }
             };
+
+            ExecuteNonQuery(sql, parameters);
+            Debug.WriteLine("Insert Task Into Database");
         }
         public static void UpdateTaskInDatabase(Logic.Task task)
         {
@@ -256,7 +261,7 @@ namespace TimeTable.Data
                     priority = @priority,
                     estimated_min = @estimated_min, 
                     due_date = @due_date, 
-                    subject_id = @subject_id
+                    subject_id = @subject_id,
                     completed = @completed,
                     completed_at = @completed_at
                 WHERE task_id = @task_id
@@ -275,19 +280,24 @@ namespace TimeTable.Data
                 { "@completed_at", task.CompletedAt }
             };
             
+            ExecuteNonQuery(sql, parameters);
+            Debug.WriteLine("Update Task In Database");
 
         }
         public static void DeleteTaskFromDatabase(int taskId, int userId)
         {
             string sql = @"DELETE FROM tasks 
-                WHERE task_id = @taskId;
-                AND user_id = @userId";
+                WHERE task_id = @taskId
+                AND user_id = @userId;";
 
             var parameters = new Dictionary<string, object>
             {
                 { "@taskId", taskId},
                 { "@userId", userId}
             };  
+
+            ExecuteNonQuery(sql, parameters);
+            Debug.WriteLine("Delete Task From Database");
         }
        
         // subject related
@@ -354,20 +364,23 @@ namespace TimeTable.Data
         }
         public static void DeleteSubjectFromDatabase(string subjectName, int userId)
         {
-            string sql = $@"DELETE FROM subjects
-                WHERE subject_id = {GetSubjectIdFromDatabse(userId, subjectName)},
-                AND user_id = @userID;";
+            string sql = @"
+            DELETE FROM subjects
+            WHERE user_id = @userId
+            AND subject_name = @subjectName;";
 
             var parameters = new Dictionary<string, object>
             {
-                { "@userID", userId}
+                { "@userId", userId },
+                { "@subjectName", subjectName }
             };
-            Debug.WriteLine("DeleteSubjectFromDatabase");
+
             ExecuteNonQuery(sql, parameters);
         }
 
+
         // plan related
-        
+
         public static void GetPlansFromDatabase()
         {
             string sql = @"SELECT plan_id, plan_name, start_time, end_time, recurrence FROM plans;";

@@ -88,6 +88,7 @@ namespace TimeTable.UI
             Name = "SubjectLibraryPage";
             Size = new Size(856, 721);
             Load += SubjectLibraryPage_Load;
+            VisibleChanged += SubjectLibraryPage_VisibleChanged;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
