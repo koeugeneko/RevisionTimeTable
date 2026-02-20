@@ -237,8 +237,8 @@ namespace TimeTable.Data
         }
         public static void InsertTaskIntoDatabase(Logic.Task task)
         {
-            string sql = @"INSERT INTO tasks (user_id, description, priority, estimated_min, due_date, created_at, subject_id) 
-                VALUES (@userId, @description, @priority, @estimated_min, @due_date, @created_at @subject_id);";
+            string sql = @"INSERT INTO tasks (user_id, description, priority, estimated_min, due_date, created_at, subject_id, completed) 
+                VALUES (@userId, @description, @priority, @estimated_min, @due_date, @created_at, @subject_id, @completed);";
 
             var parameters = new Dictionary<string, object>
             {
@@ -248,7 +248,8 @@ namespace TimeTable.Data
                 { "@estimated_min", task.EstimatedMinutes },
                 { "@due_date", task.DueDate },
                 { "@created_at", task.CreatedAt },
-                { "@subject_id", task.SubjectId }
+                { "@subject_id", task.SubjectId },
+                { "@completed", task.Completed }
             };
 
             ExecuteNonQuery(sql, parameters);
