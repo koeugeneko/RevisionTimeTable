@@ -31,22 +31,15 @@ namespace TimeTable.UI
 
             var tasks = TaskService.GetTasksForCurrentUser();
 
-            var displayList = tasks.Select(t => new
-            {
-                Description = t.Description,
-                Time = t.EstimatedMinutes,
-                Priority = t.Priority,
-                DueDate = t.DueDate,
-                Completed = t.Completed,
-                //Completed_At = t.CompletedAt,
-                //Created_At = t.CreatedAt,
-            }).ToList();
-
             Debug.WriteLine($"found {tasks.Count} subjects");
 
-            dataGridView1.DataSource = displayList;
-
+            dataGridView1.DataSource = tasks;
+            dataGridView1.Columns["UserId"].Visible = false;
+            dataGridView1.Columns["TaskId"].Visible = false;
+            //dataGridView1.Columns["Completed"].ReadOnly = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.MultiSelect = false;
         }
 
         private void TaskLibraryPage_Load(object sender, EventArgs e)
@@ -57,6 +50,25 @@ namespace TimeTable.UI
         private void TaskLibraryPage_VisibleChanged(object sender, EventArgs e)
         {
             DisplayTasks();
+        }
+
+        private void DeleteTaskButton_Click(object sender, EventArgs e)
+        {
+
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                var selectedTask = (Logic.Task)dataGridView1.SelectedRows[0].DataBoundItem;
+
+                int taskId = selectedTask.TaskId;
+                TaskService.DeleteTask(taskId);
+            }
+
+            DisplayTasks(); // refresh
+        }
+
+        private void EditTaskButton_Click(object sender, EventArgs e)
+        {
+            //TaskService.UpdateTask();
         }
     }
 }

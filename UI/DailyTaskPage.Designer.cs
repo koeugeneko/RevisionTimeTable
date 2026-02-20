@@ -48,9 +48,9 @@
             // lblDate
             // 
             lblDate.Font = new Font("Segoe UI", 12F);
-            lblDate.Location = new Point(508, 110);
+            lblDate.Location = new Point(521, 110);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(302, 29);
+            lblDate.Size = new Size(295, 29);
             lblDate.TabIndex = 1;
             lblDate.Text = "00/00/0000, Friday";
             // 
@@ -61,12 +61,12 @@
             dataGridView1.Margin = new Padding(2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.Size = new Size(687, 390);
+            dataGridView1.Size = new Size(679, 372);
             dataGridView1.TabIndex = 2;
             // 
             // button1
             // 
-            button1.Location = new Point(63, 598);
+            button1.Location = new Point(52, 586);
             button1.Margin = new Padding(2);
             button1.Name = "button1";
             button1.Size = new Size(174, 67);
@@ -76,7 +76,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(388, 598);
+            button2.Location = new Point(557, 598);
             button2.Margin = new Padding(2);
             button2.Name = "button2";
             button2.Size = new Size(174, 67);

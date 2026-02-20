@@ -26,8 +26,10 @@ namespace TimeTable.UI
 
         }
         private void button1_Click(object sender, EventArgs e)// delete subject
-        {
-            SubjectService.DeleteTask(dataGridView1.CurrentRow.Cells["Name"].Value.ToString());
+        {       
+
+            SubjectService.DeleteSubject(dataGridView1.CurrentRow.Cells["Name"].Value.ToString());
+            DisplaySubjects(); // refresh
         }
 
         private void DisplaySubjects()
@@ -36,18 +38,19 @@ namespace TimeTable.UI
 
             var subjects = SubjectService.GetSubjectsForCurrentUser();
 
-            var displayList = subjects.Select(s => new
-            {
-                Name = s.Name
-            }).ToList();
+            
 
             Debug.WriteLine($"found {subjects.Count} subjects");
 
-            dataGridView1.DataSource = displayList;
-
+            dataGridView1.DataSource = subjects;
+            dataGridView1.Columns["UserId"].Visible = false;
+            dataGridView1.Columns["SubjectId"].Visible = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.MultiSelect = false;
         }
+
+
 
         private void SubjectLibraryPage_Load(object sender, EventArgs e)
         {

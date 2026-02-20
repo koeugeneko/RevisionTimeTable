@@ -68,6 +68,7 @@ namespace TimeTable.UI
             DeleteTaskButton.TabIndex = 3;
             DeleteTaskButton.Text = "DeleteTask";
             DeleteTaskButton.UseVisualStyleBackColor = true;
+            DeleteTaskButton.Click += DeleteTaskButton_Click;
             // 
             // EditTaskButton
             // 
@@ -77,6 +78,7 @@ namespace TimeTable.UI
             EditTaskButton.TabIndex = 4;
             EditTaskButton.Text = "Edit task";
             EditTaskButton.UseVisualStyleBackColor = true;
+            EditTaskButton.Click += EditTaskButton_Click;
             // 
             // button2
             // 

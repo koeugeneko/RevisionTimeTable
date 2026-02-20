@@ -231,7 +231,7 @@ namespace TimeTable.Data
                 });
             }
 
-            Debug.WriteLine($"Retrieved {tasks.Count} subjects for user {userId}");
+            Debug.WriteLine($"Retrieved {tasks.Count} task for user {userId}");
             return tasks;
 
         }
@@ -285,6 +285,7 @@ namespace TimeTable.Data
             Debug.WriteLine("Update Task In Database");
 
         }
+        
         public static void DeleteTaskFromDatabase(int taskId, int userId)
         {
             string sql = @"DELETE FROM tasks 

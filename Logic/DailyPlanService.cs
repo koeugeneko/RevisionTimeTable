@@ -31,6 +31,8 @@ namespace TimeTable.Logic
             memo[key] = best;
             return best;
         }
+
+
         static bool? isHoliday;
         public async static void CallPublicHolidayApi()
         {

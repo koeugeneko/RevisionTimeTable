@@ -31,14 +31,18 @@ namespace TimeTable.Logic
 
         }
 
-        public static void UpdateTask()
+        public static void UpdateTask(Logic.Task task)
         {
-
+            DataLayer.UpdateTaskInDatabase(task);
+        }
+        public static void MarkTaskAsCompleted(Logic.Task task)
+        {
+            DataLayer.UpdateTaskInDatabase(task);
         }
 
-        public static void DeleteTask() 
+        public static void DeleteTask(int taskId) 
         {
-
+            DataLayer.DeleteTaskFromDatabase(taskId, CurrentUser.UserId);
         }
     }
 }
