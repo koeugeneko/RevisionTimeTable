@@ -202,7 +202,10 @@ namespace TimeTable.Data
             ExecuteNonQuery(sql, parameters);
         }
 
-        public static void 
+        public static void UpdateUserSettings()
+        {
+
+        }
 
         // task related
         public static List<Logic.Task> GetTasksFromDatabase(int userId)

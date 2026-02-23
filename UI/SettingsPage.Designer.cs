@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            label4 = new Label();
-            label2 = new Label();
             label3 = new Label();
             label5 = new Label();
             button1 = new Button();
@@ -38,16 +36,12 @@
             DelectAccountButton = new Button();
             label7 = new Label();
             label8 = new Label();
-            trackBar2 = new TrackBar();
-            trackBar3 = new TrackBar();
             checkBox1 = new CheckBox();
             numericUpDown1 = new NumericUpDown();
             label6 = new Label();
             comboBox1 = new ComboBox();
             numericUpDown2 = new NumericUpDown();
             label9 = new Label();
-            ((System.ComponentModel.ISupportInitialize)trackBar2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)trackBar3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
             SuspendLayout();
@@ -61,28 +55,10 @@
             label1.TabIndex = 0;
             label1.Text = "Task limit per day:";
             // 
-            // label4
-            // 
-            label4.Font = new Font("Segoe UI", 10F);
-            label4.Location = new Point(41, 317);
-            label4.Name = "label4";
-            label4.Size = new Size(250, 40);
-            label4.TabIndex = 3;
-            label4.Text = "Sound";
-            // 
-            // label2
-            // 
-            label2.Font = new Font("Segoe UI", 10F);
-            label2.Location = new Point(41, 374);
-            label2.Name = "label2";
-            label2.Size = new Size(250, 40);
-            label2.TabIndex = 4;
-            label2.Text = "Timer Sound";
-            // 
             // label3
             // 
             label3.Font = new Font("Segoe UI", 10F);
-            label3.Location = new Point(41, 429);
+            label3.Location = new Point(41, 282);
             label3.Name = "label3";
             label3.Size = new Size(250, 40);
             label3.TabIndex = 5;
@@ -91,7 +67,7 @@
             // label5
             // 
             label5.Font = new Font("Segoe UI", 10F);
-            label5.Location = new Point(41, 533);
+            label5.Location = new Point(41, 376);
             label5.Name = "label5";
             label5.Size = new Size(188, 40);
             label5.TabIndex = 6;
@@ -99,7 +75,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(41, 576);
+            button1.Location = new Point(41, 419);
             button1.Name = "button1";
             button1.Size = new Size(166, 35);
             button1.TabIndex = 7;
@@ -108,7 +84,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(224, 576);
+            button2.Location = new Point(224, 419);
             button2.Name = "button2";
             button2.Size = new Size(166, 35);
             button2.TabIndex = 8;
@@ -118,7 +94,7 @@
             // 
             // DelectAccountButton
             // 
-            DelectAccountButton.Location = new Point(423, 576);
+            DelectAccountButton.Location = new Point(423, 419);
             DelectAccountButton.Name = "DelectAccountButton";
             DelectAccountButton.Size = new Size(166, 35);
             DelectAccountButton.TabIndex = 9;
@@ -144,23 +120,9 @@
             label8.TabIndex = 13;
             label8.Text = "Developer: Eugene (A level NEA)";
             // 
-            // trackBar2
-            // 
-            trackBar2.Location = new Point(239, 374);
-            trackBar2.Name = "trackBar2";
-            trackBar2.Size = new Size(130, 56);
-            trackBar2.TabIndex = 15;
-            // 
-            // trackBar3
-            // 
-            trackBar3.Location = new Point(239, 312);
-            trackBar3.Name = "trackBar3";
-            trackBar3.Size = new Size(130, 56);
-            trackBar3.TabIndex = 16;
-            // 
             // checkBox1
             // 
-            checkBox1.Location = new Point(243, 436);
+            checkBox1.Location = new Point(243, 289);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(126, 30);
             checkBox1.TabIndex = 17;
@@ -220,8 +182,6 @@
             Controls.Add(label6);
             Controls.Add(numericUpDown1);
             Controls.Add(checkBox1);
-            Controls.Add(trackBar3);
-            Controls.Add(trackBar2);
             Controls.Add(label8);
             Controls.Add(label7);
             Controls.Add(DelectAccountButton);
@@ -229,24 +189,17 @@
             Controls.Add(button1);
             Controls.Add(label5);
             Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label4);
             Controls.Add(label1);
             Name = "SettingsPage";
             Size = new Size(856, 721);
-            ((System.ComponentModel.ISupportInitialize)trackBar2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)trackBar3).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private Label label1;
-        private Label label4;
-        private Label label2;
         private Label label3;
         private Label label5;
         private Button button1;
@@ -254,8 +207,6 @@
         private Button DelectAccountButton;
         private Label label7;
         private Label label8;
-        private TrackBar trackBar2;
-        private TrackBar trackBar3;
         private CheckBox checkBox1;
         private NumericUpDown numericUpDown1;
         private Label label6;

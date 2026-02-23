@@ -6,13 +6,12 @@ using TimeTable.Data;
 
 namespace TimeTable.Logic
 {
-    public static class DailyPlanService
+     static class DailyPlanService
     {
         // Recursive Backtracking + Memoization (DP) using LinkedList
-        // Recursive Backtracking + Memoization (DP) using LinkedList
-        public static LinkedList<Task> FindOptimalTasks(
+        static LinkedList<Task> FindOptimalTasks(
             List<Task> tasks,
-            int maxMinutes,
+            int maxTasks,
             int index,
             Dictionary<string, LinkedList<Task>> memo)
         {
@@ -52,9 +51,14 @@ namespace TimeTable.Logic
             return best;
         }
 
-        static List<Task> tasks = DataLayer.GetUnFinishedTasksFromDatabase(CurrentUser.UserId);
 
+        public static void GenerateDailyPlan()
+        {
+            List<Task> tasks = DataLayer.GetUnFinishedTasksFromDatabase(CurrentUser.UserId);
 
+            FindOptimalTasks(tasks,);
+
+        }
         static bool? isHoliday;
         public async static void CallPublicHolidayApi()
         {
