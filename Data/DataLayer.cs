@@ -202,14 +202,15 @@ namespace TimeTable.Data
             ExecuteNonQuery(sql, parameters);
         }
 
+        public static void 
+
         // task related
         public static List<Logic.Task> GetTasksFromDatabase(int userId)
         {
             string sql = $@"
                 SELECT task_id, description, priority, estimated_min 
                 FROM tasks 
-                WHERE completed = false 
-                AND user_id = @userID";
+                WHERE user_id = @userID";
 
             var parameters = new Dictionary<string, object>
             {
@@ -235,6 +236,39 @@ namespace TimeTable.Data
             return tasks;
 
         }
+        public static List<Logic.Task> GetUnFinishedTasksFromDatabase(int userId)
+        {
+            string sql = $@"
+                SELECT task_id, description, priority, estimated_min 
+                FROM tasks 
+                WHERE user_id = @userID
+                AND completed = false";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@userID", userId}
+            };
+
+            var results = ExecuteQuery(sql, parameters);
+
+            var tasks = new List<Logic.Task>(); // load the data into task objects
+            foreach (var row in results)
+            {
+                tasks.Add(new Logic.Task
+                {
+                    UserId = userId,
+                    TaskId = Convert.ToInt32(row["task_id"]),
+                    Description = Convert.ToString(row["description"]),
+                    Priority = Convert.ToInt32(row["priority"]),
+                    EstimatedMinutes = Convert.ToInt32(row["estimated_min"])
+                });
+            }
+
+            Debug.WriteLine($"Retrieved {tasks.Count} task for user {userId}");
+            return tasks;
+
+        }
+
         public static void InsertTaskIntoDatabase(Logic.Task task)
         {
             string sql = @"INSERT INTO tasks (user_id, description, priority, estimated_min, due_date, created_at, subject_id, completed) 
@@ -367,9 +401,9 @@ namespace TimeTable.Data
         public static void DeleteSubjectFromDatabase(string subjectName, int userId)
         {
             string sql = @"
-            DELETE FROM subjects
-            WHERE user_id = @userId
-            AND subject_name = @subjectName;";
+                DELETE FROM subjects
+                WHERE user_id = @userId
+                AND subject_name = @subjectName;";
 
             var parameters = new Dictionary<string, object>
             {
@@ -385,11 +419,19 @@ namespace TimeTable.Data
 
         public static void GetPlansFromDatabase()
         {
-            string sql = @"SELECT plan_id, plan_name, start_time, end_time, recurrence FROM plans;";
+            string sql = $@"
+                SELECT plan_id
+                FROM plans
+                WHERE plan_date = {DateTime.Now.Date};";
+
+            DailyPlan results = ExecuteScalar(sql);
         }
+
         public static void InsertPlanIntoDatabase()
         {
-            string sql = @"INSERT INTO plans (plan_name, start_time, end_time, recurrence) VALUES (@plan_name, @start_time, @end_time, @recurrence);";
+            string sql = @"
+                INSERT INTO plans
+                ;";
         }
     }
 }

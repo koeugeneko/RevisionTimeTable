@@ -31,7 +31,6 @@
             progressBar1 = new ProgressBar();
             lblDate = new Label();
             dataGridView1 = new DataGridView();
-            button1 = new Button();
             button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -64,19 +63,9 @@
             dataGridView1.Size = new Size(679, 372);
             dataGridView1.TabIndex = 2;
             // 
-            // button1
-            // 
-            button1.Location = new Point(52, 586);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Size = new Size(174, 67);
-            button1.TabIndex = 3;
-            button1.Text = "Add emergcy task";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // button2
             // 
-            button2.Location = new Point(557, 598);
+            button2.Location = new Point(557, 602);
             button2.Margin = new Padding(2);
             button2.Name = "button2";
             button2.Size = new Size(174, 67);
@@ -90,7 +79,6 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(button2);
-            Controls.Add(button1);
             Controls.Add(dataGridView1);
             Controls.Add(lblDate);
             Controls.Add(progressBar1);
@@ -106,7 +94,6 @@
         private ProgressBar progressBar1;
         private Label lblDate;
         private DataGridView dataGridView1;
-        private Button button1;
         private Button button2;
     }
 }

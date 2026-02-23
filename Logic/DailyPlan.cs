@@ -10,5 +10,8 @@ namespace TimeTable.Logic
     {
         public DateTime Date { get; set; }
 
+        public List<Task> Tasks { get; set; }
+        public int totalTasks { get; set; }
+        public bool isHoliday { get; set; }
     }
 }
