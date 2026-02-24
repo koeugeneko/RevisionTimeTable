@@ -15,24 +15,24 @@ namespace TimeTable.Logic
             int index,
             Dictionary<string, LinkedList<Task>> memo)
         {
-            if (index >= tasks.Count || maxMinutes <= 0)
+            if (index >= tasks.Count || maxTasks <= 0)
                 return new LinkedList<Task>();
 
-            string key = $"{index}-{maxMinutes}";
+            string key = $"{index}-{maxTasks}";
             if (memo.ContainsKey(key))
                 return memo[key];
 
             // Skip 
-            var skip = FindOptimalTasks(tasks, maxMinutes, index + 1, memo);
+            var skip = FindOptimalTasks(tasks, maxTasks, index + 1, memo);
 
             // Take 
             LinkedList<Task> take = new LinkedList<Task>();
 
-            if (tasks[index].EstimatedMinutes <= maxMinutes)
+            if (tasks[index].EstimatedMinutes <= maxTasks)
             {
                 var next = FindOptimalTasks(
                     tasks,
-                    maxMinutes - tasks[index].EstimatedMinutes,
+                    maxTasks - tasks[index].EstimatedMinutes,
                     index + 1,
                     memo);
 
@@ -56,7 +56,7 @@ namespace TimeTable.Logic
         {
             List<Task> tasks = DataLayer.GetUnFinishedTasksFromDatabase(CurrentUser.UserId);
 
-            FindOptimalTasks(tasks,);
+            //FindOptimalTasks(tasks,);
 
         }
         static bool? isHoliday;

@@ -177,7 +177,7 @@ namespace TimeTable
             Debug.WriteLine($"sign out succes");
         }
         private void SignOut()
-        {
+        {   
             Environment.Exit(0);
         }
         private void LoadTimerPage()

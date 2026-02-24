@@ -187,24 +187,53 @@ namespace TimeTable.Data
         }
 
         // user prefence related
-        public static void UpdateMaxDailyTasks(int UserId) //TODO
+        public static UserSettings GetUserSettingsFromDatabase(int userID)
         {
             string sql = @"
-                UPDATE usersettins
-                set max_daily_task = 
-            where user_id = @userID";
+                SELECT max_daily_tasks, region, enable_notifcation, max_holiday_daily_tasks
+                FROM usersettings
+                WHERE user_id = @userID";   
+
+            var parameters = new Dictionary<string, object>
+                {
+                { "@userID", userID }
+            };
+            var result = ExecuteQuery(sql, parameters);
+            if (result.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                var row = result[0];
+                return new UserSettings
+                {
+                    maxDailyTasks = Convert.ToInt32(row["max_daily_tasks"]),
+                    Region = Convert.ToString(row["region"]),
+                    taskReminderEnabled = Convert.ToBoolean(row["enable_notifcation"]),
+                    maxHoildayDailyTasks = Convert.ToInt32(row["max_holiday_daily_tasks"])
+                };
+            }
+
+        }
+        public static void UpdateUserSettingsInDatabase(int userId, UserSettings userSettings)
+        {
+            string sql = @"
+                UPDATE usersettings
+                SET max_daily_tasks = @maxDailyTasks,
+                    region = @region,
+                    enable_notifcation = @taskReminderEnabled,       
+                    max_holiday_daily_tasks = @maxHoildayDailyTasks
+                WHERE user_id = @userId;";
 
             var parameters = new Dictionary<string, object>
             {
-                { "@userID", UserId}
+                { "@maxDailyTasks", userSettings.maxDailyTasks },
+                { "@region", userSettings.Region },
+                { "@taskReminderEnabled", userSettings.taskReminderEnabled },
+                { "@maxHoildayDailyTasks", userSettings.maxHoildayDailyTasks },
+                { "@userId", userId }
             };
-
-            ExecuteNonQuery(sql, parameters);
-        }
-
-        public static void UpdateUserSettings()
-        {
-
         }
 
         // task related
@@ -427,7 +456,6 @@ namespace TimeTable.Data
                 FROM plans
                 WHERE plan_date = {DateTime.Now.Date};";
 
-            DailyPlan results = ExecuteScalar(sql);
         }
 
         public static void InsertPlanIntoDatabase()

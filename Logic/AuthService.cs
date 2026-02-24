@@ -45,6 +45,7 @@ namespace TimeTable.Logic
             if (inputHash == storedHash) // check if password mathchs
             {   
                 CurrentUser.UserId = Data.DataLayer.GetUserIdFromDatabase(username);
+                CurrentUser.Username = username;
                 return true;
             }
             else

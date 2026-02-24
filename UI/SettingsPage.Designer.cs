@@ -30,7 +30,7 @@
         {
             label1 = new Label();
             label3 = new Label();
-            label5 = new Label();
+            Userlabel = new Label();
             button1 = new Button();
             button2 = new Button();
             DelectAccountButton = new Button();
@@ -51,7 +51,7 @@
             label1.Font = new Font("Segoe UI", 10F);
             label1.Location = new Point(41, 42);
             label1.Name = "label1";
-            label1.Size = new Size(188, 40);
+            label1.Size = new Size(188, 39);
             label1.TabIndex = 0;
             label1.Text = "Task limit per day:";
             // 
@@ -64,14 +64,14 @@
             label3.TabIndex = 5;
             label3.Text = "Task reminder";
             // 
-            // label5
+            // Userlabel
             // 
-            label5.Font = new Font("Segoe UI", 10F);
-            label5.Location = new Point(41, 376);
-            label5.Name = "label5";
-            label5.Size = new Size(188, 40);
-            label5.TabIndex = 6;
-            label5.Text = "User: Eugene";
+            Userlabel.Font = new Font("Segoe UI", 10F);
+            Userlabel.Location = new Point(41, 376);
+            Userlabel.Name = "Userlabel";
+            Userlabel.Size = new Size(188, 25);
+            Userlabel.TabIndex = 6;
+            Userlabel.Text = "User: Eugene";
             // 
             // button1
             // 
@@ -81,6 +81,7 @@
             button1.TabIndex = 7;
             button1.Text = "Change my pasword";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -135,6 +136,7 @@
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(150, 27);
             numericUpDown1.TabIndex = 18;
+            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
             // 
             // label6
             // 
@@ -187,11 +189,12 @@
             Controls.Add(DelectAccountButton);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(label5);
+            Controls.Add(Userlabel);
             Controls.Add(label3);
             Controls.Add(label1);
             Name = "SettingsPage";
             Size = new Size(856, 721);
+            Load += SettingsPage_Load;
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
             ResumeLayout(false);
@@ -201,7 +204,7 @@
 
         private Label label1;
         private Label label3;
-        private Label label5;
+        private Label Userlabel;
         private Button button1;
         private Button button2;
         private Button DelectAccountButton;

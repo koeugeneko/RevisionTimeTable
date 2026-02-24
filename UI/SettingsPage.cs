@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TimeTable.Logic;
 
 namespace TimeTable.UI
 {
@@ -17,11 +18,15 @@ namespace TimeTable.UI
             InitializeComponent();
         }
 
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e) // max task per day
+        {
+            UserSettingsService.changeMaxDailytasks()
+        }
+
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
 
         }
-
         private void DelectAccountButton_Click(object sender, EventArgs e)
         {
             // Initializes the variables to pass to the MessageBox.Show method.
@@ -43,5 +48,26 @@ namespace TimeTable.UI
         {
             signoutButtonClicked?.Invoke();
         }
+
+        private void SettingsPage_Load(object sender, EventArgs e)
+        {
+            Userlabel.Text = $"User: {CurrentUser.Username}";
+        }
+
+        private void button1_Click(object sender, EventArgs e) //change my password button
+        {
+            // Initializes the variables to pass to the MessageBox.Show method.
+            string message = "Function to be added";
+            string caption = "Change my password";
+            MessageBoxButtons buttons = MessageBoxButtons.OK;
+            DialogResult result;
+
+            // Displays the MessageBox.
+            result = MessageBox.Show(message, caption, buttons);
+
+        }
+
+        
+        
     }
 }

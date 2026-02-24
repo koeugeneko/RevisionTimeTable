@@ -10,10 +10,7 @@ namespace TimeTable.Logic
     {
 
         public static string Username { get; set; }
-
         public static int UserId;
-
-
         private static int _UserId;
 
         public static int getUserId()
