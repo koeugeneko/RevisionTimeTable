@@ -7,30 +7,34 @@ using TimeTable.Data;
 
 namespace TimeTable.Logic
 {
-    internal class UserSettingsService
+    public static class UserSettingsService
     {
-        public void signout()
+        public static void signout()
         {
             CurrentUser.UserId = 0;
             CurrentUser.Username = null;
         }
+        public static UserSettings settings;
+        public static void getUserSettings()
+        {
+            settings = DataLayer.GetUserSettingsFromDatabase(CurrentUser.UserId);
+        }
+        
+        public static void changeMaxDailytasks(int newMax)
+        {
+            settings.maxDailyTasks = newMax;
+            updateUserSettings();
+        }
+        public static  void changeMaxDailyMinutes(int newMax)
+        {
+            settings.maxHoildayDailyTasks = newMax;
+            updateUserSettings();
+        }
 
-        UserSettingsservice()
-        {
-            UserSettings settings = DataLayer.GetUserSettingsFromDatabase(CurrentUser.UserId);
-        }
-        public void changeMaxDailytasks(int newMax)
-        {
-            
-        }
-        public void changeMaxDailyMinutes(int newMax)
-        {
-           
-        }
-        public void updateUserSettings(UserSettings newSettings)
+        public static void updateUserSettings()
         {
             // Update user settings in database for the current user
-            DataLayer.UpdateUserSettingsInDatabase(CurrentUser.UserId, newSettings);
+            DataLayer.UpdateUserSettingsInDatabase(CurrentUser.UserId, settings);
         }
 
 

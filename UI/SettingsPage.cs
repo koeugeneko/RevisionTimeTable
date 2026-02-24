@@ -20,12 +20,12 @@ namespace TimeTable.UI
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e) // max task per day
         {
-            UserSettingsService.changeMaxDailytasks()
+            UserSettingsService.changeMaxDailytasks(Convert.ToInt32(numericUpDown1.Value));
         }
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
-
+            UserSettingsService.changeMaxDailyMinutes(Convert.ToInt32(numericUpDown2.Value));
         }
         private void DelectAccountButton_Click(object sender, EventArgs e)
         {
@@ -52,6 +52,7 @@ namespace TimeTable.UI
         private void SettingsPage_Load(object sender, EventArgs e)
         {
             Userlabel.Text = $"User: {CurrentUser.Username}";
+            UserSettingsService.getUserSettings();
         }
 
         private void button1_Click(object sender, EventArgs e) //change my password button
