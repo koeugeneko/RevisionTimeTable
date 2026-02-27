@@ -27,7 +27,7 @@ namespace TimeTable.UI
         }
         private void DailyTaskPage_Load(object sender, EventArgs e)
         {
-            // set date time
+            // set date
             var now = DateTime.Now;
             lblDate.Text = $"{now:dd/MM/yyyy} {now.DayOfWeek}";
             Logic.DailyPlanService.CallPublicHolidayApi();
@@ -45,16 +45,13 @@ namespace TimeTable.UI
 
             Debug.WriteLine($"found {dailyTasks.Count} daily tasks");
 
-            foreach (Logic.Task task in dailyTasks) {
-               
-            }
+           
             dataGridView1.DataSource = dailyTasks.ToList<Logic.Task>();
             dataGridView1.Columns["TaskId"].Visible = false;
             dataGridView1.Columns["UserId"].Visible = false;
             dataGridView1.Columns["SubjectId"].Visible = false;
             dataGridView1.Columns["CompletedAt"].Visible = false;
             dataGridView1.Columns["CreatedAt"].Visible = false;
-
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

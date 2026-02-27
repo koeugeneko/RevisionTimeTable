@@ -267,9 +267,7 @@ namespace TimeTable.Data
 
             Debug.WriteLine($"Retrieved {tasks.Count} task for user {userId}");
             return tasks;
-
         }
-
         public static void InsertTaskIntoDatabase(Logic.Task task)
         {
             string sql = @"INSERT INTO tasks (user_id, description, priority, estimated_min, due_date, created_at, subject_id, completed) 
@@ -371,7 +369,7 @@ namespace TimeTable.Data
             string sql = @"
                 SELECT subject_name
                 FROM subjects
-                WHERE Subject.user_id = @userId
+                WHERE Subjects.user_id = @userId
                 AND subjectId = @subjectId";
 
             var parameters = new Dictionary<string, object>
@@ -382,7 +380,7 @@ namespace TimeTable.Data
 
             var result = ExecuteScalar(sql, parameters);
             Debug.WriteLine($"{result.ToString()}");
-            return Convert.ToString(["subject_name"]); //todo return the subject name
+            return Convert.ToString(result);
 ;
         }
 

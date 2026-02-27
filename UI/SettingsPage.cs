@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TimeTable.Logic;
+﻿using TimeTable.Logic;
 
 namespace TimeTable.UI
 {
@@ -39,7 +30,7 @@ namespace TimeTable.UI
             result = MessageBox.Show(message, caption, buttons);
             if (result == DialogResult.Yes)
             {
-                // Delect account
+                Environment.Exit(0);
             }
         }
 
@@ -68,7 +59,7 @@ namespace TimeTable.UI
 
         }
 
-        
-        
+
+
     }
 }
