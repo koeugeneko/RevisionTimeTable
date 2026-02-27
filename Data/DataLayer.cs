@@ -9,64 +9,135 @@ namespace TimeTable.Data
     public class DataLayer
     {
         private static readonly string ConnectionString = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek001";
+        private static readonly string ConnectionString2 = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek002";
+
 
         // INSERT / UPDATE / DELETE mutiple data
         public static int ExecuteNonQuery(string sql, Dictionary<string, object> parameters = null)
         {
-            using var conn = new NpgsqlConnection(ConnectionString);
-            conn.Open();
-
-            using var cmd = new NpgsqlCommand(sql, conn);
-            if (parameters != null)
+            try
             {
-                foreach (var p in parameters)
-                    cmd.Parameters.AddWithValue(p.Key, p.Value);
-            }
+                using var conn = new NpgsqlConnection(ConnectionString);
+                conn.Open();
 
-            return cmd.ExecuteNonQuery();
+                using var cmd = new NpgsqlCommand(sql, conn);
+                if (parameters != null)
+                {
+                    foreach (var p in parameters)
+                        cmd.Parameters.AddWithValue(p.Key, p.Value);
+                }
+
+                return cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                using var conn = new NpgsqlConnection(ConnectionString2);
+                conn.Open();
+
+                using var cmd = new NpgsqlCommand(sql, conn);
+                if (parameters != null)
+                {
+                    foreach (var p in parameters)
+                        cmd.Parameters.AddWithValue(p.Key, p.Value);
+                }
+
+                return cmd.ExecuteNonQuery();
+            }
+            
         }
         // SELECT signel data
         public static object ExecuteScalar(string sql, Dictionary<string, object> parameters = null)
         {
-            using var conn = new NpgsqlConnection(ConnectionString);
-            conn.Open();
-
-            using var cmd = new NpgsqlCommand(sql, conn);
-            if (parameters != null)
+            try
             {
-                foreach (var p in parameters)
-                    cmd.Parameters.AddWithValue(p.Key, p.Value);
-            }
+                using var conn = new NpgsqlConnection(ConnectionString);
 
-            return cmd.ExecuteScalar();
+                conn.Open();
+
+                using var cmd = new NpgsqlCommand(sql, conn);
+                if (parameters != null)
+                {
+                    foreach (var p in parameters)
+                        cmd.Parameters.AddWithValue(p.Key, p.Value);
+                }
+
+                return cmd.ExecuteScalar();
+            }
+            catch (Exception e)
+            {
+                using var conn = new NpgsqlConnection(ConnectionString2);
+                conn.Open();
+
+                using var cmd = new NpgsqlCommand(sql, conn);
+                if (parameters != null)
+                {
+                    foreach (var p in parameters)
+                        cmd.Parameters.AddWithValue(p.Key, p.Value);
+                }
+
+                return cmd.ExecuteScalar();
+            }
         }
         // SELECT muli data with a reader
         public static List<Dictionary<string, object>> ExecuteQuery(string sql, Dictionary<string, object> parameters = null)
         {
-            var result = new List<Dictionary<string, object>>();
 
-            using var conn = new NpgsqlConnection(ConnectionString);
-            conn.Open();
-
-            using var cmd = new NpgsqlCommand(sql, conn);
-            if (parameters != null)
+            try
             {
-                foreach (var p in parameters)
-                    cmd.Parameters.AddWithValue(p.Key, p.Value);
-            }
+                var result = new List<Dictionary<string, object>>();
 
-            using var reader = cmd.ExecuteReader();
-            while (reader.Read())
-            {
-                var row = new Dictionary<string, object>();
-                for (int i = 0; i < reader.FieldCount; i++)
+
+                using var conn = new NpgsqlConnection(ConnectionString);
+                conn.Open();
+
+                using var cmd = new NpgsqlCommand(sql, conn);
+                if (parameters != null)
                 {
-                    row[reader.GetName(i)] = reader.GetValue(i);
+                    foreach (var p in parameters)
+                        cmd.Parameters.AddWithValue(p.Key, p.Value);
                 }
-                result.Add(row);
-            }
 
-            return result;
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var row = new Dictionary<string, object>();
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        row[reader.GetName(i)] = reader.GetValue(i);
+                    }
+                    result.Add(row);
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                var result = new List<Dictionary<string, object>>();
+
+
+                using var conn = new NpgsqlConnection(ConnectionString2);
+                conn.Open();
+
+                using var cmd = new NpgsqlCommand(sql, conn);
+                if (parameters != null)
+                {
+                    foreach (var p in parameters)
+                        cmd.Parameters.AddWithValue(p.Key, p.Value);
+                }
+
+                using var reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var row = new Dictionary<string, object>();
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        row[reader.GetName(i)] = reader.GetValue(i);
+                    }
+                    result.Add(row);
+                }
+
+                return result;
+            }
         }
 
         // user related
