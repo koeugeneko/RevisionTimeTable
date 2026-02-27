@@ -1,6 +1,7 @@
 using Microsoft.VisualBasic.ApplicationServices;
 using Npgsql;
 using System.Diagnostics;
+using System.Xml.Linq;
 using TimeTable.Logic;
 
 namespace TimeTable.Data
@@ -365,7 +366,27 @@ namespace TimeTable.Data
             Debug.WriteLine($"Retrieved {subjects.Count} subjects for user {UserId}");
             return subjects;
         }
-        public static int GetSubjectIdFromDatabse(int userID, string subjectName)
+        public static string GetSubjectNameFromDatabse(int userId, string subjectId)
+        {
+            string sql = @"
+                SELECT subject_name
+                FROM subjects
+                WHERE Subject.user_id = @userId
+                AND subjectId = @subjectId";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@userId", userId },
+                { "@subjectId", subjectId }
+            };
+
+            var result = ExecuteScalar(sql, parameters);
+            Debug.WriteLine($"{result.ToString()}");
+            return Convert.ToString(["subject_name"]); //todo return the subject name
+;
+        }
+
+        public static int GetSubjectIdFromDatabase(int userID, string subjectName)
         {
             string sql = @"
                 SELECT subject_id
