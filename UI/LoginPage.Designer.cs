@@ -33,7 +33,6 @@ namespace TimeTable
             txtPassword = new TextBox();
             lblLoginPassword = new Label();
             btnLoginLogin = new Button();
-            chkRememberMe = new CheckBox();
             labelSignUp = new Label();
             ErrorLabel = new Label();
             SuspendLayout();
@@ -96,17 +95,6 @@ namespace TimeTable
             btnLoginLogin.UseVisualStyleBackColor = false;
             btnLoginLogin.Click += btnLoginLogin_Click;
             // 
-            // chkRememberMe
-            // 
-            chkRememberMe.AutoSize = true;
-            chkRememberMe.Location = new Point(207, 384);
-            chkRememberMe.Name = "chkRememberMe";
-            chkRememberMe.Size = new Size(125, 24);
-            chkRememberMe.TabIndex = 5;
-            chkRememberMe.Text = "RememberMe";
-            chkRememberMe.UseVisualStyleBackColor = true;
-            chkRememberMe.CheckedChanged += chkRememberMe_CheckedChanged;
-            // 
             // labelSignUp
             // 
             labelSignUp.Font = new Font("Segoe UI", 9F);
@@ -137,7 +125,6 @@ namespace TimeTable
             BackgroundImageLayout = ImageLayout.Stretch;
             Controls.Add(ErrorLabel);
             Controls.Add(labelSignUp);
-            Controls.Add(chkRememberMe);
             Controls.Add(btnLoginLogin);
             Controls.Add(txtPassword);
             Controls.Add(lblLoginPassword);
@@ -158,7 +145,6 @@ namespace TimeTable
         private TextBox txtPassword;
         private Label lblLoginPassword;
         private Button btnLoginLogin;
-        private CheckBox chkRememberMe;
         private Label labelSignUp;
         private Label ErrorLabel;
     }

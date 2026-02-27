@@ -25,7 +25,7 @@ namespace TimeTable.Logic
             settings.maxDailyTasks = newMax;
             updateUserSettings();
         }
-        public static  void changeMaxDailyMinutes(int newMax)
+        public static void changeMaxHolidayDailyTask(int newMax)
         {
             settings.maxHoildayDailyTasks = newMax;
             updateUserSettings();

@@ -25,7 +25,7 @@ namespace TimeTable.UI
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
-            UserSettingsService.changeMaxDailyMinutes(Convert.ToInt32(numericUpDown2.Value));
+            UserSettingsService.changeMaxHolidayDailyTask(Convert.ToInt32(numericUpDown2.Value));
         }
         private void DelectAccountButton_Click(object sender, EventArgs e)
         {

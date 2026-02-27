@@ -38,8 +38,6 @@ namespace TimeTable.UI
 
             var subjects = SubjectService.GetSubjectsForCurrentUser();
 
-            
-
             Debug.WriteLine($"found {subjects.Count} subjects");
 
             dataGridView1.DataSource = subjects;

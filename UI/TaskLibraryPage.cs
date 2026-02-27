@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,6 +37,7 @@ namespace TimeTable.UI
             dataGridView1.DataSource = tasks;
             dataGridView1.Columns["UserId"].Visible = false;
             dataGridView1.Columns["TaskId"].Visible = false;
+            dataGridView1.Columns["SubjectId"].Visible = false;
             //dataGridView1.Columns["Completed"].ReadOnly = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

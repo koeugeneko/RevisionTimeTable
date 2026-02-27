@@ -12,6 +12,8 @@ namespace TimeTable.Logic
         public int UserId { get; set; }
         public int? SubjectId { get; set; }
 
+        public string subjectname { get; set; }
+
         //public string Name { get; set; } not going to use it
         public string Description { get; set; }
         public int EstimatedMinutes { get; set; }
