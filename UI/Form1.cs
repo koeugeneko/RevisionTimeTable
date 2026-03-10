@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using TimeTable.UI;
+using TimeTable.Logic;
 
 namespace TimeTable
 {
@@ -23,10 +24,13 @@ namespace TimeTable
         {
             InitializeComponent();
 
+            Logic.ReminderService.();
+
             loginPage = new LoginPage(); 
             signUpPage = new SignUpPage();
             
         }
+
 
         public void InitialiseUserControls()
         {

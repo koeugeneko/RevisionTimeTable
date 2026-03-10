@@ -54,7 +54,6 @@ namespace TimeTable.Logic
             }
         }
 
-
         public static bool ValidateUsername(string username)
         {
             if (string.IsNullOrEmpty(username)) return false; // check if username is empty
@@ -129,12 +128,12 @@ namespace TimeTable.Logic
             byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
             byte[] saltBytes = System.Text.Encoding.UTF8.GetBytes(salt);
 
-            // Combine: [usernameLength (4 bytes)][username][passwordLength (4 bytes)][password][salt]
+            // [usernameLength (4 bytes)][username][passwordLength (4 bytes)][password][salt]
             int totalLength = 4 + usernameBytes.Length + 4 + passwordBytes.Length + saltBytes.Length;
             byte[] input = new byte[totalLength];
             int pos = 0;
 
-            // Write username length as 4 bytes (big-endian style)
+            // make username length 4 bytes
             input[pos++] = (byte)(usernameBytes.Length >> 24);
             input[pos++] = (byte)(usernameBytes.Length >> 16);
             input[pos++] = (byte)(usernameBytes.Length >> 8);
@@ -142,7 +141,7 @@ namespace TimeTable.Logic
             Array.Copy(usernameBytes, 0, input, pos, usernameBytes.Length);
             pos += usernameBytes.Length;
 
-            // Write password length as 4 bytes
+            // make password length 4 bytes
             input[pos++] = (byte)(passwordBytes.Length >> 24);
             input[pos++] = (byte)(passwordBytes.Length >> 16);
             input[pos++] = (byte)(passwordBytes.Length >> 8);
@@ -150,7 +149,7 @@ namespace TimeTable.Logic
             Array.Copy(passwordBytes, 0, input, pos, passwordBytes.Length);
             pos += passwordBytes.Length;
 
-            // Append salt
+            // add salt
             Array.Copy(saltBytes, 0, input, pos, saltBytes.Length);
 
             // Step 2: Initialize 256-bit state (32 bytes) from input
@@ -220,7 +219,6 @@ namespace TimeTable.Logic
             count = count % 8;
             return (byte)((value << count) | (value >> (8 - count)));
         }
-
         public static string GenerateSalt(int saltLength)
         {
             Debug.WriteLine("GenerateSalt");

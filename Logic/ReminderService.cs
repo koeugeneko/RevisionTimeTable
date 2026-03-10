@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Toolkit.Uwp.Notifications;
 using TimeTable.Data;
+using System.Net;
+using System.Net.Mail;
 
 
 namespace TimeTable.Logic
@@ -35,7 +37,20 @@ namespace TimeTable.Logic
             }
         }
 
+        static async void asdf()
+        {
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("youremail@gmail.com");
+            mail.To.Add("receiver@email.com");
+            mail.Subject = "Test Email";
+            mail.Body = "Hello from C#";
 
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.Credentials = new NetworkCredential("youremail@gmail.com", "yourpassword");
+            smtp.EnableSsl = true;
+
+            await smtp.SendMailAsync(mail);
+        }
 
     }
 

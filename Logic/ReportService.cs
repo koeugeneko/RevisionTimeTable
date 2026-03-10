@@ -8,7 +8,7 @@ namespace TimeTable.Logic
 {
     internal class ReportService
     {
-        public List<Task> MergeSortTasks(List<Task> tasks)
+        public List<Task> MergeSortTasks(List<Task> tasks) // recursion
         {
             if (tasks.Count <= 1) return tasks;
 
@@ -26,7 +26,6 @@ namespace TimeTable.Logic
 
             while (i < left.Count && j < right.Count)
             {
-                // 多準則比較：priority DESC, due_date ASC, hours ASC
                 if (CompareTasks(left[i], right[j]) <= 0)
                     result.Add(left[i++]);
                 else
