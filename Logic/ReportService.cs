@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TimeTable.Data;
 
 namespace TimeTable.Logic
 {
-    internal class ReportService
+    public class ReportService
     {
-        public List<Task> MergeSortTasks(List<Task> tasks) // recursion
+        public List<Task> MergeSortTasks(List<Task> tasks) // recursion of merge sort
         {
             if (tasks.Count <= 1) return tasks;
 
@@ -43,6 +44,11 @@ namespace TimeTable.Logic
             if (cmp == 0) cmp = (a.DueDate ?? DateTime.MaxValue).CompareTo(b.DueDate ?? DateTime.MaxValue);  // ASC
             if (cmp == 0) cmp = a.EstimatedMinutes.CompareTo(b.EstimatedMinutes);  // ASC
             return cmp;
+        }
+
+        public void wasd()
+        {
+            int asd = DataLayer.GetNumberOfTasksFromDatabse(CurrentUser.UserId);
         }
     }
 }

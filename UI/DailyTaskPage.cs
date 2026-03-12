@@ -30,7 +30,6 @@ namespace TimeTable.UI
             // set date
             var now = DateTime.Now;
             lblDate.Text = $"{now:dd/MM/yyyy} {now.DayOfWeek}";
-            Logic.DailyPlanService.CallPublicHolidayApi();
 
             DisplayPlan();
         }
@@ -41,8 +40,6 @@ namespace TimeTable.UI
 
             dataGridView1.Columns.Clear();
             
-
-
             Debug.WriteLine($"found {dailyTasks.Count} daily tasks");
 
            

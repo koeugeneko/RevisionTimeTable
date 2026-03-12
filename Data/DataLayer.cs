@@ -40,7 +40,7 @@ namespace TimeTable.Data
                     foreach (var p in parameters)
                         cmd.Parameters.AddWithValue(p.Key, p.Value);
                 }
-
+                Debug.WriteLine(e.ToString());
                 return cmd.ExecuteNonQuery();
             }
             
@@ -74,6 +74,8 @@ namespace TimeTable.Data
                     foreach (var p in parameters)
                         cmd.Parameters.AddWithValue(p.Key, p.Value);
                 }
+
+                Debug.WriteLine(e.ToString());
 
                 return cmd.ExecuteScalar();
             }
@@ -136,6 +138,7 @@ namespace TimeTable.Data
                     result.Add(row);
                 }
 
+                Debug.WriteLine(e.ToString());
                 return result;
             }
         }
@@ -406,6 +409,23 @@ namespace TimeTable.Data
             Debug.WriteLine("Delete Task From Database");
         }
        
+        public static int GetNumberOfTasksFromDatabse(int userId)
+        {
+            string sql = @"
+            SELECT COUNT(*)
+            FROM tasks
+            WHERE userid = @userId";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { @"userId", userId }
+            };
+
+            var results = ExecuteScalar(sql, parameters);
+            return Convert.ToInt32(results);
+
+        }
+
         // subject related
         public static List<Subject> GetSubjectsFromDatabase(int UserId)
         {

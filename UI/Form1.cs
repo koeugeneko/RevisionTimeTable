@@ -24,8 +24,6 @@ namespace TimeTable
         {
             InitializeComponent();
 
-            Logic.ReminderService.();
-
             loginPage = new LoginPage(); 
             signUpPage = new SignUpPage();
             

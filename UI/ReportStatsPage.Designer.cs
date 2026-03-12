@@ -86,7 +86,6 @@
             label3.Size = new Size(133, 20);
             label3.TabIndex = 5;
             label3.Text = "Completetion rate:";
-            label3.Click += label3_Click;
             // 
             // label4
             // 
@@ -154,6 +153,7 @@
             Controls.Add(dateTimePicker1);
             Name = "ReportStatsPage";
             Size = new Size(651, 570);
+            Load += ReportStatsPage_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

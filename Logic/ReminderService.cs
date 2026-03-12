@@ -11,7 +11,7 @@ using System.Net.Mail;
 
 namespace TimeTable.Logic
 {
-    internal class ReminderService
+    public class ReminderService
     {
         Queue<string> reminder = new Queue<string>();
 
@@ -37,11 +37,11 @@ namespace TimeTable.Logic
             }
         }
 
-        static async void asdf()
+        public static async void asdf()
         {
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("youremail@gmail.com");
-            mail.To.Add("receiver@email.com");
+            mail.To.Add("eugeneko@exe-coll.co.uk");
             mail.Subject = "Test Email";
             mail.Body = "Hello from C#";
 

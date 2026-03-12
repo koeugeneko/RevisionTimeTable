@@ -56,18 +56,17 @@ namespace TimeTable.Logic
         {
             List<Task> tasks = DataLayer.GetTasksFromDatabase(CurrentUser.UserId); //todo , filter out not ofinished tasks
 
-            CallPublicHolidayApi();
+            //CallPublicHolidayApi();
             int maxTask;
             UserSettings userSettings = DataLayer.GetUserSettingsFromDatabase(CurrentUser.UserId);
             if (isHoliday == true)
             {
                 maxTask = userSettings.maxHoildayDailyTasks;
-
             }
             else
             {
                 //maxTask = userSettings.maxDailyTasks;
-                maxTask = 3; // testing
+                maxTask = 2; // testing
             }
 
             int index = 0;
@@ -81,7 +80,7 @@ namespace TimeTable.Logic
         {
             using var client = new HttpClient();
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"https://date.nager.at/api/v3/IsTodayPublicHoliday/us");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://date.nager.at/api/v3/IsTodayPublicHoliday/uk");
 
             using var response = await client.SendAsync(request);
 
