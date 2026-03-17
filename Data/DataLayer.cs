@@ -270,7 +270,7 @@ namespace TimeTable.Data
                 WHERE user_id = @userID";   
 
             var parameters = new Dictionary<string, object>
-                {
+            {
                 { "@userID", userID }
             };
             var result = ExecuteQuery(sql, parameters);
@@ -309,6 +309,8 @@ namespace TimeTable.Data
                 { "@maxHoildayDailyTasks", userSettings.maxHoildayDailyTasks },
                 { "@userId", userId }
             };
+
+            ExecuteNonQuery(sql, parameters);
         }
 
         // task related
@@ -414,11 +416,11 @@ namespace TimeTable.Data
             string sql = @"
             SELECT COUNT(*)
             FROM tasks
-            WHERE userid = @userId";
+            WHERE user_id = @userId";
 
             var parameters = new Dictionary<string, object>
             {
-                { @"userId", userId }
+                { @"user_id", userId }
             };
 
             var results = ExecuteScalar(sql, parameters);
@@ -461,7 +463,7 @@ namespace TimeTable.Data
                 SELECT subject_name
                 FROM subjects
                 WHERE Subjects.user_id = @userId
-                AND subjectId = @subjectId";
+                AND subjectId = @subjectId;";
 
             var parameters = new Dictionary<string, object>
             {

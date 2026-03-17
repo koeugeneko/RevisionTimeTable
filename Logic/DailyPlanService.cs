@@ -65,8 +65,7 @@ namespace TimeTable.Logic
             }
             else
             {
-                //maxTask = userSettings.maxDailyTasks;
-                maxTask = 2; // testing
+                maxTask = userSettings.maxDailyTasks;
             }
 
             int index = 0;
