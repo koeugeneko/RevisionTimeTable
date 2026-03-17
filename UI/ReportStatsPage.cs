@@ -20,27 +20,52 @@ namespace TimeTable.UI
 
         private void DisplayReport()
         {
-            Dictionary<string, string> report = new();
+            Dictionary<string, string> taskReport = new();
+            Dictionary<string, string> subjectReport = new();
 
-            report.Add("Total tasks", 10.ToString());
-            report.Add("Finished tasks", 12.ToString());
-            report.Add("Completion rate", "20%");
-            report.Add("Total subjects", 10.ToString());
+            taskReport.Add("Total time", "20 hurs 30 min"); //testing data
+            taskReport.Add("Total tasks", 10.ToString());
+            taskReport.Add("Finished tasks", 12.ToString());
+            taskReport.Add("Overdue tasks", 2.ToString());
+            taskReport.Add("Completion rate", "20%");
+            for ( int i  = 0; i <= 30; i++)
+            {
+                taskReport.Add($"Completion rate{i}", $"{i}%");
+            }
             //report.Add("")
 
+            subjectReport.Add("Total subjects", 10.ToString());  // testing datas
+            subjectReport.Add("total time on subject 1", "1 hur 10 min");
+
             dataGridView1.Columns.Clear();
-
-            dataGridView1.DataSource = report.ToList();
-
+            dataGridView1.DataSource = taskReport.ToList();
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.ColumnHeadersVisible = false;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
+
+            dataGridView2.Columns.Clear();
+            dataGridView2.DataSource = subjectReport.ToList();
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView2.ColumnHeadersVisible = false;
+            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView2.MultiSelect = false;
+
+            dataGridView3.Columns.Clear();
+            dataGridView3.DataSource = taskReport.ToList();
+            dataGridView3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView3.ColumnHeadersVisible = false;
+            dataGridView3.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView3.MultiSelect = false;
+
         }
 
         private void ReportStatsPage_Load(object sender, EventArgs e)
         {
             DisplayReport();
         }
+
+
     }
 }

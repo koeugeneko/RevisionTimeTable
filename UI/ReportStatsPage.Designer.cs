@@ -32,18 +32,20 @@
             dateTimePicker2 = new DateTimePicker();
             label1 = new Label();
             label2 = new Label();
+            dataGridView1 = new DataGridView();
+            dataGridView2 = new DataGridView();
             label3 = new Label();
             label4 = new Label();
+            dataGridView3 = new DataGridView();
             label5 = new Label();
-            label6 = new Label();
-            dateTimeTotalTime = new DateTimePicker();
-            dataGridView1 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
             SuspendLayout();
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(23, 67);
+            dateTimePicker1.Location = new Point(37, 55);
             dateTimePicker1.Margin = new Padding(2);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(241, 27);
@@ -51,7 +53,7 @@
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(342, 67);
+            dateTimePicker2.Location = new Point(425, 55);
             dateTimePicker2.Margin = new Padding(2);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(241, 27);
@@ -60,7 +62,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(23, 36);
+            label1.Location = new Point(37, 24);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(43, 20);
@@ -70,91 +72,88 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(340, 40);
+            label2.Location = new Point(423, 28);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new Size(25, 20);
             label2.TabIndex = 3;
             label2.Text = "To";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(23, 191);
-            label3.Margin = new Padding(2, 0, 2, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(133, 20);
-            label3.TabIndex = 5;
-            label3.Text = "Completetion rate:";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(340, 144);
-            label4.Margin = new Padding(2, 0, 2, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(88, 20);
-            label4.TabIndex = 6;
-            label4.Text = "Totoal Time";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(23, 144);
-            label5.Margin = new Padding(2, 0, 2, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(129, 20);
-            label5.TabIndex = 7;
-            label5.Text = "Task Completed: 0";
-            // 
-            // label6
-            // 
-            label6.Font = new Font("Segoe UI", 12F);
-            label6.Location = new Point(23, 264);
-            label6.Margin = new Padding(2, 0, 2, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(190, 37);
-            label6.TabIndex = 8;
-            label6.Text = "Subject Breakdown";
-            // 
-            // dateTimeTotalTime
-            // 
-            dateTimeTotalTime.Checked = false;
-            dateTimeTotalTime.CustomFormat = "hh:mm";
-            dateTimeTotalTime.Format = DateTimePickerFormat.Custom;
-            dateTimeTotalTime.Location = new Point(443, 144);
-            dateTimeTotalTime.Name = "dateTimeTotalTime";
-            dateTimeTotalTime.Size = new Size(113, 27);
-            dateTimeTotalTime.TabIndex = 9;
-            dateTimeTotalTime.Visible = false;
-            // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(31, 314);
+            dataGridView1.Location = new Point(24, 144);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(552, 225);
+            dataGridView1.Size = new Size(361, 218);
             dataGridView1.TabIndex = 10;
+            // 
+            // dataGridView2
+            // 
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Location = new Point(425, 144);
+            dataGridView2.Name = "dataGridView2";
+            dataGridView2.RowHeadersWidth = 51;
+            dataGridView2.Size = new Size(350, 218);
+            dataGridView2.TabIndex = 11;
+            // 
+            // label3
+            // 
+            label3.Font = new Font("Segoe UI", 12F);
+            label3.Location = new Point(24, 105);
+            label3.Name = "label3";
+            label3.Size = new Size(361, 36);
+            label3.TabIndex = 12;
+            label3.Text = "Tasks breakdown";
+            // 
+            // label4
+            // 
+            label4.Font = new Font("Segoe UI", 12F);
+            label4.Location = new Point(425, 105);
+            label4.Name = "label4";
+            label4.Size = new Size(350, 36);
+            label4.TabIndex = 13;
+            label4.Text = "Subject breakdown";
+            // 
+            // dataGridView3
+            // 
+            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView3.Location = new Point(24, 416);
+            dataGridView3.Name = "dataGridView3";
+            dataGridView3.RowHeadersWidth = 51;
+            dataGridView3.Size = new Size(361, 218);
+            dataGridView3.TabIndex = 14;
+            // 
+            // label5
+            // 
+            label5.Font = new Font("Segoe UI", 12F);
+            label5.Location = new Point(23, 377);
+            label5.Name = "label5";
+            label5.Size = new Size(362, 36);
+            label5.TabIndex = 15;
+            label5.Text = "Others";
             // 
             // ReportStatsPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(dataGridView1);
-            Controls.Add(dateTimeTotalTime);
-            Controls.Add(label6);
+            AutoSize = true;
             Controls.Add(label5);
+            Controls.Add(dataGridView3);
             Controls.Add(label4);
             Controls.Add(label3);
+            Controls.Add(dataGridView2);
+            Controls.Add(dataGridView1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(dateTimePicker2);
             Controls.Add(dateTimePicker1);
             Name = "ReportStatsPage";
-            Size = new Size(651, 570);
+            Size = new Size(813, 711);
             Load += ReportStatsPage_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -165,11 +164,11 @@
         private DateTimePicker dateTimePicker2;
         private Label label1;
         private Label label2;
+        private DataGridView dataGridView1;
+        private DataGridView dataGridView2;
         private Label label3;
         private Label label4;
+        private DataGridView dataGridView3;
         private Label label5;
-        private Label label6;
-        private DateTimePicker dateTimeTotalTime;
-        private DataGridView dataGridView1;
     }
 }
