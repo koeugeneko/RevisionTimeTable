@@ -16,6 +16,7 @@ namespace TimeTable.Logic
         public int UserId { get; }
         public DateTime CreatedAt { get; set; }
         public DateTime lastLogin { get; set; }
+        public int userAccessLevel { get; set; }
 
 
     }

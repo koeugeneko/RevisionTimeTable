@@ -1,8 +1,6 @@
 -- TimeTable Database Setup Script for PostgreSQL
 -- Run this script to initialize the database
 
--- Create tables in order (respecting foreign key dependencies)
-
 -- 1. Users table
 CREATE TABLE IF NOT EXISTS Users (
     user_id SERIAL PRIMARY KEY,

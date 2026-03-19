@@ -14,10 +14,16 @@ namespace TimeTable.Logic
             CurrentUser.UserId = 0;
             CurrentUser.Username = null;
         }
-        public static UserSettings settings;
+        static UserSettings settings;
         public static void getUserSettings()
         {
             settings = DataLayer.GetUserSettingsFromDatabase(CurrentUser.UserId);
+
+            if (settings == null) 
+            {
+                Console.WriteLine($"settings is null for user {CurrentUser.UserId}");
+                settings = new UserSettings();
+            }
         }
         
         public static void changeMaxDailytasks(int newMax)
@@ -34,7 +40,14 @@ namespace TimeTable.Logic
         public static void updateUserSettings()
         {
             // Update user settings in database for the current user
-            DataLayer.UpdateUserSettingsInDatabase(CurrentUser.UserId, settings);
+            try
+            {
+                DataLayer.UpdateUserSettingsInDatabase(CurrentUser.UserId, settings);
+            }
+            catch (Exception e)
+            {
+                DataLayer.InsertUserSettingsInDatabase(CurrentUser.UserId, settings);
+            }
         }
 
 

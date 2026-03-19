@@ -8,10 +8,9 @@ namespace TimeTable.UI
         {
             InitializeComponent();
         }
-
         private void numericUpDown1_ValueChanged(object sender, EventArgs e) // max task per day
         {
-            UserSettingsService.changeMaxDailytasks(Convert.ToInt32(numericUpDown1.Value));
+            UserSettingsService.changeMaxDailytasks(Convert.ToInt16(numericUpDown1.Value));
         }
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)

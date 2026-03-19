@@ -312,7 +312,23 @@ namespace TimeTable.Data
 
             ExecuteNonQuery(sql, parameters);
         }
+        public static void InsertUserSettingsInDatabase(int userId, UserSettings userSettings)
+        {
+            string sql = @"a
+                INSERT Into usersettings (user_id, max_daily_tasks, region, enable_notifcation, max_holiday_daily_tasks)
+                VALUES (@userId, @maxDailyTasks, @region, @taskReminderEnabled, maxHoildayDailyTasks, userId";
 
+            var parameters = new Dictionary<string, object>
+            {
+                { "@maxDailyTasks", userSettings.maxDailyTasks },
+                { "@region", userSettings.Region },
+                { "@taskReminderEnabled", userSettings.taskReminderEnabled },
+                { "@maxHoildayDailyTasks", userSettings.maxHoildayDailyTasks },
+                { "@userId", userId }
+            };
+
+            ExecuteNonQuery(sql, parameters);
+        }
         // task related
         public static List<Logic.Task> GetTasksFromDatabase(int userId)
         {
@@ -476,7 +492,6 @@ namespace TimeTable.Data
             return Convert.ToString(result);
 ;
         }
-
         public static int GetSubjectIdFromDatabase(int userID, string subjectName)
         {
             string sql = @"
@@ -528,7 +543,6 @@ namespace TimeTable.Data
 
 
         // plan related
-
         public static void GetPlansFromDatabase()
         {
             string sql = $@"

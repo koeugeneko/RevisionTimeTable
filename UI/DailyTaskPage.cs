@@ -42,17 +42,19 @@ namespace TimeTable.UI
             
             Debug.WriteLine($"found {dailyTasks.Count} daily tasks");
 
-           
-            dataGridView1.DataSource = dailyTasks.ToList<Logic.Task>();
-            dataGridView1.Columns["TaskId"].Visible = false;
-            dataGridView1.Columns["UserId"].Visible = false;
-            dataGridView1.Columns["SubjectId"].Visible = false;
-            dataGridView1.Columns["CompletedAt"].Visible = false;
-            dataGridView1.Columns["CreatedAt"].Visible = false;
-
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.MultiSelect = false;
+            // data grid view settings
+            {
+                dataGridView1.DataSource = dailyTasks.ToList<Logic.Task>();
+                dataGridView1.Columns["TaskId"].Visible = false;
+                dataGridView1.Columns["UserId"].Visible = false;
+                dataGridView1.Columns["SubjectId"].Visible = false;
+                dataGridView1.Columns["CompletedAt"].Visible = false;
+                dataGridView1.Columns["CreatedAt"].Visible = false;
+                dataGridView1.RowHeadersVisible = false;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dataGridView1.MultiSelect = false;
+            }
         }
         
 

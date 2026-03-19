@@ -38,6 +38,7 @@
             label4 = new Label();
             dataGridView3 = new DataGridView();
             label5 = new Label();
+            formsPlot1 = new ScottPlot.WinForms.FormsPlot();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
@@ -133,11 +134,20 @@
             label5.TabIndex = 15;
             label5.Text = "Others";
             // 
+            // formsPlot1
+            // 
+            formsPlot1.DisplayScale = 1.25F;
+            formsPlot1.Location = new Point(423, 416);
+            formsPlot1.Name = "formsPlot1";
+            formsPlot1.Size = new Size(341, 218);
+            formsPlot1.TabIndex = 16;
+            // 
             // ReportStatsPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
+            Controls.Add(formsPlot1);
             Controls.Add(label5);
             Controls.Add(dataGridView3);
             Controls.Add(label4);
@@ -170,5 +180,6 @@
         private Label label4;
         private DataGridView dataGridView3;
         private Label label5;
+        private ScottPlot.WinForms.FormsPlot formsPlot1;
     }
 }

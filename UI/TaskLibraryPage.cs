@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using TimeTable.Logic;
 
 namespace TimeTable.UI
@@ -34,14 +35,21 @@ namespace TimeTable.UI
 
             Debug.WriteLine($"found {tasks.Count} subjects");
 
-            dataGridView1.DataSource = tasks;
-            dataGridView1.Columns["UserId"].Visible = false;
-            dataGridView1.Columns["TaskId"].Visible = false;
-            dataGridView1.Columns["SubjectId"].Visible = false;
-            //dataGridView1.Columns["Completed"].ReadOnly = false;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.MultiSelect = false;
+            //DataGridView1 settings
+            {
+                dataGridView1.DataSource = tasks;
+                dataGridView1.Columns["UserId"].Visible = false;
+                dataGridView1.Columns["TaskId"].Visible = false;
+                dataGridView1.Columns["SubjectId"].Visible = false;
+                //dataGridView1.Columns["Completed"].ReadOnly = false;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                //dataGridView1.Columns["EstimatedMinutes"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                //dataGridView1.Columns["Subjectname"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                //dataGridView1.Columns[""].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                dataGridView1.RowHeadersVisible = false;
+                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dataGridView1.MultiSelect = false;
+            }
         }
 
         private void TaskLibraryPage_Load(object sender, EventArgs e)

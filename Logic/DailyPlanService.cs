@@ -54,7 +54,7 @@ namespace TimeTable.Logic
 
         public static LinkedList<Task> GenerateDailyPlan()
         {
-            List<Task> tasks = DataLayer.GetTasksFromDatabase(CurrentUser.UserId); //todo , filter out not ofinished tasks
+            List<Task> tasks = DataLayer.GetTasksFromDatabase(CurrentUser.UserId); //todo , filter out not finished tasks
 
             //CallPublicHolidayApi();
             int maxTask;
@@ -65,7 +65,8 @@ namespace TimeTable.Logic
             }
             else
             {
-                maxTask = userSettings.maxDailyTasks;
+                //maxTask = userSettings.maxDailyTasks;
+                maxTask = 2;
             }
 
             int index = 0;
@@ -74,7 +75,7 @@ namespace TimeTable.Logic
             return FindOptimalTasks(tasks, maxTask, index, memo);
 
         }
-        static bool? isHoliday;
+        static bool? isHoliday = false; // defalt to fase
         public async static void CallPublicHolidayApi()
         {
             using var client = new HttpClient();

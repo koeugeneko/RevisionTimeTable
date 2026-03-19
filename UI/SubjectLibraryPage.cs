@@ -44,6 +44,7 @@ namespace TimeTable.UI
             dataGridView1.Columns["UserId"].Visible = false;
             dataGridView1.Columns["SubjectId"].Visible = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
         }
