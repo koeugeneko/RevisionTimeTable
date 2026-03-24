@@ -32,25 +32,24 @@
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
+            SwitchModeButton = new Button();
             SuspendLayout();
             // 
             // label1
             // 
             label1.Font = new Font("Segoe UI", 80F);
-            label1.Location = new Point(280, 225);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(224, 180);
             label1.Name = "label1";
-            label1.Size = new Size(500, 225);
+            label1.Size = new Size(400, 180);
             label1.TabIndex = 0;
             label1.Text = "99:59";
             // 
             // button1
             // 
             button1.Font = new Font("Segoe UI", 30F);
-            button1.Location = new Point(236, 621);
-            button1.Margin = new Padding(4, 4, 4, 4);
+            button1.Location = new Point(189, 497);
             button1.Name = "button1";
-            button1.Size = new Size(225, 122);
+            button1.Size = new Size(180, 98);
             button1.TabIndex = 1;
             button1.Text = "Stop";
             button1.UseVisualStyleBackColor = true;
@@ -58,10 +57,9 @@
             // button2
             // 
             button2.Font = new Font("Segoe UI", 30F);
-            button2.Location = new Point(604, 621);
-            button2.Margin = new Padding(4, 4, 4, 4);
+            button2.Location = new Point(483, 497);
             button2.Name = "button2";
-            button2.Size = new Size(225, 122);
+            button2.Size = new Size(180, 98);
             button2.TabIndex = 2;
             button2.Text = "Start";
             button2.UseVisualStyleBackColor = true;
@@ -69,26 +67,35 @@
             // button3
             // 
             button3.Font = new Font("Segoe UI", 20F);
-            button3.Location = new Point(410, 521);
-            button3.Margin = new Padding(4, 4, 4, 4);
+            button3.Location = new Point(328, 417);
             button3.Name = "button3";
-            button3.Size = new Size(271, 68);
+            button3.Size = new Size(217, 54);
             button3.TabIndex = 3;
             button3.Text = "Add 5 min";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // SwitchModeButton
+            // 
+            SwitchModeButton.Font = new Font("Segoe UI", 20F);
+            SwitchModeButton.Location = new Point(299, 70);
+            SwitchModeButton.Name = "SwitchModeButton";
+            SwitchModeButton.Size = new Size(224, 63);
+            SwitchModeButton.TabIndex = 4;
+            SwitchModeButton.Text = "StopWatch";
+            SwitchModeButton.UseVisualStyleBackColor = true;
+            // 
             // TimerPage
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(SwitchModeButton);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(label1);
-            Margin = new Padding(4, 4, 4, 4);
             Name = "TimerPage";
-            Size = new Size(1070, 901);
+            Size = new Size(856, 721);
             ResumeLayout(false);
         }
 
@@ -98,5 +105,6 @@
         private Button button1;
         private Button button2;
         private Button button3;
+        private Button SwitchModeButton;
     }
 }

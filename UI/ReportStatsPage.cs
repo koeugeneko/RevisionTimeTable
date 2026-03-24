@@ -61,6 +61,11 @@ namespace TimeTable.UI
 
         }
 
+        private void displayChart()
+        {
+
+        }
+
         private void ReportStatsPage_Load(object sender, EventArgs e)
         {
             DisplayReport();

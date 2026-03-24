@@ -256,7 +256,7 @@ namespace TimeTable.Data
                 { "@userID",UserId}
             };
 
-            DateTime lastLogin = Convert.ToDateTime(ExecuteScalar(sql));
+            DateTime lastLogin = Convert.ToDateTime(ExecuteScalar(sql, parameters));
             return lastLogin;
 
         }
@@ -285,7 +285,7 @@ namespace TimeTable.Data
                 {
                     maxDailyTasks = Convert.ToInt32(row["max_daily_tasks"]),
                     Region = Convert.ToString(row["region"]),
-                    taskReminderEnabled = Convert.ToBoolean(row["enable_notifcation"]),
+                    taskReminderEnabled = Convert.ToBoolean(row["enable_notifcations"]),
                     maxHoildayDailyTasks = Convert.ToInt32(row["max_holiday_daily_tasks"])
                 };
             }
@@ -314,7 +314,7 @@ namespace TimeTable.Data
         }
         public static void InsertUserSettingsInDatabase(int userId, UserSettings userSettings)
         {
-            string sql = @"a
+            string sql = @"
                 INSERT Into usersettings (user_id, max_daily_tasks, region, enable_notifcation, max_holiday_daily_tasks)
                 VALUES (@userId, @maxDailyTasks, @region, @taskReminderEnabled, maxHoildayDailyTasks, userId";
 
@@ -479,7 +479,7 @@ namespace TimeTable.Data
                 SELECT subject_name
                 FROM subjects
                 WHERE Subjects.user_id = @userId
-                AND subjectId = @subjectId;";
+                AND subject_id = @subjectId;";
 
             var parameters = new Dictionary<string, object>
             {
@@ -541,7 +541,36 @@ namespace TimeTable.Data
             ExecuteNonQuery(sql, parameters);
         }
 
-
+        public static void GetSubjectTimeStatsFromDatabse()
+        {
+            string sql = @"
+                SELECT s.subject_name, 
+                SUM(t.estimated_min) as total_minutes,
+                COUNT(t.task_id) as task_count,
+                AVG(t.priority) as avg_priority
+                FROM subjects s
+                LEFT JOIN tasks t ON s.subject_id = t.subject_id
+                INNER JOIN users u ON s.user_id = u.user_id
+                INNER JOIN usersettings us ON u.user_id = us.user_id
+                WHERE s.user_id = @userID
+                GROUP BY s.subject_name;
+";
+        }
+        
+        public static void GgetSubjectCompletionRateFromDatabase()
+        {
+            string sql = @"
+                SELECT s.subject_name,
+                COUNT(t.task_id) as total,
+                SUM(CASE WHEN t.completed = true THEN 1 ELSE 0 END) as completed,
+                (SUM(CASE WHEN t.completed = true THEN 1 ELSE 0 END)::float / COUNT(t.task_id) * 100) as rate
+                FROM subjects s
+                INNER JOIN tasks t ON s.subject_id = t.subject_id
+                INNER JOIN users u ON t.user_id = u.user_id
+                LEFT JOIN usersettings us ON u.user_id = us.user_id
+                WHERE t.user_id = @userID
+                GROUP BY s.subject_name;";
+        }
         // plan related
         public static void GetPlansFromDatabase()
         {

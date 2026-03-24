@@ -55,6 +55,8 @@ namespace TimeTable.UI
         private void TaskLibraryPage_Load(object sender, EventArgs e)
         {
             DisplayTasks();
+
+            EditTaskButton.Visible = false;
         }
 
         private void TaskLibraryPage_VisibleChanged(object sender, EventArgs e)
@@ -78,7 +80,6 @@ namespace TimeTable.UI
 
         private void EditTaskButton_Click(object sender, EventArgs e)
         {
-            //TaskService.UpdateTask();
         }
     }
 }
