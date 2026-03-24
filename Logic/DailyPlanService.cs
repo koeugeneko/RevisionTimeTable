@@ -54,19 +54,23 @@ namespace TimeTable.Logic
 
         public static LinkedList<Task> GenerateDailyPlan()
         {
-            List<Task> tasks = DataLayer.GetTasksFromDatabase(CurrentUser.UserId); //todo , filter out not finished tasks
+            List<Task> tasks = DataLayer.GetTasksFromDatabase(CurrentUser.UserId);
 
-            //CallPublicHolidayApi();
+            CallPublicHolidayApi();
+
             int maxTask;
             UserSettings userSettings = DataLayer.GetUserSettingsFromDatabase(CurrentUser.UserId);
-            if (isHoliday == true)
+            if (userSettings == null)
+            {
+                maxTask = 2;
+            }
+            else if (isHoliday == true)
             {
                 maxTask = userSettings.maxHoildayDailyTasks;
             }
             else
             {
-                //maxTask = userSettings.maxDailyTasks;
-                maxTask = 2;
+                maxTask = userSettings.maxDailyTasks > 0 ? userSettings.maxDailyTasks : 2;
             }
 
             int index = 0;

@@ -47,15 +47,30 @@ namespace TimeTable.UI
 
         private void button1_Click(object sender, EventArgs e) //change my password button
         {
-            // Initializes the variables to pass to the MessageBox.Show method.
-            string message = "Function to be added";
-            string caption = "Change my password";
-            MessageBoxButtons buttons = MessageBoxButtons.OK;
-            DialogResult result;
+            string currentPassword = Microsoft.VisualBasic.Interaction.InputBox("Enter current password:", "Change Password", "");
+            if (string.IsNullOrEmpty(currentPassword)) return;
 
-            // Displays the MessageBox.
-            result = MessageBox.Show(message, caption, buttons);
+            string newPassword = Microsoft.VisualBasic.Interaction.InputBox("Enter new password:", "Change Password", "");
+            if (string.IsNullOrEmpty(newPassword)) return;
 
+            string confirmPassword = Microsoft.VisualBasic.Interaction.InputBox("Confirm new password:", "Change Password", "");
+            if (string.IsNullOrEmpty(confirmPassword)) return;
+
+            if (newPassword != confirmPassword)
+            {
+                MessageBox.Show("New passwords do not match.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            bool success = AuthService.ChangePassword(CurrentUser.Username, currentPassword, newPassword);
+            if (success)
+            {
+                MessageBox.Show("Password changed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Current password is incorrect.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 

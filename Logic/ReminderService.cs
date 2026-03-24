@@ -3,55 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Toolkit.Uwp.Notifications;
 using TimeTable.Data;
-using System.Net;
-using System.Net.Mail;
-
+using System.Windows.Forms;
 
 namespace TimeTable.Logic
 {
     public class ReminderService
     {
-        Queue<string> reminder = new Queue<string>();
-
-        // get last login
-        // if more then 3 days
-        // sent reminder
-
-        /*public void ShowNotification()
+        public static void CheckLastLoginAndRemind()
         {
-            new ToastContentBuilder()
-            .AddArgument("action", "viewDetails")
-            .AddText("Notification Title")
-            .AddText("This is the notification message.")
-            .(); // Displays the notification
-        }*/
-
-        public void adf()
-        {
-            DateTime lastlogin = Data.DataLayer.GetLastLogin(CurrentUser.UserId);
-            //if( DateTime.Now.Date - lastlogin.Date >= 3)
+            try
             {
+                DateTime lastLogin = DataLayer.GetLastLogin(CurrentUser.UserId);
+                TimeSpan daysSinceLogin = DateTime.Now.Date - lastLogin.Date;
 
+                if (daysSinceLogin.Days >= 3)
+                {
+                    MessageBox.Show(
+                        $"Welcome back! It's been {daysSinceLogin.Days} days since your last login.\nDon't forget to study today!",
+                        "TimeTable Reminder",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception)
+            {
             }
         }
 
-        public static async void asdf()
+        public static void ShowTaskReminder(int overdueCount)
         {
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("youremail@gmail.com");
-            mail.To.Add("eugeneko@exe-coll.co.uk");
-            mail.Subject = "Test Email";
-            mail.Body = "Hello from C#";
-
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-            smtp.Credentials = new NetworkCredential("youremail@gmail.com", "yourpassword");
-            smtp.EnableSsl = true;
-
-            await smtp.SendMailAsync(mail);
+            if (overdueCount > 0)
+            {
+                MessageBox.Show(
+                    $"You have {overdueCount} overdue task(s)!\nPlease check your daily tasks.",
+                    "Task Reminder",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
         }
 
+        public static void ShowStudyReminder()
+        {
+            MessageBox.Show(
+                "Time to study! Open TimeTable and complete your daily tasks.",
+                "Study Reminder",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
     }
-
 }

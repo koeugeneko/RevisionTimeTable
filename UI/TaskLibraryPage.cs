@@ -22,6 +22,8 @@ namespace TimeTable.UI
         }
 
         public Action addNewTaskButtonClicked;
+        public Action<Logic.Task> editTaskButtonClicked;
+
         private void AddNewTask_Click(object sender, EventArgs e)
         {
             addNewTaskButtonClicked?.Invoke();
@@ -55,8 +57,6 @@ namespace TimeTable.UI
         private void TaskLibraryPage_Load(object sender, EventArgs e)
         {
             DisplayTasks();
-
-            EditTaskButton.Visible = false;
         }
 
         private void TaskLibraryPage_VisibleChanged(object sender, EventArgs e)
@@ -80,6 +80,11 @@ namespace TimeTable.UI
 
         private void EditTaskButton_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                var selectedTask = (Logic.Task)dataGridView1.SelectedRows[0].DataBoundItem;
+                editTaskButtonClicked?.Invoke(selectedTask);
+            }
         }
     }
 }

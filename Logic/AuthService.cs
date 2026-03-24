@@ -251,5 +251,32 @@ namespace TimeTable.Logic
             return new string(salt);
         }
 
+        public static bool ChangePassword(string username, string currentPassword, string newPassword)
+        {
+            if (!Login(username, currentPassword))
+                return false;
+
+            if (!ValidatePassword(newPassword))
+                return false;
+
+            string newSalt = GenerateSalt(16);
+            string newHash = HashPassword(username, newPassword, newSalt);
+
+            string sql = @"
+                UPDATE userpasswords
+                SET hashed_password = @newHash, salt = @newSalt
+                WHERE user_id = (SELECT user_id FROM users WHERE username = @username)";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@username", username },
+                { "@newHash", newHash },
+                { "@newSalt", newSalt }
+            };
+
+            DataLayer.ExecuteNonQuery(sql, parameters);
+            return true;
+        }
+
     }
 }

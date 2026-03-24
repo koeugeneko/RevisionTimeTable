@@ -201,9 +201,8 @@ namespace TimeTable.Data
             {
                 { "@username", user.Username },
                 { "@email", user.Email },
-                { "@hashed_password", user.HashedPassword },
                 { "@created_at", user.CreatedAt },
-                { "@last_login", user.lastLogin }
+                { "@last_login", DateTime.Now }
             };
             Debug.WriteLine($"HashedPassword: {user.HashedPassword}");
             Debug.WriteLine($"Salt: {user.Salt}");
@@ -256,9 +255,11 @@ namespace TimeTable.Data
                 { "@userID",UserId}
             };
 
-            DateTime lastLogin = Convert.ToDateTime(ExecuteScalar(sql, parameters));
-            return lastLogin;
+            var result = ExecuteScalar(sql, parameters);
+            if (result == null || result == DBNull.Value)
+                return DateTime.Now;
 
+            return Convert.ToDateTime(result);
         }
 
         // user prefence related
@@ -285,7 +286,7 @@ namespace TimeTable.Data
                 {
                     maxDailyTasks = Convert.ToInt32(row["max_daily_tasks"]),
                     Region = Convert.ToString(row["region"]),
-                    taskReminderEnabled = Convert.ToBoolean(row["enable_notifcations"]),
+                    taskReminderEnabled = Convert.ToBoolean(row["enable_notifications"]),
                     maxHoildayDailyTasks = Convert.ToInt32(row["max_holiday_daily_tasks"])
                 };
             }
@@ -297,7 +298,7 @@ namespace TimeTable.Data
                 UPDATE usersettings
                 SET max_daily_tasks = @maxDailyTasks,
                     region = @region,
-                    enable_notifcation = @taskReminderEnabled,       
+                    enable_notifications = @taskReminderEnabled,       
                     max_holiday_daily_tasks = @maxHoildayDailyTasks
                 WHERE user_id = @userId;";
 
@@ -315,8 +316,8 @@ namespace TimeTable.Data
         public static void InsertUserSettingsInDatabase(int userId, UserSettings userSettings)
         {
             string sql = @"
-                INSERT Into usersettings (user_id, max_daily_tasks, region, enable_notifcation, max_holiday_daily_tasks)
-                VALUES (@userId, @maxDailyTasks, @region, @taskReminderEnabled, maxHoildayDailyTasks, userId";
+                INSERT INTO usersettings (user_id, max_daily_tasks, region, enable_notifications, max_holiday_daily_tasks)
+                VALUES (@userId, @maxDailyTasks, @region, @taskReminderEnabled, @maxHoildayDailyTasks)";
 
             var parameters = new Dictionary<string, object>
             {
@@ -473,12 +474,12 @@ namespace TimeTable.Data
             Debug.WriteLine($"Retrieved {subjects.Count} subjects for user {UserId}");
             return subjects;
         }
-        public static string GetSubjectNameFromDatabse(int userId, string subjectId)
+        public static string GetSubjectNameFromDatabse(int userId, int subjectId)
         {
             string sql = @"
                 SELECT subject_name
                 FROM subjects
-                WHERE Subjects.user_id = @userId
+                WHERE subjects.user_id = @userId
                 AND subject_id = @subjectId;";
 
             var parameters = new Dictionary<string, object>
@@ -586,6 +587,69 @@ namespace TimeTable.Data
             string sql = @"
                 INSERT INTO plans
                 ;";
+        }
+
+        // Statistics methods for ReportStatsPage
+        public static int GetTotalTaskCount(int userId)
+        {
+            string sql = "SELECT COUNT(*) FROM tasks WHERE user_id = @userID";
+            var parameters = new Dictionary<string, object> { { "@userID", userId } };
+            var result = ExecuteScalar(sql, parameters);
+            return Convert.ToInt32(result);
+        }
+
+        public static int GetCompletedTaskCount(int userId)
+        {
+            string sql = "SELECT COUNT(*) FROM tasks WHERE user_id = @userID AND completed = true";
+            var parameters = new Dictionary<string, object> { { "@userID", userId } };
+            var result = ExecuteScalar(sql, parameters);
+            return Convert.ToInt32(result);
+        }
+
+        public static int GetOverdueTaskCount(int userId)
+        {
+            string sql = "SELECT COUNT(*) FROM tasks WHERE user_id = @userID AND completed = false AND due_date < @today";
+            var parameters = new Dictionary<string, object> 
+            { 
+                { "@userID", userId },
+                { "@today", DateTime.Now.Date }
+            };
+            var result = ExecuteScalar(sql, parameters);
+            return Convert.ToInt32(result);
+        }
+
+        public static int GetTotalStudyMinutes(int userId)
+        {
+            string sql = "SELECT COALESCE(SUM(estimated_min), 0) FROM tasks WHERE user_id = @userID";
+            var parameters = new Dictionary<string, object> { { "@userID", userId } };
+            var result = ExecuteScalar(sql, parameters);
+            return Convert.ToInt32(result);
+        }
+
+        public static int GetTotalSubjectCount(int userId)
+        {
+            string sql = "SELECT COUNT(*) FROM subjects WHERE user_id = @userID";
+            var parameters = new Dictionary<string, object> { { "@userID", userId } };
+            var result = ExecuteScalar(sql, parameters);
+            return Convert.ToInt32(result);
+        }
+
+        public static Dictionary<string, int> GetSubjectTimeStats(int userId)
+        {
+            string sql = @"
+                SELECT s.subject_name, COALESCE(SUM(t.estimated_min), 0) as total_minutes
+                FROM subjects s
+                LEFT JOIN tasks t ON s.subject_id = t.subject_id
+                WHERE s.user_id = @userID
+                GROUP BY s.subject_name";
+            var parameters = new Dictionary<string, object> { { "@userID", userId } };
+            var results = ExecuteQuery(sql, parameters);
+            var stats = new Dictionary<string, int>();
+            foreach (var row in results)
+            {
+                stats[Convert.ToString(row["subject_name"])] = Convert.ToInt32(row["total_minutes"]);
+            }
+            return stats;
         }
     }
 }

@@ -60,7 +60,19 @@ namespace TimeTable.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                var selectedTask = (Logic.Task)dataGridView1.SelectedRows[0].DataBoundItem;
+                selectedTask.Completed = true;
+                selectedTask.CompletedAt = DateTime.Now;
+                DataLayer.UpdateTaskInDatabase(selectedTask);
+                DisplayPlan();
+                MessageBox.Show("Task marked as complete!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Please select a task to mark as complete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }
