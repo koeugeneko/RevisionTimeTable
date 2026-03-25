@@ -99,6 +99,7 @@ namespace TimeTable
             sideBar.SettingButtonClicked += LoadSettingPage;
             sideBar.SubjectLibraryButtonClicked += LoadSubjectLibraryPage;
             sideBar.TaskLibraryButtonClicked += LoadTaskLibraryPage;
+            sideBar.TimerButtonClicked += LoadTimerPage;
         }
         private void LoadSideBarTop()
         {
@@ -152,6 +153,7 @@ namespace TimeTable
             panelMain.Controls.Add(taskLibraryPage);
 
             taskLibraryPage.addNewTaskButtonClicked += LoadAddNewTaskPage;
+            taskLibraryPage.editTaskButtonClicked += LoadTaskDetailPage;
         }
         private void LoadSubjectLibraryPage()
         {
@@ -204,12 +206,13 @@ namespace TimeTable
 
             addNewTaskPage.confirmButtonClicked += LoadTaskLibraryPage;
         }
-        private void LoadTaskDetailPage()
+        private void LoadTaskDetailPage(Logic.Task task)
         {
             panelMain.Controls.Clear();
             taskDetailPage.Dock = DockStyle.Fill;
+            taskDetailPage.SetTask(task);
+            taskDetailPage.backButtonClicked += LoadTaskLibraryPage;
             panelMain.Controls.Add(taskDetailPage);
-
         }
     }
 }

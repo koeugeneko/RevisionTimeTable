@@ -1,4 +1,5 @@
 using Microsoft.VisualBasic.Logging;
+using System.IO;
 using TimeTable.Data;
 using TimeTable.Logic;
 using TimeTable.UI;
@@ -8,9 +9,53 @@ namespace TimeTable
 {
     public partial class LoginPage : UserControl
     {
+        private readonly string _rememberMeFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TimeTable", "rememberme.txt");
+
         public LoginPage()
         {
             InitializeComponent();
+            LoadRememberedUser();
+        }
+
+        private void LoadRememberedUser()
+        {
+            try
+            {
+                if (File.Exists(_rememberMeFile))
+                {
+                    string savedUsername = File.ReadAllText(_rememberMeFile).Trim();
+                    if (!string.IsNullOrEmpty(savedUsername))
+                    {
+                        txtUsername.Text = savedUsername;
+                        txtUsername.ForeColor = Color.Black;
+                        chkRememberMe.Checked = true;
+                    }
+                }
+            }
+            catch { }
+        }
+
+        private void SaveRememberedUser(string username)
+        {
+            try
+            {
+                string directory = Path.GetDirectoryName(_rememberMeFile);
+                if (!Directory.Exists(directory))
+                    Directory.CreateDirectory(directory);
+
+                File.WriteAllText(_rememberMeFile, username);
+            }
+            catch { }
+        }
+
+        private void ClearRememberedUser()
+        {
+            try
+            {
+                if (File.Exists(_rememberMeFile))
+                    File.Delete(_rememberMeFile);
+            }
+            catch { }
         }
 
         private void txtUsername_Click(object sender, EventArgs e)
@@ -42,31 +87,28 @@ namespace TimeTable
             }
             else
             {
+                if (chkRememberMe.Checked)
+                    SaveRememberedUser(txtUsername.Text);
+                else
+                    ClearRememberedUser();
+
                 int userId = DataLayer.GetUserIdFromDatabase(txtUsername.Text);
                 LoginSuccessful?.Invoke(
                     this,
                     new LoginSuccessEvent(userId)
                     );
-
             }
-            //loginSuccessful?.Invoke(); // For testing purposes only, remove this line in production
-
         }
 
         private void LoginPage_Load(object sender, EventArgs e)
         {
-            /*// Set focus to the username label when login page loads - workaround for text box focus issue
-            this.BeginInvoke(new Action(() =>
-            {
-                lblUsername.Focus();
-            }));*/
             ErrorLabel.Hide();
         }
 
 
         private void chkRememberMe_CheckedChanged(object sender, EventArgs e)
         {
-            // need to save username and password to local storage // add a autofill funtion here
+            // Will be applied on next successful login
         }
 
         public Action SignUpClicked;
@@ -81,7 +123,7 @@ namespace TimeTable
             if (originalFont == null)
                 originalFont = labelSignUp.Font;
 
-            labelSignUp.Font = new Font(originalFont, FontStyle.Underline); // underline animation when mouse hover
+            labelSignUp.Font = new Font(originalFont, FontStyle.Underline);
             labelSignUp.ForeColor = Color.Blue;
             labelSignUp.Cursor = Cursors.Hand;
         }
@@ -95,7 +137,5 @@ namespace TimeTable
                 labelSignUp.Cursor = Cursors.Default;
             }
         }
-
-
     }
 }

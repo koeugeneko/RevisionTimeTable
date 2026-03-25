@@ -334,9 +334,11 @@ namespace TimeTable.Data
         public static List<Logic.Task> GetTasksFromDatabase(int userId)
         {
             string sql = $@"
-                SELECT task_id, description, priority, estimated_min 
-                FROM tasks 
-                WHERE user_id = @userID";
+                SELECT t.task_id, t.description, t.priority, t.estimated_min, t.subject_id, t.due_date, t.completed, t.completed_at, t.created_at,
+                       COALESCE(s.subject_name, 'No Subject') as subject_name
+                FROM tasks t
+                LEFT JOIN subjects s ON t.subject_id = s.subject_id
+                WHERE t.user_id = @userID";
 
             var parameters = new Dictionary<string, object>
             {
@@ -354,7 +356,13 @@ namespace TimeTable.Data
                     TaskId = Convert.ToInt32(row["task_id"]),
                     Description = Convert.ToString(row["description"]),
                     Priority = Convert.ToInt32(row["priority"]),
-                    EstimatedMinutes = Convert.ToInt32(row["estimated_min"])
+                    EstimatedMinutes = Convert.ToInt32(row["estimated_min"]),
+                    SubjectId = row["subject_id"] != DBNull.Value ? Convert.ToInt32(row["subject_id"]) : (int?)null,
+                    subjectname = Convert.ToString(row["subject_name"]),
+                    DueDate = row["due_date"] != DBNull.Value ? Convert.ToDateTime(row["due_date"]) : (DateTime?)null,
+                    Completed = Convert.ToBoolean(row["completed"]),
+                    CompletedAt = row["completed_at"] != DBNull.Value ? Convert.ToDateTime(row["completed_at"]) : (DateTime?)null,
+                    CreatedAt = Convert.ToDateTime(row["created_at"])
                 });
             }
 
@@ -650,6 +658,15 @@ namespace TimeTable.Data
                 stats[Convert.ToString(row["subject_name"])] = Convert.ToInt32(row["total_minutes"]);
             }
             return stats;
+        }
+
+        public static void DeleteUserAccount(int userId)
+        {
+            ExecuteNonQuery("DELETE FROM tasks WHERE user_id = @userId", new Dictionary<string, object> { { "@userId", userId } });
+            ExecuteNonQuery("DELETE FROM subjects WHERE user_id = @userId", new Dictionary<string, object> { { "@userId", userId } });
+            ExecuteNonQuery("DELETE FROM usersettings WHERE user_id = @userId", new Dictionary<string, object> { { "@userId", userId } });
+            ExecuteNonQuery("DELETE FROM userpasswords WHERE user_id = @userId", new Dictionary<string, object> { { "@userId", userId } });
+            ExecuteNonQuery("DELETE FROM users WHERE user_id = @userId", new Dictionary<string, object> { { "@userId", userId } });
         }
     }
 }

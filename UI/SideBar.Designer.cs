@@ -88,6 +88,19 @@ namespace TimeTable.UI
             ReportStatButton.UseVisualStyleBackColor = true;
             ReportStatButton.Click += ReportStatButton_Click;
             // 
+            // TimerButton
+            // 
+            TimerButton = new Button();
+            TimerButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            TimerButton.Location = new Point(18, 550);
+            TimerButton.Margin = new Padding(4);
+            TimerButton.Name = "TimerButton";
+            TimerButton.Size = new Size(148, 70);
+            TimerButton.TabIndex = 5;
+            TimerButton.Text = "Timer";
+            TimerButton.UseVisualStyleBackColor = true;
+            TimerButton.Click += TimerButton_Click;
+            // 
             // SettingButton
             // 
             SettingButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -105,6 +118,7 @@ namespace TimeTable.UI
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(TimerButton);
             Controls.Add(SettingButton);
             Controls.Add(ReportStatButton);
             Controls.Add(SubjectLibraryButton);
@@ -122,6 +136,7 @@ namespace TimeTable.UI
         private Button TaskLibraryButton;
         private Button SubjectLibraryButton;
         private Button ReportStatButton;
+        private Button TimerButton;
         private Button SettingButton;
     }
 }

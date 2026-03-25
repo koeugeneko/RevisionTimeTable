@@ -43,11 +43,10 @@ namespace TimeTable.UI
                 dataGridView1.Columns["UserId"].Visible = false;
                 dataGridView1.Columns["TaskId"].Visible = false;
                 dataGridView1.Columns["SubjectId"].Visible = false;
-                //dataGridView1.Columns["Completed"].ReadOnly = false;
+                dataGridView1.Columns["subjectname"].HeaderText = "Subject";
+                dataGridView1.Columns["Description"].HeaderText = "Task";
+                dataGridView1.Columns["EstimatedMinutes"].HeaderText = "Time (min)";
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                //dataGridView1.Columns["EstimatedMinutes"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView1.Columns["Subjectname"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-                //dataGridView1.Columns[""].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 dataGridView1.RowHeadersVisible = false;
                 dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dataGridView1.MultiSelect = false;

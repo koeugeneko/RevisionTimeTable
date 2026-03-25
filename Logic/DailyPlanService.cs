@@ -56,7 +56,7 @@ namespace TimeTable.Logic
         {
             List<Task> tasks = DataLayer.GetTasksFromDatabase(CurrentUser.UserId);
 
-            CallPublicHolidayApi();
+            CallPublicHolidayApi(); // Now synchronous - waits for result
 
             int maxTask;
             UserSettings userSettings = DataLayer.GetUserSettingsFromDatabase(CurrentUser.UserId);
@@ -67,11 +67,14 @@ namespace TimeTable.Logic
             else if (isHoliday == true)
             {
                 maxTask = userSettings.maxHoildayDailyTasks;
+                Debug.WriteLine("Today is a holiday! Using holiday task limit.");
             }
             else
             {
                 maxTask = userSettings.maxDailyTasks > 0 ? userSettings.maxDailyTasks : 2;
             }
+
+            Debug.WriteLine($"Max tasks for today: {maxTask}, isHoliday: {isHoliday}");
 
             int index = 0;
             var memo = new Dictionary<string, LinkedList<Task>>();
@@ -79,29 +82,33 @@ namespace TimeTable.Logic
             return FindOptimalTasks(tasks, maxTask, index, memo);
 
         }
-        static bool? isHoliday = false; // defalt to fase
-        public async static void CallPublicHolidayApi()
+        static bool? isHoliday = false; // default to false
+
+        public static void CallPublicHolidayApi()
         {
-            using var client = new HttpClient();
-
-            var request = new HttpRequestMessage(HttpMethod.Get, $"https://date.nager.at/api/v3/IsTodayPublicHoliday/uk");
-
-            using var response = await client.SendAsync(request);
-
-            Debug.WriteLine(response);
-            switch (response.StatusCode)
+            try
             {
-                case HttpStatusCode.OK:
-                    isHoliday = true;
-                    break;
-                case HttpStatusCode.Accepted:
-                    isHoliday = false;
-                    break;
-                case HttpStatusCode.NotFound:
-                    isHoliday = null;
-                    break;
-            }
+                using var client = new HttpClient();
+                client.Timeout = TimeSpan.FromSeconds(5);
 
-        } // find if todays a holiday
+                var response = client.GetAsync("https://date.nager.at/api/v3/IsTodayPublicHoliday/uk").Result;
+
+                Debug.WriteLine($"Holiday API Response: {response.StatusCode}");
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    isHoliday = true;
+                }
+                else
+                {
+                    isHoliday = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Holiday API Error: {ex.Message}");
+                isHoliday = null;
+            }
+        }
     }
 }

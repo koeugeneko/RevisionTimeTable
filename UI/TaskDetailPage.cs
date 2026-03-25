@@ -29,6 +29,15 @@ namespace TimeTable.UI
         private void LoadTaskData()
         {
             if (_currentTask == null) return;
+
+            textBoxDescription.Text = _currentTask.Description ?? "";
+            numericUpDownPriority.Value = _currentTask.Priority > 0 ? _currentTask.Priority : 1;
+            numericUpDownEstimatedTime.Value = _currentTask.EstimatedMinutes > 0 ? _currentTask.EstimatedMinutes : 30;
+            
+            if (_currentTask.DueDate.HasValue)
+            {
+                dateTimePickerDueDate.Value = _currentTask.DueDate.Value;
+            }
         }
 
         public Action backButtonClicked;
@@ -41,6 +50,11 @@ namespace TimeTable.UI
         {
             if (_currentTask != null)
             {
+                _currentTask.Description = textBoxDescription.Text;
+                _currentTask.Priority = Convert.ToInt32(numericUpDownPriority.Value);
+                _currentTask.EstimatedMinutes = Convert.ToInt32(numericUpDownEstimatedTime.Value);
+                _currentTask.DueDate = dateTimePickerDueDate.Value;
+
                 TaskService.UpdateTask(_currentTask);
                 MessageBox.Show("Task updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 backButtonClicked?.Invoke();

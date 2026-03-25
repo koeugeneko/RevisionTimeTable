@@ -41,6 +41,12 @@ namespace TimeTable.UI
             ReportStatButtonClicked?.Invoke();
         }
 
+        public event Action TimerButtonClicked;
+        private void TimerButton_Click(object sender, EventArgs e)
+        {
+            TimerButtonClicked?.Invoke();
+        }
+
         public event Action SettingButtonClicked;
         private void SettingButton_Click(object sender, EventArgs e)
         {

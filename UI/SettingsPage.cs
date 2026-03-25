@@ -19,17 +19,22 @@ namespace TimeTable.UI
         }
         private void DelectAccountButton_Click(object sender, EventArgs e)
         {
-            // Initializes the variables to pass to the MessageBox.Show method.
-            string message = "Confirm to delete account. This action can not be revert";
+            string message = "Confirm to delete account. This action cannot be undone.\n\nAll your tasks, subjects, and settings will be permanently deleted.";
             string caption = "Delete my account";
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult result;
+            DialogResult result = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            // Displays the MessageBox.
-            result = MessageBox.Show(message, caption, buttons);
             if (result == DialogResult.Yes)
             {
-                Environment.Exit(0);
+                try
+                {
+                    TimeTable.Data.DataLayer.DeleteUserAccount(CurrentUser.UserId);
+                    MessageBox.Show("Your account has been deleted.", "Account Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Environment.Exit(0);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error deleting account: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
