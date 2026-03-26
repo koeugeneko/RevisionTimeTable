@@ -1,59 +1,31 @@
-using Microsoft.VisualBasic.Logging;
-using System.IO;
 using TimeTable.Data;
 using TimeTable.Logic;
 using TimeTable.UI;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace TimeTable
 {
     public partial class LoginPage : UserControl
     {
-        private readonly string _rememberMeFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TimeTable", "rememberme.txt");
-
         public LoginPage()
         {
             InitializeComponent();
-            LoadRememberedUser();
+            LoadRememberedCredentials();
         }
 
-        private void LoadRememberedUser()
+        private void LoadRememberedCredentials()
         {
             try
             {
-                if (File.Exists(_rememberMeFile))
+                var credentials = LocalStorageService.LoadCredentials();
+                if (credentials.HasValue)
                 {
-                    string savedUsername = File.ReadAllText(_rememberMeFile).Trim();
-                    if (!string.IsNullOrEmpty(savedUsername))
-                    {
-                        txtUsername.Text = savedUsername;
-                        txtUsername.ForeColor = Color.Black;
-                        chkRememberMe.Checked = true;
-                    }
+                    txtUsername.Text = credentials.Value.username;
+                    txtUsername.ForeColor = Color.Black;
+                    txtPassword.Text = credentials.Value.password;
+                    txtPassword.ForeColor = Color.Black;
+                    txtPassword.UseSystemPasswordChar = true;
+                    chkRememberMe.Checked = true;
                 }
-            }
-            catch { }
-        }
-
-        private void SaveRememberedUser(string username)
-        {
-            try
-            {
-                string directory = Path.GetDirectoryName(_rememberMeFile);
-                if (!Directory.Exists(directory))
-                    Directory.CreateDirectory(directory);
-
-                File.WriteAllText(_rememberMeFile, username);
-            }
-            catch { }
-        }
-
-        private void ClearRememberedUser()
-        {
-            try
-            {
-                if (File.Exists(_rememberMeFile))
-                    File.Delete(_rememberMeFile);
             }
             catch { }
         }
@@ -88,9 +60,13 @@ namespace TimeTable
             else
             {
                 if (chkRememberMe.Checked)
-                    SaveRememberedUser(txtUsername.Text);
+                {
+                    LocalStorageService.SaveCredentials(txtUsername.Text, txtPassword.Text);
+                }
                 else
-                    ClearRememberedUser();
+                {
+                    LocalStorageService.ClearCredentials();
+                }
 
                 int userId = DataLayer.GetUserIdFromDatabase(txtUsername.Text);
                 LoginSuccessful?.Invoke(
@@ -104,7 +80,6 @@ namespace TimeTable
         {
             ErrorLabel.Hide();
         }
-
 
         private void chkRememberMe_CheckedChanged(object sender, EventArgs e)
         {
