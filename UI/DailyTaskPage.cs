@@ -53,6 +53,26 @@ namespace TimeTable.UI
 
             Debug.WriteLine($"found {dailyTasks.Count} daily tasks");
 
+            // Calculate progress
+            int totalTasks = dailyTasks.Count;
+            int completedTasks = dailyTasks.Count(t => t.Completed);
+            int progressPercent = totalTasks > 0 ? (completedTasks * 100) / totalTasks : 0;
+
+            // Update progress bar
+            progressBar1.Maximum = 100;
+            progressBar1.Value = progressPercent;
+
+            // Update progress label
+            if (totalTasks == 0)
+            {
+                lblProgress.Text = "No tasks for today";
+            }
+            else
+            {
+                lblProgress.Text = $"{completedTasks} of {totalTasks} tasks completed ({progressPercent}%)";
+            }
+
+            // DataGridView settings
             dataGridView1.DataSource = dailyTasks.ToList<Logic.Task>();
             dataGridView1.Columns["TaskId"].Visible = false;
             dataGridView1.Columns["UserId"].Visible = false;

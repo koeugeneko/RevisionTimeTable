@@ -30,6 +30,7 @@
         {
             progressBar1 = new ProgressBar();
             lblDate = new Label();
+            lblProgress = new Label();
             dataGridView1 = new DataGridView();
             button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -43,6 +44,16 @@
             progressBar1.Size = new Size(378, 29);
             progressBar1.TabIndex = 0;
             progressBar1.Click += progressBar1_Click;
+            // 
+            // lblProgress
+            // 
+            lblProgress.Font = new Font("Segoe UI", 10F);
+            lblProgress.Location = new Point(52, 142);
+            lblProgress.Name = "lblProgress";
+            lblProgress.Size = new Size(400, 25);
+            lblProgress.TabIndex = 5;
+            lblProgress.Text = "0 of 0 tasks completed";
+            lblProgress.ForeColor = Color.Gray;
             // 
             // lblDate
             // 
@@ -83,6 +94,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(button2);
             Controls.Add(dataGridView1);
+            Controls.Add(lblProgress);
             Controls.Add(lblDate);
             Controls.Add(progressBar1);
             Name = "DailyTaskPage";
