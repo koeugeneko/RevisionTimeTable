@@ -33,10 +33,6 @@ namespace TimeTable.UI
             }
         }
 
-        private void progressBar1_Click(object sender, EventArgs e)
-        {
-            progressBar1.PerformStep();
-        }
         private void DailyTaskPage_Load(object sender, EventArgs e)
         {
             var now = DateTime.Now;

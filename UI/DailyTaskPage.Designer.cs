@@ -43,7 +43,6 @@
             progressBar1.Name = "progressBar1";
             progressBar1.Size = new Size(378, 29);
             progressBar1.TabIndex = 0;
-            progressBar1.Click += progressBar1_Click;
             // 
             // lblProgress
             // 
@@ -108,6 +107,7 @@
 
         private ProgressBar progressBar1;
         private Label lblDate;
+        private Label lblProgress;
         private DataGridView dataGridView1;
         private Button button2;
     }

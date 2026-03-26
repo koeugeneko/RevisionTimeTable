@@ -99,7 +99,6 @@ namespace TimeTable
             sideBar.SettingButtonClicked += LoadSettingPage;
             sideBar.SubjectLibraryButtonClicked += LoadSubjectLibraryPage;
             sideBar.TaskLibraryButtonClicked += LoadTaskLibraryPage;
-            sideBar.TimerButtonClicked += LoadTimerPage;
         }
         private void LoadSideBarTop()
         {

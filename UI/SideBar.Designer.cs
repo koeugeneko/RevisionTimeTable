@@ -2,15 +2,8 @@ namespace TimeTable.UI
 {
     partial class SideBar
     {
-        /// <summary> 
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +15,6 @@ namespace TimeTable.UI
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             DailyTaskButton = new Button();
@@ -40,7 +29,7 @@ namespace TimeTable.UI
             DailyTaskButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             DailyTaskButton.BackgroundImageLayout = ImageLayout.Zoom;
             DailyTaskButton.Location = new Point(18, 44);
-            DailyTaskButton.Margin = new Padding(4, 4, 4, 4);
+            DailyTaskButton.Margin = new Padding(4);
             DailyTaskButton.Name = "DailyTaskButton";
             DailyTaskButton.Size = new Size(148, 112);
             DailyTaskButton.TabIndex = 0;
@@ -53,7 +42,7 @@ namespace TimeTable.UI
             TaskLibraryButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             TaskLibraryButton.BackgroundImageLayout = ImageLayout.Zoom;
             TaskLibraryButton.Location = new Point(18, 189);
-            TaskLibraryButton.Margin = new Padding(4, 4, 4, 4);
+            TaskLibraryButton.Margin = new Padding(4);
             TaskLibraryButton.Name = "TaskLibraryButton";
             TaskLibraryButton.RightToLeft = RightToLeft.No;
             TaskLibraryButton.Size = new Size(148, 112);
@@ -66,7 +55,7 @@ namespace TimeTable.UI
             // 
             SubjectLibraryButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             SubjectLibraryButton.Location = new Point(18, 330);
-            SubjectLibraryButton.Margin = new Padding(4, 4, 4, 4);
+            SubjectLibraryButton.Margin = new Padding(4);
             SubjectLibraryButton.Name = "SubjectLibraryButton";
             SubjectLibraryButton.Size = new Size(148, 112);
             SubjectLibraryButton.TabIndex = 2;
@@ -79,7 +68,7 @@ namespace TimeTable.UI
             ReportStatButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             ReportStatButton.BackgroundImageLayout = ImageLayout.Zoom;
             ReportStatButton.Location = new Point(18, 474);
-            ReportStatButton.Margin = new Padding(4, 4, 4, 4);
+            ReportStatButton.Margin = new Padding(4);
             ReportStatButton.Name = "ReportStatButton";
             ReportStatButton.RightToLeft = RightToLeft.No;
             ReportStatButton.Size = new Size(148, 112);
@@ -88,25 +77,12 @@ namespace TimeTable.UI
             ReportStatButton.UseVisualStyleBackColor = true;
             ReportStatButton.Click += ReportStatButton_Click;
             // 
-            // TimerButton
-            // 
-            TimerButton = new Button();
-            TimerButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            TimerButton.Location = new Point(18, 550);
-            TimerButton.Margin = new Padding(4);
-            TimerButton.Name = "TimerButton";
-            TimerButton.Size = new Size(148, 70);
-            TimerButton.TabIndex = 5;
-            TimerButton.Text = "Timer";
-            TimerButton.UseVisualStyleBackColor = true;
-            TimerButton.Click += TimerButton_Click;
-            // 
             // SettingButton
             // 
             SettingButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             SettingButton.BackgroundImageLayout = ImageLayout.Zoom;
             SettingButton.Location = new Point(18, 629);
-            SettingButton.Margin = new Padding(4, 4, 4, 4);
+            SettingButton.Margin = new Padding(4);
             SettingButton.Name = "SettingButton";
             SettingButton.Size = new Size(148, 112);
             SettingButton.TabIndex = 4;
@@ -118,7 +94,6 @@ namespace TimeTable.UI
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(TimerButton);
             Controls.Add(SettingButton);
             Controls.Add(ReportStatButton);
             Controls.Add(SubjectLibraryButton);
@@ -136,7 +111,6 @@ namespace TimeTable.UI
         private Button TaskLibraryButton;
         private Button SubjectLibraryButton;
         private Button ReportStatButton;
-        private Button TimerButton;
         private Button SettingButton;
     }
 }
