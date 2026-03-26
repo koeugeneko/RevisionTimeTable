@@ -79,7 +79,11 @@ namespace TimeTable.Logic
             int index = 0;
             var memo = new Dictionary<string, LinkedList<Task>>();
 
-            return FindOptimalTasks(tasks, maxTask, index, memo);
+            LinkedList<Task> plan = FindOptimalTasks(tasks, maxTask, index, memo);
+
+            DataLayer.SaveDailyPlan(CurrentUser.UserId, plan, DateTime.Now.Date);
+
+            return plan;
 
         }
         static bool? isHoliday = false; // default to false

@@ -4,8 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TimeTable.Data;
 using TimeTable.Logic;
@@ -14,20 +12,44 @@ namespace TimeTable.UI
 {
     public partial class ReportStatsPage : UserControl
     {
+        private int _currentUserId;
+
         public ReportStatsPage()
         {
             InitializeComponent();
         }
 
+        private void DisplayTaskProgressChart()
+        {
+            // TODO: Implement pie chart for completed vs pending tasks
+            // Use: formsPlot1.Plot.Add.Pie(...)
+            formsPlot1.Plot.Title("Click to view task progress");
+            formsPlot1.Refresh();
+        }
+
+        private void DisplaySubjectProgressChart(string subjectName)
+        {
+            // TODO: Implement bar chart for subject time
+            formsPlot1.Plot.Title($"Click to view: {subjectName}");
+            formsPlot1.Refresh();
+        }
+
+        private void DisplayWeeklyProgressChart()
+        {
+            // TODO: Implement weekly progress chart
+            formsPlot1.Plot.Title("Click to view weekly progress");
+            formsPlot1.Refresh();
+        }
+
         private void DisplayReport()
         {
-            int userId = CurrentUser.UserId;
+            _currentUserId = CurrentUser.UserId;
 
-            int totalTasks = DataLayer.GetTotalTaskCount(userId);
-            int completedTasks = DataLayer.GetCompletedTaskCount(userId);
-            int overdueTasks = DataLayer.GetOverdueTaskCount(userId);
-            int totalMinutes = DataLayer.GetTotalStudyMinutes(userId);
-            int totalSubjects = DataLayer.GetTotalSubjectCount(userId);
+            int totalTasks = DataLayer.GetTotalTaskCount(_currentUserId);
+            int completedTasks = DataLayer.GetCompletedTaskCount(_currentUserId);
+            int overdueTasks = DataLayer.GetOverdueTaskCount(_currentUserId);
+            int totalMinutes = DataLayer.GetTotalStudyMinutes(_currentUserId);
+            int totalSubjects = DataLayer.GetTotalSubjectCount(_currentUserId);
 
             double completionRate = totalTasks > 0 ? (double)completedTasks / totalTasks * 100 : 0;
 
@@ -45,7 +67,7 @@ namespace TimeTable.UI
             Dictionary<string, string> subjectReport = new();
             subjectReport.Add("Total subjects", totalSubjects.ToString());
 
-            var subjectTimeStats = DataLayer.GetSubjectTimeStats(userId);
+            var subjectTimeStats = DataLayer.GetSubjectTimeStats(_currentUserId);
             foreach (var subject in subjectTimeStats)
             {
                 int subHours = subject.Value / 60;
@@ -77,10 +99,8 @@ namespace TimeTable.UI
             dataGridView3.ColumnHeadersVisible = false;
             dataGridView3.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView3.MultiSelect = false;
-        }
 
-        private void displayChart()
-        {
+            DisplayTaskProgressChart();
         }
 
         private void ReportStatsPage_Load(object sender, EventArgs e)

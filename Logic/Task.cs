@@ -17,6 +17,7 @@ namespace TimeTable.Logic
         //public string Name { get; set; } not going to use it
         public string Description { get; set; }
         public int EstimatedMinutes { get; set; }
+        public int ActualMinutes { get; set; }
         public int Priority { get; set; }  // 1=Low, 2=Medium, 3=High
         public DateTime? DueDate { get; set; }
         public bool Completed { get; set; }

@@ -10,6 +10,9 @@ namespace TimeTable.Logic
         private int _remainingSeconds;
         private bool _isRunning;
 
+        public Logic.Task CurrentTask { get; set; }
+        public int ActualMinutesSpent { get; private set; }
+
         public event Action<int> OnTick;
         public event Action OnTimerComplete;
 
@@ -33,6 +36,7 @@ namespace TimeTable.Logic
             else
             {
                 Stop();
+                ActualMinutesSpent = (_totalSeconds / 60);
                 OnTimerComplete?.Invoke();
             }
         }
@@ -58,6 +62,8 @@ namespace TimeTable.Logic
         {
             _isRunning = false;
             _timer.Stop();
+            int elapsedSeconds = _totalSeconds - _remainingSeconds;
+            ActualMinutesSpent = elapsedSeconds / 60;
         }
 
         public void Reset()
@@ -70,7 +76,7 @@ namespace TimeTable.Logic
         public void AddMinutes(int minutes)
         {
             _remainingSeconds += minutes * 60;
-            _totalSeconds = _remainingSeconds;
+            _totalSeconds += minutes * 60;
             OnTick?.Invoke(_remainingSeconds);
         }
 
@@ -87,6 +93,14 @@ namespace TimeTable.Logic
         public bool IsRunning()
         {
             return _isRunning;
+        }
+
+        public void SaveActualTime()
+        {
+            if (CurrentTask != null)
+            {
+                CurrentTask.ActualMinutes = ActualMinutesSpent;
+            }
         }
     }
 }

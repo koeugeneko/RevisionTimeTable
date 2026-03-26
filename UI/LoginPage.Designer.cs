@@ -35,6 +35,7 @@ namespace TimeTable
             btnLoginLogin = new Button();
             labelSignUp = new Label();
             ErrorLabel = new Label();
+            chkRememberMe = new CheckBox();
             SuspendLayout();
             // 
             // lblUsername
@@ -118,11 +119,23 @@ namespace TimeTable
             ErrorLabel.TabIndex = 7;
             ErrorLabel.Text = "Username or password incorrect";
             // 
+            // chkRememberMe
+            // 
+            chkRememberMe.AutoSize = true;
+            chkRememberMe.Location = new Point(207, 380);
+            chkRememberMe.Name = "chkRememberMe";
+            chkRememberMe.Size = new Size(116, 24);
+            chkRememberMe.TabIndex = 8;
+            chkRememberMe.Text = "Remember Me";
+            chkRememberMe.UseVisualStyleBackColor = true;
+            chkRememberMe.CheckedChanged += chkRememberMe_CheckedChanged;
+            // 
             // LoginPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
+            Controls.Add(chkRememberMe);
             Controls.Add(ErrorLabel);
             Controls.Add(labelSignUp);
             Controls.Add(btnLoginLogin);
@@ -147,5 +160,6 @@ namespace TimeTable
         private Button btnLoginLogin;
         private Label labelSignUp;
         private Label ErrorLabel;
+        private CheckBox chkRememberMe;
     }
 }

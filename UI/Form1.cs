@@ -143,6 +143,7 @@ namespace TimeTable
         {
             panelMain.Controls.Clear();
             dailyTaskPage.Dock = DockStyle.Fill;
+            dailyTaskPage.NavigateToTimer += LoadTimerPageWithTask;
             panelMain.Controls.Add(dailyTaskPage);
             Debug.WriteLine("Daily Task Page Loaded");
         }
@@ -190,6 +191,17 @@ namespace TimeTable
             timerPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(timerPage);
         }
+
+        private void LoadTimerPageWithTask(Logic.Task task)
+        {
+            panelMain.Controls.Clear();
+            timerPage.Dock = DockStyle.Fill;
+            timerPage.SetTask(task);
+            timerPage.NavigateBack = LoadDailyTaskPage;
+            panelMain.Controls.Add(timerPage);
+            Debug.WriteLine($"Timer Page Loaded for task: {task.Description}");
+        }
+
         private void LoadAddNewSubjectPage()
         {   
             panelMain.Controls.Clear();

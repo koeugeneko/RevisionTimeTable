@@ -11,6 +11,19 @@ namespace TimeTable.Data
         private static readonly string ConnectionString = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek001";
         private static readonly string ConnectionString2 = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek002";
 
+        private static DateTime? ToDateTime(object value)
+        {
+            if (value == null || value == DBNull.Value)
+                return null;
+
+            if (value is DateOnly dateOnly)
+                return dateOnly.ToDateTime(TimeOnly.MinValue);
+
+            if (value is DateTime dateTime)
+                return dateTime;
+
+            return Convert.ToDateTime(value);
+        }
 
         // INSERT / UPDATE / DELETE mutiple data
         public static int ExecuteNonQuery(string sql, Dictionary<string, object> parameters = null)
@@ -259,7 +272,7 @@ namespace TimeTable.Data
             if (result == null || result == DBNull.Value)
                 return DateTime.Now;
 
-            return Convert.ToDateTime(result);
+            return ToDateTime(result) ?? DateTime.Now;
         }
 
         // user prefence related
@@ -359,10 +372,10 @@ namespace TimeTable.Data
                     EstimatedMinutes = Convert.ToInt32(row["estimated_min"]),
                     SubjectId = row["subject_id"] != DBNull.Value ? Convert.ToInt32(row["subject_id"]) : (int?)null,
                     subjectname = Convert.ToString(row["subject_name"]),
-                    DueDate = row["due_date"] != DBNull.Value ? Convert.ToDateTime(row["due_date"]) : (DateTime?)null,
+                    DueDate = ToDateTime(row["due_date"]),
                     Completed = Convert.ToBoolean(row["completed"]),
-                    CompletedAt = row["completed_at"] != DBNull.Value ? Convert.ToDateTime(row["completed_at"]) : (DateTime?)null,
-                    CreatedAt = Convert.ToDateTime(row["created_at"])
+                    CompletedAt = ToDateTime(row["completed_at"]),
+                    CreatedAt = ToDateTime(row["created_at"]) ?? DateTime.Now
                 });
             }
 
@@ -580,22 +593,6 @@ namespace TimeTable.Data
                 WHERE t.user_id = @userID
                 GROUP BY s.subject_name;";
         }
-        // plan related
-        public static void GetPlansFromDatabase()
-        {
-            string sql = $@"
-                SELECT plan_id
-                FROM plans
-                WHERE plan_date = {DateTime.Now.Date};";
-
-        }
-
-        public static void InsertPlanIntoDatabase()
-        {
-            string sql = @"
-                INSERT INTO plans
-                ;";
-        }
 
         // Statistics methods for ReportStatsPage
         public static int GetTotalTaskCount(int userId)
@@ -667,6 +664,119 @@ namespace TimeTable.Data
             ExecuteNonQuery("DELETE FROM usersettings WHERE user_id = @userId", new Dictionary<string, object> { { "@userId", userId } });
             ExecuteNonQuery("DELETE FROM userpasswords WHERE user_id = @userId", new Dictionary<string, object> { { "@userId", userId } });
             ExecuteNonQuery("DELETE FROM users WHERE user_id = @userId", new Dictionary<string, object> { { "@userId", userId } });
+        }
+
+        // Daily Plan methods with 5-table JOIN
+        public static void SaveDailyPlan(int userId, LinkedList<Logic.Task> tasks, DateTime planDate)
+        {
+            string insertPlanSql = @"
+                INSERT INTO dailyplans (user_id, plan_date, created_at)
+                VALUES (@userId, @planDate, @createdAt)
+                ON CONFLICT (user_id, plan_date) DO UPDATE SET created_at = @createdAt
+                RETURNING plan_id";
+            
+            var planParams = new Dictionary<string, object>
+            {
+                { "@userId", userId },
+                { "@planDate", planDate.Date },
+                { "@createdAt", DateTime.Now }
+            };
+
+            var result = ExecuteScalar(insertPlanSql, planParams);
+            int planId = Convert.ToInt32(result);
+
+            ExecuteNonQuery("DELETE FROM dailyplantasks WHERE plan_id = @planId", 
+                new Dictionary<string, object> { { "@planId", planId } });
+
+            int order = 1;
+            foreach (var task in tasks)
+            {
+                string insertTaskSql = @"
+                    INSERT INTO dailyplantasks (plan_id, task_id, task_order)
+                    VALUES (@planId, @taskId, @taskOrder)
+                    ON CONFLICT (plan_id, task_id) DO UPDATE SET task_order = @taskOrder";
+                
+                var taskParams = new Dictionary<string, object>
+                {
+                    { "@planId", planId },
+                    { "@taskId", task.TaskId },
+                    { "@taskOrder", order++ }
+                };
+                ExecuteNonQuery(insertTaskSql, taskParams);
+            }
+
+            Debug.WriteLine($"Saved daily plan with {tasks.Count} tasks for {planDate.Date}");
+        }
+
+        public static Dictionary<DateTime, (int completed, int pending)> GetWeeklyPlanHistory(int userId)
+        {
+            string sql = @"
+                SELECT dp.plan_date,
+                       COUNT(dpt.task_id) as total_tasks,
+                       SUM(CASE WHEN t.completed = true THEN 1 ELSE 0 END) as completed_tasks
+                FROM dailyplans dp
+                INNER JOIN dailyplantasks dpt ON dp.plan_id = dpt.plan_id
+                INNER JOIN tasks t ON dpt.task_id = t.task_id
+                WHERE dp.user_id = @userId 
+                  AND dp.plan_date >= @startDate
+                GROUP BY dp.plan_date
+                ORDER BY dp.plan_date DESC";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@userId", userId },
+                { "@startDate", DateTime.Now.Date.AddDays(-7) }
+            };
+
+            var results = ExecuteQuery(sql, parameters);
+            var weeklyData = new Dictionary<DateTime, (int completed, int pending)>();
+
+            foreach (var row in results)
+            {
+                DateTime? dateResult = ToDateTime(row["plan_date"]);
+                DateTime date = dateResult ?? DateTime.Now;
+                int total = Convert.ToInt32(row["total_tasks"]);
+                int completed = Convert.ToInt32(row["completed_tasks"]);
+                weeklyData[date] = (completed, total - completed);
+            }
+
+            return weeklyData;
+        }
+
+        // 5-table JOIN query for plan details
+        public static List<Dictionary<string, object>> GetPlanDetailsWithJoins(int userId, DateTime? startDate = null, DateTime? endDate = null)
+        {
+            string sql = @"
+                SELECT dp.plan_date, 
+                       t.description as task_description,
+                       t.completed,
+                       t.estimated_min,
+                       s.subject_name,
+                       u.username,
+                       us.max_daily_tasks,
+                       dpt.task_order
+                FROM dailyplans dp
+                INNER JOIN dailyplantasks dpt ON dp.plan_id = dpt.plan_id
+                INNER JOIN tasks t ON dpt.task_id = t.task_id
+                INNER JOIN subjects s ON t.subject_id = s.subject_id
+                INNER JOIN users u ON dp.user_id = u.user_id
+                LEFT JOIN usersettings us ON u.user_id = us.user_id
+                WHERE dp.user_id = @userId";
+
+            if (startDate.HasValue)
+                sql += " AND dp.plan_date >= @startDate";
+            if (endDate.HasValue)
+                sql += " AND dp.plan_date <= @endDate";
+
+            sql += " ORDER BY dp.plan_date DESC, dpt.task_order";
+
+            var parameters = new Dictionary<string, object> { { "@userId", userId } };
+            if (startDate.HasValue)
+                parameters["@startDate"] = startDate.Value;
+            if (endDate.HasValue)
+                parameters["@endDate"] = endDate.Value;
+
+            return ExecuteQuery(sql, parameters);
         }
     }
 }
