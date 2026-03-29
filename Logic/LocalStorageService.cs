@@ -7,11 +7,11 @@ namespace TimeTable.Logic
 {
     public class LocalStorageService
     {
-        private static readonly string FolderPath = Path.Combine(
+        private static string FolderPath => Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-            "revisionTimeTable");
+            ConfigService.StorageFolderPath);
         
-        private static readonly string FilePath = Path.Combine(FolderPath, "rememberMe.json");
+        private static string FilePath => Path.Combine(FolderPath, ConfigService.StorageFileName);
 
         public class RememberMeData
         {

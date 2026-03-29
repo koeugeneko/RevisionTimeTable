@@ -93,9 +93,10 @@ namespace TimeTable.Logic
             try
             {
                 using var client = new HttpClient();
-                client.Timeout = TimeSpan.FromSeconds(5);
+                client.Timeout = TimeSpan.FromSeconds(ConfigService.HolidayApiTimeout);
 
-                var response = client.GetAsync("https://date.nager.at/api/v3/IsTodayPublicHoliday/uk").Result;
+                string url = $"{ConfigService.HolidayApiUrl}{ConfigService.HolidayApiCountry}";
+                var response = client.GetAsync(url).Result;
 
                 Debug.WriteLine($"Holiday API Response: {response.StatusCode}");
 

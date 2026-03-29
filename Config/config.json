@@ -1,0 +1,18 @@
+{
+  "ConnectionStrings": {
+    "Primary": "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek001",
+    "Secondary": "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek002"
+  },
+  "HolidayApi": {
+    "BaseUrl": "https://date.nager.at/api/v3/IsTodayPublicHoliday/",
+    "Country": "uk",
+    "TimeoutSeconds": 5
+  },
+  "Timer": {
+    "DefaultMinutes": 25
+  },
+  "Storage": {
+    "FolderPath": "revisionTimeTable",
+    "FileName": "rememberMe.json"
+  }
+}

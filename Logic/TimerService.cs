@@ -21,7 +21,7 @@ namespace TimeTable.Logic
             _timer = new System.Windows.Forms.Timer();
             _timer.Interval = 1000;
             _timer.Tick += Timer_Tick;
-            _totalSeconds = 25 * 60;
+            _totalSeconds = ConfigService.TimerDefaultMinutes * 60;
             _remainingSeconds = _totalSeconds;
             _isRunning = false;
         }
