@@ -142,7 +142,11 @@ namespace TimeTable
         {
             panelMain.Controls.Clear();
             dailyTaskPage.Dock = DockStyle.Fill;
+            
+            // Unsubscribe first to prevent duplicate handlers
+            dailyTaskPage.NavigateToTimer -= LoadTimerPageWithTask;
             dailyTaskPage.NavigateToTimer += LoadTimerPageWithTask;
+            
             panelMain.Controls.Add(dailyTaskPage);
             Debug.WriteLine("Daily Task Page Loaded");
         }
@@ -152,6 +156,10 @@ namespace TimeTable
             taskLibraryPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(taskLibraryPage);
 
+            // Unsubscribe first to prevent duplicate handlers
+            taskLibraryPage.addNewTaskButtonClicked -= LoadAddNewTaskPage;
+            taskLibraryPage.editTaskButtonClicked -= LoadTaskDetailPage;
+            
             taskLibraryPage.addNewTaskButtonClicked += LoadAddNewTaskPage;
             taskLibraryPage.editTaskButtonClicked += LoadTaskDetailPage;
         }
@@ -161,6 +169,8 @@ namespace TimeTable
             subjectLibraryPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(subjectLibraryPage);
 
+            // Unsubscribe first to prevent duplicate handlers
+            subjectLibraryPage.AddSubjectButtonClicked -= LoadAddNewSubjectPage;
             subjectLibraryPage.AddSubjectButtonClicked += LoadAddNewSubjectPage;
         }
         private void LoadReportStatsPage()
@@ -176,6 +186,8 @@ namespace TimeTable
             settingsPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(settingsPage);
 
+            // Unsubscribe first to prevent duplicate handlers
+            settingsPage.signoutButtonClicked -= SignOut;
             settingsPage.signoutButtonClicked += SignOut;
 
             Debug.WriteLine($"sign out succes");
@@ -207,6 +219,8 @@ namespace TimeTable
             addNewSubjectPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(addNewSubjectPage);
 
+            // Unsubscribe first to prevent duplicate handlers
+            addNewSubjectPage.confirmButtonClicked -= LoadSubjectLibraryPage;
             addNewSubjectPage.confirmButtonClicked += LoadSubjectLibraryPage;
         }
         private void LoadAddNewTaskPage()
@@ -215,6 +229,8 @@ namespace TimeTable
             addNewTaskPage.Dock = DockStyle.Fill;
             panelMain.Controls.Add(addNewTaskPage);
 
+            // Unsubscribe first to prevent duplicate handlers
+            addNewTaskPage.confirmButtonClicked -= LoadTaskLibraryPage;
             addNewTaskPage.confirmButtonClicked += LoadTaskLibraryPage;
         }
         private void LoadTaskDetailPage(Logic.Task task)
@@ -222,7 +238,11 @@ namespace TimeTable
             panelMain.Controls.Clear();
             taskDetailPage.Dock = DockStyle.Fill;
             taskDetailPage.SetTask(task);
+
+            // Unsubscribe first to prevent duplicate handlers
+            taskDetailPage.backButtonClicked -= LoadTaskLibraryPage;
             taskDetailPage.backButtonClicked += LoadTaskLibraryPage;
+            
             panelMain.Controls.Add(taskDetailPage);
         }
     }

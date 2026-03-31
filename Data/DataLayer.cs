@@ -45,7 +45,7 @@ namespace TimeTable.Data
             catch (Exception e)
             {
                 using var conn = new NpgsqlConnection(ConnectionString2);
-                conn.Open();
+                 conn.Open();
 
                 using var cmd = new NpgsqlCommand(sql, conn);
                 if (parameters != null)
@@ -254,7 +254,8 @@ namespace TimeTable.Data
             {
                 { "@username", username }
             };
-            return Convert.ToInt32(ExecuteScalar(sql, parameters));
+            var result = ExecuteScalar(sql, parameters);
+            return result != null ? Convert.ToInt32(result) : -1;
         }
         public static DateTime GetLastLogin(int UserId)
         {
@@ -279,7 +280,7 @@ namespace TimeTable.Data
         public static UserSettings GetUserSettingsFromDatabase(int userID)
         {
             string sql = @"
-                SELECT max_daily_tasks, region, enable_notifcations, max_holiday_daily_tasks
+                SELECT max_daily_tasks, region, enable_notifications, max_holiday_daily_tasks
                 FROM usersettings
                 WHERE user_id = @userID";   
 
@@ -340,7 +341,7 @@ namespace TimeTable.Data
                 { "@maxHoildayDailyTasks", userSettings.maxHoildayDailyTasks },
                 { "@userId", userId }
             };
-
+             
             ExecuteNonQuery(sql, parameters);
         }
         // task related
@@ -458,7 +459,7 @@ namespace TimeTable.Data
 
             var parameters = new Dictionary<string, object>
             {
-                { @"user_id", userId }
+                { "@userId", userId }
             };
 
             var results = ExecuteScalar(sql, parameters);
@@ -510,11 +511,12 @@ namespace TimeTable.Data
             };
 
             var result = ExecuteScalar(sql, parameters);
+            if (result == null) return null;
             Debug.WriteLine($"{result.ToString()}");
             return Convert.ToString(result);
 ;
         }
-        public static int GetSubjectIdFromDatabase(int userID, string subjectName)
+        public static int? GetSubjectIdFromDatabase(int userID, string subjectName)
         {
             string sql = @"
                 SELECT subject_id
@@ -529,6 +531,7 @@ namespace TimeTable.Data
             };
 
             var result = ExecuteScalar(sql, parameters);
+            if (result == null) return null;
             Debug.WriteLine($"{result.ToString()}");
             return Convert.ToInt32(result);
         }

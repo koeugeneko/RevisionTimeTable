@@ -11,12 +11,12 @@ namespace TimeTable.Logic
     internal static class TaskService
     {
 
-        public static void AddNewTask(string subjectName, DateTime estamiatedTime, decimal priority, string description, DateTime dueDate)
+        public static void AddNewTask(string subjectName, int estimatedMinutes, decimal priority, string description, DateTime dueDate)
         {
             Task task = new Task();
             {
                 task.SubjectId = DataLayer.GetSubjectIdFromDatabase(CurrentUser.UserId, subjectName);
-                task.EstimatedMinutes = estamiatedTime.Minute;
+                task.EstimatedMinutes = estimatedMinutes;
                 task.Priority = Convert.ToInt32(priority);
                 task.Description = description;
                 task.DueDate = dueDate;

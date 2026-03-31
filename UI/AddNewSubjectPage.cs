@@ -22,11 +22,12 @@ namespace TimeTable.UI
         private void button1_Click(object sender, EventArgs e) // add new subject button
         {   
             bool success = SubjectService.AddNewSubject(textBox1.Text);
-            confirmButtonClicked?.Invoke();
             if (!success)
             {
                 MessageBox.Show("A subject with this name already exists. Please choose a different name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            confirmButtonClicked?.Invoke();
         }
 
         private void AddNewSubjectPage_VisibleChanged(object sender, EventArgs e)

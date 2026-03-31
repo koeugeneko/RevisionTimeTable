@@ -24,7 +24,10 @@ namespace TimeTable.UI
         public event Action confirmButtonClicked;
         private void buttonConfirm_Click(object sender, EventArgs e) // confirm
         {
-            TaskService.AddNewTask(comboBoxSubject.Text, dateTimePickerEstamiatedTime.Value, numericUpDownPriority.Value, textBoxDescription.Text, monthCalendarDueDate.SelectionStart);
+            // Convert DateTimePicker value to total minutes
+            int totalMinutes = (int)dateTimePickerEstamiatedTime.Value.TimeOfDay.TotalMinutes;
+            
+            TaskService.AddNewTask(comboBoxSubject.Text, totalMinutes, numericUpDownPriority.Value, textBoxDescription.Text, monthCalendarDueDate.SelectionStart);
 
             confirmButtonClicked?.Invoke();
         }
