@@ -28,132 +28,60 @@ namespace TimeTable.Data
         // INSERT / UPDATE / DELETE mutiple data
         public static int ExecuteNonQuery(string sql, Dictionary<string, object> parameters = null)
         {
-            try
+            using var conn = new NpgsqlConnection(ConnectionString);
+            conn.Open();
+
+            using var cmd = new NpgsqlCommand(sql, conn);
+            if (parameters != null)
             {
-                using var conn = new NpgsqlConnection(ConnectionString);
-                conn.Open();
-
-                using var cmd = new NpgsqlCommand(sql, conn);
-                if (parameters != null)
-                {
-                    foreach (var p in parameters)
-                        cmd.Parameters.AddWithValue(p.Key, p.Value);
-                }
-
-                return cmd.ExecuteNonQuery();
+                foreach (var p in parameters)
+                    cmd.Parameters.AddWithValue(p.Key, p.Value);
             }
-            catch (Exception e)
-            {
-                using var conn = new NpgsqlConnection(ConnectionString2);
-                 conn.Open();
 
-                using var cmd = new NpgsqlCommand(sql, conn);
-                if (parameters != null)
-                {
-                    foreach (var p in parameters)
-                        cmd.Parameters.AddWithValue(p.Key, p.Value);
-                }
-                Debug.WriteLine(e.ToString());
-                return cmd.ExecuteNonQuery();
-            }
-            
+            return cmd.ExecuteNonQuery();
         }
         // SELECT signel data
         public static object ExecuteScalar(string sql, Dictionary<string, object> parameters = null)
         {
-            try
+            using var conn = new NpgsqlConnection(ConnectionString);
+            conn.Open();
+
+            using var cmd = new NpgsqlCommand(sql, conn);
+            if (parameters != null)
             {
-                using var conn = new NpgsqlConnection(ConnectionString);
-
-                conn.Open();
-
-                using var cmd = new NpgsqlCommand(sql, conn);
-                if (parameters != null)
-                {
-                    foreach (var p in parameters)
-                        cmd.Parameters.AddWithValue(p.Key, p.Value);
-                }
-
-                return cmd.ExecuteScalar();
+                foreach (var p in parameters)
+                    cmd.Parameters.AddWithValue(p.Key, p.Value);
             }
-            catch (Exception e)
-            {
-                using var conn = new NpgsqlConnection(ConnectionString2);
-                conn.Open();
 
-                using var cmd = new NpgsqlCommand(sql, conn);
-                if (parameters != null)
-                {
-                    foreach (var p in parameters)
-                        cmd.Parameters.AddWithValue(p.Key, p.Value);
-                }
-
-                Debug.WriteLine(e.ToString());
-
-                return cmd.ExecuteScalar();
-            }
+            return cmd.ExecuteScalar();
         }
         // SELECT muli data with a reader
         public static List<Dictionary<string, object>> ExecuteQuery(string sql, Dictionary<string, object> parameters = null)
         {
+            var result = new List<Dictionary<string, object>>();
 
-            try
+            using var conn = new NpgsqlConnection(ConnectionString);
+            conn.Open();
+
+            using var cmd = new NpgsqlCommand(sql, conn);
+            if (parameters != null)
             {
-                var result = new List<Dictionary<string, object>>();
-
-
-                using var conn = new NpgsqlConnection(ConnectionString);
-                conn.Open();
-
-                using var cmd = new NpgsqlCommand(sql, conn);
-                if (parameters != null)
-                {
-                    foreach (var p in parameters)
-                        cmd.Parameters.AddWithValue(p.Key, p.Value);
-                }
-
-                using var reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    var row = new Dictionary<string, object>();
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        row[reader.GetName(i)] = reader.GetValue(i);
-                    }
-                    result.Add(row);
-                }
-
-                return result;
+                foreach (var p in parameters)
+                    cmd.Parameters.AddWithValue(p.Key, p.Value);
             }
-            catch (Exception e)
+
+            using var reader = cmd.ExecuteReader();
+            while (reader.Read())
             {
-                var result = new List<Dictionary<string, object>>();
-
-
-                using var conn = new NpgsqlConnection(ConnectionString2);
-                conn.Open();
-
-                using var cmd = new NpgsqlCommand(sql, conn);
-                if (parameters != null)
+                var row = new Dictionary<string, object>();
+                for (int i = 0; i < reader.FieldCount; i++)
                 {
-                    foreach (var p in parameters)
-                        cmd.Parameters.AddWithValue(p.Key, p.Value);
+                    row[reader.GetName(i)] = reader.GetValue(i);
                 }
-
-                using var reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    var row = new Dictionary<string, object>();
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        row[reader.GetName(i)] = reader.GetValue(i);
-                    }
-                    result.Add(row);
-                }
-
-                Debug.WriteLine(e.ToString());
-                return result;
+                result.Add(row);
             }
+
+            return result;
         }
 
         // user related
