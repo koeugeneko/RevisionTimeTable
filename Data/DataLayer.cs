@@ -8,8 +8,8 @@ namespace TimeTable.Data
 {
     public class DataLayer
     {
-        private static string ConnectionString => ConfigService.ConnectionString;
-        private static string ConnectionString2 => ConfigService.ConnectionString2;
+        private static readonly string ConnectionString = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek001";
+        private static readonly string ConnectionString2 = "Host=localhost;Port=5432;Database=TimeTable;Username=postgres;Password=Ek002";
 
         private static DateTime? ToDateTime(object value)
         {
